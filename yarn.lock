@@ -1818,6 +1818,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^4.5.15":
+  version: 4.5.15
+  resolution: "@fontsource/inter@npm:4.5.15"
+  checksum: d4330957c0a23a6c6a47f6f628b89c5603deec6305f28458fd3277bb652913dc77b31ac454bba96beeaecddef87eaf4b60befa2aad040ebb8c22c39ee33a2cf1
+  languageName: node
+  linkType: hard
+
+"@fontsource/yeseva-one@npm:^4.5.10":
+  version: 4.5.10
+  resolution: "@fontsource/yeseva-one@npm:4.5.10"
+  checksum: 190bd28b2e1ffe7df3f82b27ea2544d2c05e44251296e630fdf714d4779bb4278bc1b0bb9fc0f33e8e76b44cac4952c9529ac8362a384cb7011d346f0cc40275
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -3208,6 +3222,8 @@ __metadata:
     "@chakra-ui/react": ^2.6.1
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
+    "@fontsource/inter": ^4.5.15
+    "@fontsource/yeseva-one": ^4.5.10
     "@types/node": ^20.1.4
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
