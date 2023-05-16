@@ -22,11 +22,11 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"],
-      "public/*": ["public/*"],
-      "types/*": ["src/@types/*"],
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@public/*": ["public/*"],
+      "@themes/*": ["src/styles/themes/*"]
     }
   },
   "include": ["src"],
