@@ -1,6 +1,8 @@
 import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
 
-import feGreen from "./feGreen";
+import feGreen from "@themes/feGreen";
+import feOrange from "@themes/feOrange";
+import fePurple from "@themes/fePurple";
 
 import "@fontsource/yeseva-one/400.css";
 import "@fontsource/inter/500.css";
@@ -15,6 +17,15 @@ const theme = {
     colors: {
       fePrimary: "primary.500",
       fePrimaryContainer: "primary.300",
+      feGreen: {
+        ...feGreen.colors.primary,
+      },
+      feOrange: {
+        ...feOrange.colors.primary,
+      },
+      fePurple: {
+        ...fePurple.colors.primary,
+      },
     },
   },
   fonts: {
@@ -25,6 +36,9 @@ const theme = {
 
 export default extendTheme(
   // This will set the default colorScheme for all buttons as `primary`
-  withDefaultColorScheme({ colorScheme: "primary", components: ["Button"] }),
+  withDefaultColorScheme({
+    colorScheme: "primary",
+    components: ["Button", "Switch", "Slider", "SliderTrack"],
+  }),
   theme
 );
