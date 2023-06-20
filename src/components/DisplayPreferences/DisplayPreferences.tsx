@@ -32,12 +32,13 @@ const DisplayPreferences = ({
     <Modal
       isOpen={openModalDisclosure}
       onClose={closeModalDisclosure}
+      closeOnEsc={false}
+      closeOnOverlayClick={false}
       size={{ base: 'sm', md: '3xl' }}
     >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Поставки</ModalHeader>
-        <ModalCloseButton />
         <ModalBody>
           <Flex paddingTop={5} flexDir={'column'} gap={5}>
             <Text>Големина на фонт</Text>
@@ -57,10 +58,9 @@ const DisplayPreferences = ({
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="gray" mr={3} onClick={closeModalDisclosure}>
-            Откажи
+          <Button autoFocus onClick={handleSave}>
+            ОК
           </Button>
-          <Button onClick={handleSave}>Зачувај</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
