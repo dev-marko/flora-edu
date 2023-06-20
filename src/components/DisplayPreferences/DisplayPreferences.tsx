@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   Button,
   Flex,
@@ -12,39 +10,40 @@ import {
   ModalOverlay,
   Switch,
   Text,
-} from "@chakra-ui/react";
-import FontSizeSlider from "./FontSizeSlider";
-import ColorThemeSelect from "./ColorThemeSelect";
+} from '@chakra-ui/react';
+
+import FontSizeSlider from '@components/DisplayPreferences/FontSizeSlider';
+import ColorThemeSelect from '@components/DisplayPreferences/ColorThemeSelect';
 
 type Props = {
-  showModalDisclosure: boolean;
+  openModalDisclosure: boolean;
   closeModalDisclosure: () => void;
 };
 
-const DisplayPreferences: React.FC<Props> = ({
-  showModalDisclosure,
+const DisplayPreferences = ({
+  openModalDisclosure,
   closeModalDisclosure,
 }: Props) => {
   const handleSave = () => {
-    alert("Clicked save button");
+    location.reload();
   };
 
   return (
     <Modal
-      isOpen={showModalDisclosure}
+      isOpen={openModalDisclosure}
       onClose={closeModalDisclosure}
-      size={{ base: "sm", md: "3xl" }}
+      size={{ base: 'sm', md: '3xl' }}
     >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Поставки</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Flex paddingTop={5} flexDir={"column"} gap={5}>
+          <Flex paddingTop={5} flexDir={'column'} gap={5}>
             <Text>Големина на фонт</Text>
             <FontSizeSlider></FontSizeSlider>
           </Flex>
-          <Flex paddingTop={8} flexDir={"column"} gap={5}>
+          <Flex paddingTop={8} flexDir={'column'} gap={5}>
             <Text>Боја</Text>
             <ColorThemeSelect></ColorThemeSelect>
           </Flex>
