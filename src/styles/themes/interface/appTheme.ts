@@ -1,4 +1,4 @@
-import { ColorHues } from "@chakra-ui/react";
+import { ColorHues } from '@chakra-ui/react';
 
 interface AppTheme {
   name: string;
