@@ -1,67 +1,59 @@
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { Text, Heading, Button, VStack } from "@chakra-ui/react";
+import { useState } from 'react';
 import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  PopoverArrow,
-} from "@chakra-ui/react";
+  Text,
+  Heading,
+  Button,
+  ChakraProvider,
+  Container,
+  extendTheme,
+  useDisclosure,
+} from '@chakra-ui/react';
 
-import "./App.css";
-
-import theme from "@themes/theme";
-
-import feGreen from "@themes/feGreen";
-import feOrange from "@themes/feOrange";
-import fePurple from "@themes/fePurple";
-
-import { useState } from "react";
-
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import customTheme from '@/styles/themes/custom-theme';
+import feGreen from '@themes/feGreen';
+import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@/constants/theme-constants';
+import DisplayPreferences from '@components/DisplayPreferences/DisplayPreferences';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 function App() {
-  const colorThemes = [feGreen, feOrange, fePurple];
-  const [activeColorTheme, activateColorTheme] = useState(feGreen);
+  const [colorTheme] = useLocalStorage(COLOR_THEME_KEY, feGreen);
+  const [fontSize] = useLocalStorage(FONT_SIZE_KEY, {
+    numberValue: 40,
+    stringValue: 'md',
+  });
+  const [activeColorTheme] = useState(colorTheme);
+
   // Merge the active color theme's colors into our base theme:
-  const mergedTheme = extendTheme(theme, { colors: activeColorTheme.colors });
+  const mergedTheme = extendTheme(customTheme, {
+    colors: activeColorTheme.colors,
+    components: {
+      Text: {
+        variants: {
+          variableFontSize: {
+            fontSize: fontSize.stringValue,
+          },
+        },
+      },
+    },
+  });
+
+  const {
+    isOpen: isDisplayOpen,
+    onOpen: onDisplayOpen,
+    onClose: onDisplayClose,
+  } = useDisclosure();
 
   return (
     <ChakraProvider theme={mergedTheme}>
-      <Heading size="4xl">ФлораЕду</Heading>
-      <Text>Test paragraph body font</Text>
-      <Button>Test 1</Button>
-      <Button>Test 2</Button>
-      <Button>Test 3</Button>
-      <Button>Test 4</Button>
-
-      <Popover>
-        <PopoverTrigger>
-          <Button size="sm">Change Theme</Button>
-        </PopoverTrigger>
-        <PopoverContent w="150px">
-          <PopoverArrow />
-          <PopoverBody>
-            <VStack>
-              {/* Map over each colorTheme and add a button to activate it */}
-              {colorThemes.map((colorTheme) => (
-                <Button
-                  variant="link"
-                  key={colorTheme.id}
-                  onClick={() => activateColorTheme(colorTheme)}
-                >
-                  {colorTheme.name}
-                </Button>
-              ))}
-            </VStack>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
-      <Card bg="fePrimaryContainer">
-        <CardBody>
-          <Text>View a summary of all your customers over the last month.</Text>
-        </CardBody>
-      </Card>
+      <Container>
+        <Heading>Testing the Display Preferences modal</Heading>
+        <Button onClick={onDisplayOpen}>Open Modal</Button>
+        <Text>Normal body text</Text>
+        <DisplayPreferences
+          openModalDisclosure={isDisplayOpen}
+          closeModalDisclosure={onDisplayClose}
+        ></DisplayPreferences>
+      </Container>
     </ChakraProvider>
   );
 }
