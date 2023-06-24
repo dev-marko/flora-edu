@@ -1,6 +1,6 @@
 import AppTheme from "./interface/appTheme";
 
-const theme: AppTheme = {
+const fePurple: AppTheme = {
   id: "fePurple",
   name: "Purple",
   colors: {
@@ -19,4 +19,4 @@ const theme: AppTheme = {
   },
 };
 
-export default theme;
+export default fePurple;
