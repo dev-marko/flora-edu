@@ -18,7 +18,7 @@ import '@fontsource/inter/900.css';
 
 import feBlue from '@themes/feBlue';
 import feGreen from '@themes/feGreen';
-import feOrange from '@themes/feOrange';
+import feYellow from '@/styles/themes/feYellow';
 import fePink from '@themes/fePink';
 import fePurple from '@themes/fePurple';
 import feRed from '@themes/feRed';
@@ -41,8 +41,8 @@ const theme = {
       feGreen: {
         ...feGreen.colors.primary,
       },
-      feOrange: {
-        ...feOrange.colors.primary,
+      feYellow: {
+        ...feYellow.colors.primary,
       },
       fePurple: {
         ...fePurple.colors.primary,

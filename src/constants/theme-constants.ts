@@ -1,6 +1,6 @@
 import feBlue from '@themes/feBlue';
 import feGreen from '@themes/feGreen';
-import feOrange from '@themes/feOrange';
+import feYellow from '@/styles/themes/feYellow';
 import fePink from '@themes/fePink';
 import fePurple from '@themes/fePurple';
 import feRed from '@themes/feRed';
@@ -10,7 +10,7 @@ export const FONT_SIZE_KEY = 'flora-edu-font-size';
 
 export const colorThemeSelectOptions = [
   'feRed.500',
-  'feOrange.500',
+  'feYellow.500',
   'feBlue.500',
   'feGreen.500',
   'fePurple.500',
@@ -21,7 +21,7 @@ export const customColorThemes = [
   feRed,
   feBlue,
   feGreen,
-  feOrange,
+  feYellow,
   fePurple,
   fePink,
 ];
