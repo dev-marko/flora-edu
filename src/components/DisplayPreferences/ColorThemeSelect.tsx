@@ -43,7 +43,13 @@ const ColorThemeButton = (props: RadioProps) => {
   );
 };
 
-const ColorThemeSelect: React.FC = () => {
+type Props = {
+  colorModeChangeCallback: (value: any) => void;
+};
+
+const ColorThemeSelect = ({
+  colorModeChangeCallback: onColorModeChange,
+}: Props) => {
   const options = colorThemeSelectOptions;
 
   const [colorTheme, setColorTheme] = useLocalStorage(COLOR_THEME_KEY, feGreen);
@@ -55,6 +61,7 @@ const ColorThemeSelect: React.FC = () => {
     );
     if (customTheme) {
       setColorTheme(customTheme);
+      onColorModeChange(customTheme);
     }
   };
 

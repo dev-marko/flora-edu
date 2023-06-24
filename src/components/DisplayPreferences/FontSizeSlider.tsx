@@ -9,44 +9,60 @@ import {
 
 import { FONT_SIZE_KEY } from '@/constants/theme-constants';
 import useLocalStorage from '@/hooks/useLocalStorage';
+import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
 
-const FontSizeSlider = () => {
+type Props = {
+  onFontSizeChange: (value: FontSizeSliderValue) => void;
+};
+
+const FontSizeSlider = ({ onFontSizeChange }: Props) => {
   const [fontSize, setFontSize] = useLocalStorage(FONT_SIZE_KEY, {
-    numericValue: 40,
+    numericValue: 25,
     stringValue: 'md',
   });
 
   const handleChange = (value: number) => {
+    let fontSizeObj: FontSizeSliderValue;
     switch (value) {
-      case 20:
-        setFontSize({
-          numericValue: 20,
+      case 0:
+        fontSizeObj = {
+          numericValue: 0,
           stringValue: 'sm',
-        });
+        };
+        setFontSize(fontSizeObj);
+        onFontSizeChange(fontSizeObj);
         break;
-      case 40:
-        setFontSize({
-          numericValue: 40,
+      case 25:
+        fontSizeObj = {
+          numericValue: 25,
           stringValue: 'md',
-        });
+        };
+        setFontSize(fontSizeObj);
+        onFontSizeChange(fontSizeObj);
         break;
-      case 60:
-        setFontSize({
-          numericValue: 60,
+      case 50:
+        fontSizeObj = {
+          numericValue: 50,
           stringValue: 'lg',
-        });
+        };
+        setFontSize(fontSizeObj);
+        onFontSizeChange(fontSizeObj);
         break;
-      case 80:
-        setFontSize({
-          numericValue: 80,
+      case 75:
+        fontSizeObj = {
+          numericValue: 75,
           stringValue: 'xl',
-        });
+        };
+        setFontSize(fontSizeObj);
+        onFontSizeChange(fontSizeObj);
         break;
-      default:
-        setFontSize({
-          numericValue: 40,
-          stringValue: 'md',
-        });
+      case 100:
+        fontSizeObj = {
+          numericValue: 100,
+          stringValue: '2xl',
+        };
+        setFontSize(fontSizeObj);
+        onFontSizeChange(fontSizeObj);
         break;
     }
   };
@@ -56,16 +72,17 @@ const FontSizeSlider = () => {
       defaultValue={fontSize.numericValue}
       min={0}
       max={100}
-      step={20}
+      step={25}
       w={{ base: '100%', md: '75%' }}
       alignSelf={'center'}
       onChange={handleChange}
     >
       <Box marginY={5}>
-        <SliderMark value={20}>S</SliderMark>
-        <SliderMark value={40}>M</SliderMark>
-        <SliderMark value={60}>L</SliderMark>
-        <SliderMark value={80}>XL</SliderMark>
+        <SliderMark value={0}>S</SliderMark>
+        <SliderMark value={25}>M</SliderMark>
+        <SliderMark value={50}>L</SliderMark>
+        <SliderMark value={75}>XL</SliderMark>
+        <SliderMark value={100}>2XL</SliderMark>
       </Box>
       <SliderTrack bg={'primary.100'}>
         <SliderFilledTrack />

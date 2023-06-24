@@ -27,7 +27,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
       "@public/*": ["public/*"],
-      "@themes/*": ["src/styles/themes/*"]
+      "@themes/*": ["src/styles/themes/*"],
+      "@interfaces/*": ["src/interfaces/*"]
     }
   },
   "include": ["src"],
