@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import {
-  Text,
-  Heading,
-  Button,
   ChakraProvider,
   Container,
   extendTheme,
@@ -18,6 +15,7 @@ import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
 import customTheme from '@/styles/themes/custom-theme';
 import feGreen from '@/styles/themes/feGreen';
 import AppTheme from '@/styles/themes/interface/appTheme';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   const [colorTheme] = useLocalStorage(COLOR_THEME_KEY, feGreen);
@@ -57,10 +55,8 @@ function App() {
 
   return (
     <ChakraProvider theme={mergedTheme}>
-      <Container maxW={'75%'}>
-        <Heading>Testing the Display Preferences modal</Heading>
-        <Button onClick={onDisplayOpen}>Open Modal</Button>
-        <Text>Normal body text</Text>
+      <Container maxW={'container.xl'}>
+        <Navbar onOpenDisplayPreferencesCallback={onDisplayOpen}></Navbar>
         <DisplayPreferences
           openModalDisclosure={isDisplayOpen}
           closeModalDisclosure={onDisplayClose}

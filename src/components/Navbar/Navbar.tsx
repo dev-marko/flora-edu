@@ -9,12 +9,18 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  HStack,
+  Heading,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, SettingsIcon } from '@chakra-ui/icons';
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
 
-export default function Navbar() {
+type Props = {
+  onOpenDisplayPreferencesCallback: () => void;
+};
+
+const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -45,13 +51,12 @@ export default function Navbar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
+          <Heading
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            Logo
-          </Text>
+            ФлораЕду
+          </Heading>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -64,7 +69,7 @@ export default function Navbar() {
           direction={'row'}
           spacing={6}
         >
-          <Button as={'a'} variant={'outline'} size={'sm'} href={'#'}>
+          <Button as={'a'} variant={'link'} size={'sm'} href={'#'}>
             Најава
           </Button>
           <Button
@@ -75,14 +80,26 @@ export default function Navbar() {
           >
             Регистрација
           </Button>
+          <Button
+            onClick={onOpenDisplayPreferencesCallback}
+            size={'sm'}
+            display={{ base: 'none', md: 'inline-flex' }}
+          >
+            <HStack>
+              <SettingsIcon></SettingsIcon>
+              <Text fontSize={'sm'}>Поставки</Text>
+            </HStack>
+          </Button>
         </Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav
+          onOpenDisplayPreferencesCallback={onOpenDisplayPreferencesCallback}
+        />
       </Collapse>
     </Box>
   );
-}
+};
 
-
+export default Navbar;

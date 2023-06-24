@@ -2,19 +2,19 @@ import { NavItem } from '@/interfaces/nav-item';
 
 export const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'Дома',
     href: '#',
   },
   {
-    label: 'Find Work',
+    label: 'Растенија',
     href: '#',
   },
   {
-    label: 'Learn Design',
+    label: 'Блог',
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: 'За Нас',
     href: '#',
   },
 ];
