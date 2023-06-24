@@ -1,35 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+
+import {
+  Text,
+  Heading,
+  Button,
+  ChakraProvider,
+  Container,
+  extendTheme,
+  useDisclosure,
+} from '@chakra-ui/react';
+
+import DisplayPreferences from '@components/DisplayPreferences/DisplayPreferences';
+import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@/constants/theme-constants';
+import useLocalStorage from '@hooks/useLocalStorage';
+import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
+
+import customTheme from '@/styles/themes/custom-theme';
+import feGreen from '@/styles/themes/feGreen';
+import AppTheme from '@/styles/themes/interface/appTheme';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [colorTheme] = useLocalStorage(COLOR_THEME_KEY, feGreen);
+  const [fontSize, setFontSize] = useLocalStorage(FONT_SIZE_KEY, {
+    numericValue: 25,
+    stringValue: 'md',
+  });
+  const [activeColorTheme, setActiveColorTheme] = useState(colorTheme);
+
+  const setColorThemeCallback = (value: AppTheme) => {
+    setActiveColorTheme(value);
+  };
+
+  const setFontSizeCallback = (value: FontSizeSliderValue) => {
+    setFontSize(value);
+  };
+
+  // Merge the active color theme's colors into our base theme:
+  const mergedTheme = extendTheme(customTheme, {
+    colors: activeColorTheme.colors,
+    components: {
+      Text: {
+        variants: {
+          variableFontSize: {
+            fontSize: fontSize.stringValue,
+          },
+        },
+      },
+    },
+  });
+
+  const {
+    isOpen: isDisplayOpen,
+    onOpen: onDisplayOpen,
+    onClose: onDisplayClose,
+  } = useDisclosure();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ChakraProvider theme={mergedTheme}>
+      <Container maxW={'75%'}>
+        <Heading>Testing the Display Preferences modal</Heading>
+        <Button onClick={onDisplayOpen}>Open Modal</Button>
+        <Text>Normal body text</Text>
+        <DisplayPreferences
+          openModalDisclosure={isDisplayOpen}
+          closeModalDisclosure={onDisplayClose}
+          onColorModeChange={setColorThemeCallback}
+          onFontSizeChange={setFontSizeCallback}
+        ></DisplayPreferences>
+      </Container>
+    </ChakraProvider>
+  );
 }
 
-export default App
+export default App;
