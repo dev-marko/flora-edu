@@ -2,10 +2,19 @@ import {
   ThemeConfig,
   extendTheme,
   withDefaultColorScheme,
-  withDefaultProps,
-  withDefaultSize,
   withDefaultVariant,
 } from '@chakra-ui/react';
+
+import '@fontsource/yeseva-one/400.css';
+import '@fontsource/inter/100.css';
+import '@fontsource/inter/200.css';
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/inter/900.css';
 
 import feBlue from '@themes/feBlue';
 import feGreen from '@themes/feGreen';
@@ -13,11 +22,6 @@ import feOrange from '@themes/feOrange';
 import fePink from '@themes/fePink';
 import fePurple from '@themes/fePurple';
 import feRed from '@themes/feRed';
-
-import '@fontsource/yeseva-one/400.css';
-import '@fontsource/inter/500.css';
-import useLocalStorage from '@/hooks/useLocalStorage';
-import { FONT_SIZE_KEY } from '@/constants/theme-constants';
 
 const colorModeConfig: ThemeConfig = {
   initialColorMode: 'light',
@@ -55,15 +59,10 @@ const theme = {
 };
 
 const customTheme = extendTheme(
-  //This will set the default colorScheme for all buttons as `primary`
   withDefaultColorScheme({
     colorScheme: 'primary',
     components: ['Button', 'Switch', 'Slider', 'SliderTrack'],
   }),
-  // withDefaultSize({
-  //   size: '2xl',
-  //   components: ['Heading'],
-  // }),
   withDefaultVariant({
     variant: 'variableFontSize',
     components: ['Text', 'Heading'],
