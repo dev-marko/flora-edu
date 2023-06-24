@@ -3,6 +3,7 @@ import {
   Flex,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -13,39 +14,44 @@ import {
 
 import FontSizeSlider from '@components/DisplayPreferences/FontSizeSlider';
 import ColorThemeSelect from '@components/DisplayPreferences/ColorThemeSelect';
+import AppTheme from '@/styles/themes/interface/appTheme';
+import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
 
 type Props = {
   openModalDisclosure: boolean;
   closeModalDisclosure: () => void;
+  onColorModeChange: (value: AppTheme) => void;
+  onFontSizeChange: (value: FontSizeSliderValue) => void;
 };
 
 const DisplayPreferences = ({
   openModalDisclosure,
   closeModalDisclosure,
+  onColorModeChange,
+  onFontSizeChange,
 }: Props) => {
-  const handleSave = () => {
-    location.reload();
-  };
-
   return (
     <Modal
       isOpen={openModalDisclosure}
       onClose={closeModalDisclosure}
-      closeOnEsc={false}
-      closeOnOverlayClick={false}
       size={{ base: 'sm', md: '3xl' }}
     >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Поставки</ModalHeader>
+        <ModalCloseButton />
         <ModalBody>
           <Flex paddingTop={5} flexDir={'column'} gap={5}>
             <Text>Големина на фонт</Text>
-            <FontSizeSlider></FontSizeSlider>
+            <FontSizeSlider
+              onFontSizeChange={onFontSizeChange}
+            ></FontSizeSlider>
           </Flex>
           <Flex paddingTop={8} flexDir={'column'} gap={5}>
             <Text>Боја</Text>
-            <ColorThemeSelect></ColorThemeSelect>
+            <ColorThemeSelect
+              colorModeChangeCallback={onColorModeChange}
+            ></ColorThemeSelect>
           </Flex>
           <Flex paddingTop={16}>
             <Text flex={{ base: 1, md: 2 }}>Далтонизам</Text>
@@ -57,8 +63,8 @@ const DisplayPreferences = ({
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button autoFocus onClick={handleSave}>
-            ОК
+          <Button autoFocus onClick={closeModalDisclosure}>
+            Затвори
           </Button>
         </ModalFooter>
       </ModalContent>

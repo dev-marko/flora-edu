@@ -65,7 +65,7 @@ const customTheme = extendTheme(
   }),
   withDefaultVariant({
     variant: 'variableFontSize',
-    components: ['Text', 'Heading'],
+    components: ['Text'],
   }),
   theme
 );

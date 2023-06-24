@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import {
   Text,
   Heading,
@@ -9,19 +10,30 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import customTheme from '@/styles/themes/custom-theme';
-import feGreen from '@themes/feGreen';
-import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@/constants/theme-constants';
 import DisplayPreferences from '@components/DisplayPreferences/DisplayPreferences';
+import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@/constants/theme-constants';
 import useLocalStorage from '@hooks/useLocalStorage';
+import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
+
+import customTheme from '@/styles/themes/custom-theme';
+import feGreen from '@/styles/themes/feGreen';
+import AppTheme from '@/styles/themes/interface/appTheme';
 
 function App() {
   const [colorTheme] = useLocalStorage(COLOR_THEME_KEY, feGreen);
-  const [fontSize] = useLocalStorage(FONT_SIZE_KEY, {
-    numberValue: 40,
+  const [fontSize, setFontSize] = useLocalStorage(FONT_SIZE_KEY, {
+    numericValue: 25,
     stringValue: 'md',
   });
-  const [activeColorTheme] = useState(colorTheme);
+  const [activeColorTheme, setActiveColorTheme] = useState(colorTheme);
+
+  const setColorThemeCallback = (value: AppTheme) => {
+    setActiveColorTheme(value);
+  };
+
+  const setFontSizeCallback = (value: FontSizeSliderValue) => {
+    setFontSize(value);
+  };
 
   // Merge the active color theme's colors into our base theme:
   const mergedTheme = extendTheme(customTheme, {
@@ -45,13 +57,15 @@ function App() {
 
   return (
     <ChakraProvider theme={mergedTheme}>
-      <Container>
+      <Container maxW={'75%'}>
         <Heading>Testing the Display Preferences modal</Heading>
         <Button onClick={onDisplayOpen}>Open Modal</Button>
         <Text>Normal body text</Text>
         <DisplayPreferences
           openModalDisclosure={isDisplayOpen}
           closeModalDisclosure={onDisplayClose}
+          onColorModeChange={setColorThemeCallback}
+          onFontSizeChange={setFontSizeCallback}
         ></DisplayPreferences>
       </Container>
     </ChakraProvider>
