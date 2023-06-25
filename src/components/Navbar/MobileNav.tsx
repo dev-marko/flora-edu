@@ -21,7 +21,7 @@ export const MobileNav = ({ onOpenDisplayPreferencesCallback }: Props) => (
       <Stack
         bg={useColorModeValue('white', 'gray.800')}
         p={4}
-        display={{ md: 'none' }}
+        display={{ xl: 'none' }}
       >
         {NAV_ITEMS.map((navItem) => (
           <MobileNavItem key={navItem.label} {...navItem} />
@@ -32,7 +32,7 @@ export const MobileNav = ({ onOpenDisplayPreferencesCallback }: Props) => (
         size={'sm'}
         variant={'link'}
         p={4}
-        display={{ md: 'none' }}
+        display={{ xl: 'none' }}
       >
         <HStack>
           <SettingsIcon></SettingsIcon>

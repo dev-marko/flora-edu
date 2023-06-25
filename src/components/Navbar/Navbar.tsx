@@ -41,9 +41,9 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
         align={'center'}
       >
         <Flex
-          flex={{ base: 1, md: 'auto' }}
+          flex={{ base: 1, md: 3, lg: 3, xl: 'auto' }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}
+          display={{ base: 'flex', md: 'flex', lg: 'flex', xl: 'none' }}
         >
           <IconButton
             onClick={onToggle}
@@ -55,7 +55,7 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
           />
         </Flex>
         <Flex
-          flex={{ base: 1 }}
+          flex={{ base: 1, md: 6 }}
           justify={{ base: 'center', md: 'space-evenly' }}
           align={'center'}
         >
@@ -68,23 +68,36 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
             ФлораЕду
           </Heading>
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex
+            display={{ base: 'none', md: 'none', lg: 'none', xl: 'flex' }}
+            ml={10}
+          >
             <DesktopNav />
           </Flex>
         </Flex>
 
         <Stack
-          flex={{ base: 1, md: 0 }}
+          flex={{ base: 1, md: 3, lg: 3, xl: 0 }}
           justify={'flex-end'}
           direction={'row'}
           spacing={6}
         >
-          <Button as={'a'} variant={'link'} size={'sm'} href={'#'}>
+          <Button
+            as={'a'}
+            variant={'link'}
+            size={{ base: 'xs', md: 'md', lg: 'lg', xl: 'sm' }}
+            href={'#'}
+          >
             Најава
           </Button>
           <Button
             as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
+            display={{
+              base: 'none',
+              md: 'none',
+              lg: 'none',
+              xl: 'inline-flex',
+            }}
             size={'sm'}
             href={'#'}
           >
@@ -93,7 +106,12 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
           <Button
             onClick={onOpenDisplayPreferencesCallback}
             size={'sm'}
-            display={{ base: 'none', md: 'inline-flex' }}
+            display={{
+              base: 'none',
+              md: 'none',
+              lg: 'none',
+              xl: 'inline-flex',
+            }}
           >
             <HStack>
               <SettingsIcon></SettingsIcon>
