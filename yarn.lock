@@ -576,6 +576,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chakra-ui/icons@npm:^2.0.19":
+  version: 2.0.19
+  resolution: "@chakra-ui/icons@npm:2.0.19"
+  dependencies:
+    "@chakra-ui/icon": 3.0.16
+  peerDependencies:
+    "@chakra-ui/system": ">=2.0.0"
+    react: ">=18"
+  checksum: 343a55d853c0b7c566ea5831dabfdfa4d5e6e88069ba3966189fab6d62671ba732fb3cab42b97c61db8d4488b279b8f6555fa096ae4cad2b96c33cc1fc13dc27
+  languageName: node
+  linkType: hard
+
 "@chakra-ui/image@npm:2.0.16":
   version: 2.0.16
   resolution: "@chakra-ui/image@npm:2.0.16"
@@ -1837,6 +1849,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/playfair-display@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "@fontsource/playfair-display@npm:5.0.3"
+  checksum: 889f7523528466257f238426876199db290c24732d6899e0359799109edfb6070b16b112215303c98941d3a59ca7ab34fa87c4bcaab1a463ec192a2180ab1812
+  languageName: node
+  linkType: hard
+
 "@fontsource/yeseva-one@npm:^4.5.10":
   version: 4.5.10
   resolution: "@fontsource/yeseva-one@npm:4.5.10"
@@ -2190,13 +2209,13 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:*, @types/react@npm:^18.0.28":
-  version: 18.2.13
-  resolution: "@types/react@npm:18.2.13"
+  version: 18.2.14
+  resolution: "@types/react@npm:18.2.14"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: f7c15f19c164a29262993ea2aae2085fa38cddd9b8359fd8fefabfced91010b515a3abe2042b2b7f2f86e6b38a25b191415aa9313a9027175e3a000883c858cc
+  checksum: a6a5e8cc78f486b9020d1ad009aa6c56943c68c7c6376e0f8399e9cbcd950b7b8f5d73f00200f5379f5e58d31d57d8aed24357f301d8e86108cd438ce6c8b3dd
   languageName: node
   linkType: hard
 
@@ -2604,9 +2623,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001503":
-  version: 1.0.30001505
-  resolution: "caniuse-lite@npm:1.0.30001505"
-  checksum: 994a48945d797603e04641aa54d2368d1405feea249dfc51a1dbfc39cbaf51ab0df8ec03c944448289597bd7046ab5dbc6dff7ee3cbfec0e70a83b164395e805
+  version: 1.0.30001507
+  resolution: "caniuse-lite@npm:1.0.30001507"
+  checksum: 7044172bdf65140c927cdaaff50368a97676f06a9fd8b515c046613bdf52cb769e9efb832ee491b8f8cc21f82c15f154a896efbab690f431bb064c95f3a2b7a8
   languageName: node
   linkType: hard
 
@@ -2848,9 +2867,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.431":
-  version: 1.4.435
-  resolution: "electron-to-chromium@npm:1.4.435"
-  checksum: cd70746db9432e3134c1e239927d160d38aedb2d65fec995bd1c03b6de51d4a8a33d7199afe5fc85c64e3eae28f4238e290729a2899420b3240e801b18c407a0
+  version: 1.4.440
+  resolution: "electron-to-chromium@npm:1.4.440"
+  checksum: 702f8f045492a15bc6eee408987c986de1e78a568b34fc68ed6a21e1fc03f3a3019e7e6a6d88c1f4468fbe788045425e70104ec9b481825d0bce00e3841418b8
   languageName: node
   linkType: hard
 
@@ -3262,10 +3281,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "flora-edu@workspace:."
   dependencies:
+    "@chakra-ui/icons": ^2.0.19
     "@chakra-ui/react": ^2.6.1
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
     "@fontsource/inter": ^4.5.15
+    "@fontsource/playfair-display": ^5.0.3
     "@fontsource/yeseva-one": ^4.5.10
     "@types/node": ^20.1.4
     "@types/react": ^18.0.28
@@ -3305,8 +3326,8 @@ __metadata:
   linkType: hard
 
 "framer-motion@npm:^10.12.10":
-  version: 10.12.16
-  resolution: "framer-motion@npm:10.12.16"
+  version: 10.12.17
+  resolution: "framer-motion@npm:10.12.17"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     tslib: ^2.4.0
@@ -3321,7 +3342,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 0ba346fd6e64688ea5e64f9e353af6202b42d59e309ac32daca7fc07dc1dad9136dd2c18017a85ac76d01becb7f4683fc92dedbfce3e44831ea0c47bdc73e812
+  checksum: d36fbc7fabd0b9e519e5ef776528b37acea9129ee3cfb4ced77c641dd3b9c31b4b63a7328f86d3b79dd86e8139102dac57f70915c0afd0a3eb7361dc2bd15e81
   languageName: node
   linkType: hard
 
@@ -3434,8 +3455,8 @@ __metadata:
   linkType: hard
 
 "glob@npm:^10.2.2":
-  version: 10.2.7
-  resolution: "glob@npm:10.2.7"
+  version: 10.3.0
+  resolution: "glob@npm:10.3.0"
   dependencies:
     foreground-child: ^3.1.0
     jackspeak: ^2.0.3
@@ -3444,7 +3465,7 @@ __metadata:
     path-scurry: ^1.7.0
   bin:
     glob: dist/cjs/src/bin.js
-  checksum: 555205a74607d6f8d9874ba888924b305b5ea1abfaa2e9ccb11ac713d040aac7edbf7d8702a2f4a1cd81b2d7666412170ce7ef061d33cddde189dae8c1a1a054
+  checksum: 6fa4ac0a86ffec1c5715a2e6fbdd63e1e7f1c2c8f5db08cc3256cdfcb81093678e7c80a3d100b502a1b9d141369ecf87bc24fe2bcb72acec7b14626d358a4eb0
   languageName: node
   linkType: hard
 
@@ -3932,11 +3953,11 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^9.0.1":
-  version: 9.0.1
-  resolution: "minimatch@npm:9.0.1"
+  version: 9.0.2
+  resolution: "minimatch@npm:9.0.2"
   dependencies:
     brace-expansion: ^2.0.1
-  checksum: 97f5f5284bb57dc65b9415dec7f17a0f6531a33572193991c60ff18450dcfad5c2dad24ffeaf60b5261dccd63aae58cc3306e2209d57e7f88c51295a532d8ec3
+  checksum: 2eb12e2047a062fdb973fb51b9803f2455e3a00977858c038d66646d303a5a15bbcbc6ed5a2fc403bc869b1309f829ed3acd881d3246faf044ea7a494974b924
   languageName: node
   linkType: hard
 
@@ -4520,8 +4541,8 @@ __metadata:
   linkType: hard
 
 "rollup@npm:^3.21.0":
-  version: 3.25.1
-  resolution: "rollup@npm:3.25.1"
+  version: 3.25.2
+  resolution: "rollup@npm:3.25.2"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -4529,7 +4550,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: f483b28a0605097a725b080c088262b0fa21f7bce66f741df73d9ff0be6a3baaf2927916b094ce95412f4f15cc59bb5eae020f59cae3d3a6993d123faceb5b41
+  checksum: 80034ec8d71022b816cd31c24455d7b06ab8d8ff49ab9e583ceb03e2ebd0f6ad00824c6257fa4f8d12a12c2dceda999cec9509c1fff956e8a707b0add1bf2d9c
   languageName: node
   linkType: hard
 
@@ -4575,13 +4596,13 @@ __metadata:
   linkType: hard
 
 "semver@npm:^7.3.5, semver@npm:^7.3.7":
-  version: 7.5.2
-  resolution: "semver@npm:7.5.2"
+  version: 7.5.3
+  resolution: "semver@npm:7.5.3"
   dependencies:
     lru-cache: ^6.0.0
   bin:
     semver: bin/semver.js
-  checksum: 3fdf5d1e6f170fe8bcc41669e31787649af91af7f54f05c71d0865bb7aa27e8b92f68b3e6b582483e2c1c648008bc84249d2cd86301771fe5cbf7621d1fe5375
+  checksum: 9d58db16525e9f749ad0a696a1f27deabaa51f66e91d2fa2b0db3de3e9644e8677de3b7d7a03f4c15bc81521e0c3916d7369e0572dbde250d9bedf5194e2a8a7
   languageName: node
   linkType: hard
 

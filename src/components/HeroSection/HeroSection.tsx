@@ -21,7 +21,7 @@ const HeroSection = () => {
         borderRadius={'5'}
         p={'9'}
       >
-        <Flex flexDir={'column'} justify={'space-between'} minH={'100%'}>
+        <Flex flexDir={'column'} justify={'space-between'} minH={'full'}>
           <Box>
             <Heading as={'h2'} size={'2xl'} color={'white'}>
               Добредојдовте

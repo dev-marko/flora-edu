@@ -73,7 +73,7 @@ const FontSizeSlider = ({ onFontSizeChange }: Props) => {
       min={0}
       max={100}
       step={25}
-      w={{ base: '100%', md: '75%' }}
+      w={'75%'}
       alignSelf={'center'}
       onChange={handleChange}
     >
