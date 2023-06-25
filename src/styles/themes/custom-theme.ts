@@ -6,6 +6,14 @@ import {
 } from '@chakra-ui/react';
 
 import '@fontsource/yeseva-one/400.css';
+
+import '@fontsource/playfair-display/400.css';
+import '@fontsource/playfair-display/500.css';
+import '@fontsource/playfair-display/600.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/playfair-display/800.css';
+import '@fontsource/playfair-display/900.css';
+
 import '@fontsource/inter/100.css';
 import '@fontsource/inter/200.css';
 import '@fontsource/inter/300.css';
@@ -53,7 +61,7 @@ const theme = {
     },
   },
   fonts: {
-    heading: `'Yeseva One', 'Times New Roman', cursive`,
+    heading: `'Playfair Display', 'Yeseva One', 'Times New Roman', cursive`,
     body: `'Inter', 'Arial', sans-serif`,
   },
 };
