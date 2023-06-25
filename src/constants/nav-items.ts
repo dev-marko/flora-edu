@@ -17,4 +17,8 @@ export const NAV_ITEMS: Array<NavItem> = [
     label: 'За Нас',
     href: '#',
   },
+  {
+    label: 'Упатство',
+    href: '#',
+  },
 ];
