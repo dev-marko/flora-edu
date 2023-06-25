@@ -58,7 +58,7 @@ function App() {
   return (
     <ChakraProvider theme={mergedTheme}>
       <Container maxW={'container.xl'}>
-      <Navbar onOpenDisplayPreferencesCallback={onDisplayOpen}></Navbar>
+        <Navbar onOpenDisplayPreferencesCallback={onDisplayOpen}></Navbar>
         <DisplayPreferences
           openModalDisclosure={isDisplayOpen}
           closeModalDisclosure={onDisplayClose}
