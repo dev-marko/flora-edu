@@ -34,7 +34,7 @@ const DisplayPreferences = ({
     <Modal
       isOpen={openModalDisclosure}
       onClose={closeModalDisclosure}
-      size={{ base: 'sm', md: '3xl' }}
+      size={{ base: 'xs', md: '3xl' }}
     >
       <ModalOverlay />
       <ModalContent>
@@ -54,12 +54,16 @@ const DisplayPreferences = ({
             ></ColorThemeSelect>
           </Flex>
           <Flex paddingTop={16}>
-            <Text flex={{ base: 1, md: 2 }}>Далтонизам</Text>
-            <Switch flex={{ base: 2, md: 7 }}></Switch>
+            <Text flex={2}>Далтонизам</Text>
+            <Switch flex={{ base: 2, md: 7 }} alignSelf={'center'}></Switch>
           </Flex>
           <Flex paddingY={8}>
-            <Text flex={{ base: 1, md: 2 }}>Затемни</Text>
-            <Switch flex={{ base: 2, md: 7 }} defaultChecked={true}></Switch>
+            <Text flex={2}>Затемни</Text>
+            <Switch
+              flex={{ base: 2, md: 7 }}
+              defaultChecked={true}
+              alignSelf={'center'}
+            ></Switch>
           </Flex>
         </ModalBody>
         <ModalFooter>
