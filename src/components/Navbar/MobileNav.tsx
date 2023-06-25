@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   HStack,
   Stack,
   Text,
@@ -15,24 +16,29 @@ type Props = {
 };
 
 export const MobileNav = ({ onOpenDisplayPreferencesCallback }: Props) => (
-  <Stack
-    bg={useColorModeValue('white', 'gray.800')}
-    p={4}
-    display={{ md: 'none' }}
-  >
-    {NAV_ITEMS.map((navItem) => (
-      <MobileNavItem key={navItem.label} {...navItem} />
-    ))}
-    <Button
-      onClick={onOpenDisplayPreferencesCallback}
-      size={'sm'}
-      variant={'link'}
-      py={2}
-    >
-      <HStack>
-        <SettingsIcon></SettingsIcon>
-        <Text fontSize={'md'}>Поставки</Text>
-      </HStack>
-    </Button>
-  </Stack>
+  <>
+    <Flex h={'full'} justify={'space-between'} flexDir={'column'}>
+      <Stack
+        bg={useColorModeValue('white', 'gray.800')}
+        p={4}
+        display={{ md: 'none' }}
+      >
+        {NAV_ITEMS.map((navItem) => (
+          <MobileNavItem key={navItem.label} {...navItem} />
+        ))}
+      </Stack>
+      <Button
+        onClick={onOpenDisplayPreferencesCallback}
+        size={'sm'}
+        variant={'link'}
+        p={4}
+        display={{ md: 'none' }}
+      >
+        <HStack>
+          <SettingsIcon></SettingsIcon>
+          <Text fontSize={'md'}>Поставки</Text>
+        </HStack>
+      </Button>
+    </Flex>
+  </>
 );

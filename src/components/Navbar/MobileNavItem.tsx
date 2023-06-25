@@ -7,6 +7,7 @@ import {
   Icon,
   Text,
   Collapse,
+  useTheme,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
@@ -14,6 +15,8 @@ import { NavItem } from '@/interfaces/nav-item';
 
 export const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
+
+  const theme = useTheme();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -29,7 +32,7 @@ export const MobileNavItem = ({ label, children, href }: NavItem) => {
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
+          color={theme.colors.primary[800]}
         >
           {label}
         </Text>

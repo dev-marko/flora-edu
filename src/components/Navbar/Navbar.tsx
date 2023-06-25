@@ -11,8 +11,10 @@ import {
   useDisclosure,
   HStack,
   Heading,
+  useTheme,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SettingsIcon } from '@chakra-ui/icons';
+
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
 
@@ -23,13 +25,15 @@ type Props = {
 const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
 
+  const theme = useTheme();
+
   return (
     <Box>
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
-        py={{ base: 2 }}
+        py={{ base: 2, md: 6 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
@@ -50,10 +54,16 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex
+          flex={{ base: 1 }}
+          justify={{ base: 'center', md: 'space-evenly' }}
+          align={'center'}
+        >
           <Heading
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            color={useColorModeValue('gray.800', 'white')}
+            color={theme.colors.primary[500]}
+            fontFamily={'Yeseva One'}
+            fontWeight={'400'}
           >
             ФлораЕду
           </Heading>
@@ -93,7 +103,7 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
         </Stack>
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
+      <Collapse in={isOpen} animateOpacity endingHeight={'45em'}>
         <MobileNav
           onOpenDisplayPreferencesCallback={onOpenDisplayPreferencesCallback}
         />
