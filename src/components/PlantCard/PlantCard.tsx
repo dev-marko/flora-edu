@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   Button,
   IconButton,
+  useTheme,
 } from '@chakra-ui/react';
 
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -20,6 +21,7 @@ import { BookmarkIcon as BookmarkIconOutline } from '@heroicons/react/24/outline
 // TODO: Type and accept props
 
 const PlantCard = () => {
+  const theme = useTheme();
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -59,7 +61,7 @@ const PlantCard = () => {
             variant={'link'}
             color={'red.500'}
           />
-          <Button>Види</Button>
+          <Button color={theme.colors.primary[500]} variant={'outline'}>Види</Button>
           <IconButton
             onClick={handleBookmarkClick}
             size={'sm'}
