@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 import heroSectionHeader from '../../assets/images/hero-section-header.jpg';
 
@@ -12,29 +12,25 @@ const HeroSection = () => {
       borderRadius={'20'}
       alignItems={'center'}
       justify={'start'}
-      px={'9'}
+      px={{ base: 3, sm: 3, md: 10 }}
+      mt={3}
+      mb={8}
     >
-      <Box
-        w={'30em'}
-        h={'22em'}
-        bgColor={'blackAlpha.300'}
-        borderRadius={'5'}
-        p={'9'}
-      >
-        <Flex flexDir={'column'} justify={'space-between'} minH={'full'}>
-          <Box>
-            <Heading as={'h2'} size={'2xl'} color={'white'}>
-              Добредојдовте
-            </Heading>
-            <Text mt={8} color={'white'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Text>
-          </Box>
-          <Box>
-            <Button>Прочитај повеќе</Button>
-          </Box>
-        </Flex>
+      <Box w={'32.5em'} bgColor={'blackAlpha.300'} borderRadius={'5'} p={10}>
+        <Stack direction={'column'} align={'start'} spacing={10}>
+          <Heading as={'h2'} size={'2xl'} color={'white'}>
+            Добредојдовте
+          </Heading>
+          <Text color={'white'} noOfLines={{ base: 6 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+          </Text>
+          <Button>Прочитај повеќе</Button>
+        </Stack>
       </Box>
     </Flex>
   );
