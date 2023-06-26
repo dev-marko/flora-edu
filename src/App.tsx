@@ -18,6 +18,8 @@ import AppTheme from '@/styles/themes/interface/appTheme';
 
 import Navbar from '@components/Navbar/Navbar';
 import Footer from '@components/Footer/Footer';
+import MostPopularPlants from '@components/MostPopularPlants/MostPopularPlants';
+import HeroSection from '@components/HeroSection/HeroSection';
 
 function App() {
   const [colorTheme] = useLocalStorage(COLOR_THEME_KEY, feGreen);
@@ -65,6 +67,8 @@ function App() {
           onColorModeChange={setColorThemeCallback}
           onFontSizeChange={setFontSizeCallback}
         ></DisplayPreferences>
+        <HeroSection></HeroSection>
+        <MostPopularPlants></MostPopularPlants>
       </Container>
       <Footer></Footer>
     </ChakraProvider>
