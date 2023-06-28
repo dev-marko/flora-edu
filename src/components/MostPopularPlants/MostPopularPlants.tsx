@@ -1,7 +1,17 @@
-import { Button, Divider, Flex, Heading, Stack } from '@chakra-ui/react';
+import {
+  Button,
+  Divider,
+  Flex,
+  Heading,
+  Stack,
+  useColorModeValue,
+} from '@chakra-ui/react';
+
 import PlantCard from '../PlantCard/PlantCard';
 
 const MostPopularPlants = () => {
+  const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
+
   return (
     <Flex flexDir={'column'}>
       <Stack
@@ -15,7 +25,7 @@ const MostPopularPlants = () => {
         <Heading textAlign={{ base: 'center' }}>Најпопуларни растенија</Heading>
         <Button>Сите растенија</Button>
       </Stack>
-      <Divider borderColor={'black'} />
+      <Divider borderColor={dividerColor} borderRadius={'lg'} />
       <Stack
         direction={['column', 'row']}
         flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'nowrap' }}
