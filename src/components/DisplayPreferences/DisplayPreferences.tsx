@@ -1,6 +1,8 @@
 import {
+  Box,
   Button,
   Flex,
+  HStack,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,6 +12,8 @@ import {
   ModalOverlay,
   Switch,
   Text,
+  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 import FontSizeSlider from '@components/DisplayPreferences/FontSizeSlider';
@@ -30,6 +34,9 @@ const DisplayPreferences = ({
   onColorModeChange,
   onFontSizeChange,
 }: Props) => {
+  const { toggleColorMode } = useColorMode();
+  const isDarkModeToggled = useColorModeValue(false, true);
+
   return (
     <Modal
       isOpen={openModalDisclosure}
@@ -53,17 +60,15 @@ const DisplayPreferences = ({
               colorModeChangeCallback={onColorModeChange}
             ></ColorThemeSelect>
           </Flex>
-          <Flex paddingTop={16}>
-            <Text flex={2}>Далтонизам</Text>
-            <Switch flex={{ base: 2, md: 7 }} alignSelf={'center'}></Switch>
-          </Flex>
-          <Flex paddingY={8}>
-            <Text flex={2}>Затемни</Text>
-            <Switch
-              flex={{ base: 2, md: 7 }}
-              defaultChecked={true}
-              alignSelf={'center'}
-            ></Switch>
+          <Flex pt={16}>
+            <HStack spacing={8}>
+              <Text>Затемни</Text>
+              <Switch
+                onChange={toggleColorMode}
+                isChecked={isDarkModeToggled}
+                alignSelf={'center'}
+              ></Switch>
+            </HStack>
           </Flex>
         </ModalBody>
         <ModalFooter>
