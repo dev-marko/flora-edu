@@ -1,11 +1,22 @@
-import { Stack, Link, Box, useTheme } from '@chakra-ui/react';
+import {
+  Stack,
+  Link,
+  Box,
+  useTheme,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { NAV_ITEMS } from '@/constants/nav-items';
 
 export const DesktopNav = () => {
-  // const linkColor = useColorModeValue('gray.600', 'gray.200');
-  // const linkHoverColor = useColorModeValue('gray.800', 'white');
-
   const theme = useTheme();
+  const linkColor = useColorModeValue(
+    theme.colors.primary[800],
+    theme.colors.primary[200]
+  );
+  const linkHoverColor = useColorModeValue(
+    theme.colors.primary[900],
+    theme.colors.primary[300]
+  );
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -16,10 +27,10 @@ export const DesktopNav = () => {
             href={navItem.href ?? '#'}
             fontSize={'md'}
             fontWeight={600}
-            color={theme.colors.primary[800]}
+            color={linkColor}
             _hover={{
               textDecoration: 'none',
-              color: theme.colors.primary[900],
+              color: linkHoverColor,
             }}
           >
             {navItem.label}
