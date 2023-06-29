@@ -9,12 +9,14 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
+import EmailContactForm from '@/components/EmailContactForm/EmailContactForm';
+
 import aboutUsImage1 from '../assets/images/about-us/about-us-1.jpg';
 import aboutUsImage2 from '../assets/images/about-us/about-us-2.jpg';
 import aboutUsImage3 from '../assets/images/about-us/about-us-3.jpg';
 
 const AboutUs = () => (
-  <Stack my={10} spacing={20}>
+  <Stack my={10} spacing={12}>
     <Box>
       <Stack spacing={8}>
         <Box>
@@ -119,7 +121,7 @@ const AboutUs = () => (
         </Box>
         <Flex
           flexDir={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
-          gap={20}
+          gap={{ base: 10, md: 20 }}
         >
           <Box flex={1}>
             <Text fontSize={'xl'} fontWeight={600}>
@@ -135,10 +137,11 @@ const AboutUs = () => (
           <Box flex={1}>
             <VStack align={'start'}>
               <Text fontSize={'xl'} fontWeight={600}>
-                Пиши ни порака!
+                Напишете ни порака!
               </Text>
-              // TODO: Insert the email form component from my personal website
-              <Box>WIP ⚒</Box>
+              <Box w={'full'}>
+                <EmailContactForm></EmailContactForm>
+              </Box>
             </VStack>
           </Box>
         </Flex>
