@@ -17,7 +17,7 @@ type Props = {
 
 export const MobileNav = ({ onOpenDisplayPreferencesCallback }: Props) => (
   <>
-    <Flex h={'full'} justify={'space-between'} flexDir={'column'}>
+    <Flex h={'full'} justify={'space-even'} flexDir={'column'}>
       <Stack
         bg={useColorModeValue('white', 'gray.800')}
         p={4}

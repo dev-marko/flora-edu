@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  useColorModeValue,
   useTheme,
 } from '@chakra-ui/react';
 import { NAV_ITEMS } from '@/constants/nav-items';
@@ -23,8 +24,13 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 const Footer = () => {
   const theme = useTheme();
 
+  const bgColor = useColorModeValue(
+    theme.colors.primary[300],
+    theme.colors.gray[700]
+  );
+
   return (
-    <Box bg={theme.colors.primary[300]} color={'white'}>
+    <Box bg={bgColor} color={'white'}>
       <Container as={Stack} maxW={'6xl'} py={10}>
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '1fr 1fr 1fr 2fr' }}
@@ -50,7 +56,7 @@ const Footer = () => {
             <Link href={'#'}>Instagram</Link>
             <Link href={'#'}>LinkedIn</Link>
           </Stack>
-          <Stack spacing={6} justify={{md: 'end'}} align={{md: 'end'}}>
+          <Stack spacing={6} justify={{ md: 'end' }} align={{ md: 'end' }}>
             <Box>
               <Heading
                 color={'white'}

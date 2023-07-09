@@ -17,6 +17,10 @@ export const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   const theme = useTheme();
+  const labelColor = useColorModeValue(
+    theme.colors.primary[800],
+    theme.colors.primary[200]
+  );
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -30,10 +34,7 @@ export const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: 'none',
         }}
       >
-        <Text
-          fontWeight={600}
-          color={theme.colors.primary[800]}
-        >
+        <Text fontWeight={600} color={labelColor}>
           {label}
         </Text>
         {children && (

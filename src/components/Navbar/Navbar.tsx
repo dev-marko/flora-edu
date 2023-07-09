@@ -26,6 +26,10 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
 
   const theme = useTheme();
+  const logoColor = useColorModeValue(
+    theme.colors.primary[500],
+    theme.colors.primary[200]
+  );
 
   return (
     <Box>
@@ -58,7 +62,7 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
         >
           <Heading
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            color={theme.colors.primary[500]}
+            color={logoColor}
             fontFamily={'Yeseva One'}
             fontWeight={'400'}
           >
