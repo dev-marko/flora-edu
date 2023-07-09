@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
-import heroSectionHeader from '../../assets/images/hero-section-header.jpg';
+import heroSectionHeader from '../../assets/images/hero-section/hero-section-header.jpg';
 
 const HeroSection = () => {
   return (
