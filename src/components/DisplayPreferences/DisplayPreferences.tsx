@@ -20,6 +20,7 @@ import FontSizeSlider from '@components/DisplayPreferences/FontSizeSlider';
 import ColorThemeSelect from '@components/DisplayPreferences/ColorThemeSelect';
 import AppTheme from '@/styles/themes/interface/appTheme';
 import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
+import InfoTooltip from '../shared/InfoTooltip';
 
 type Props = {
   openModalDisclosure: boolean;
@@ -55,14 +56,21 @@ const DisplayPreferences = ({
             ></FontSizeSlider>
           </Flex>
           <Flex paddingTop={8} flexDir={'column'} gap={5}>
-            <Text>Боја</Text>
+            <HStack align={'center'} spacing={1}>
+              <Text>Боја</Text>
+              <InfoTooltip
+                tooltipLabel="Нашите бои ги следат стандардите за семрежна пристапност."
+                labelPlacement="right"
+                ariaLabel="Information about color themes"
+              ></InfoTooltip>
+            </HStack>
             <ColorThemeSelect
               colorModeChangeCallback={onColorModeChange}
             ></ColorThemeSelect>
           </Flex>
           <Flex pt={16}>
             <HStack spacing={8}>
-              <Text>Затемни</Text>
+              <Text>Dark Mode</Text>
               <Switch
                 onChange={toggleColorMode}
                 isChecked={isDarkModeToggled}
