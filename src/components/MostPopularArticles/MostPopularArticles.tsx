@@ -7,11 +7,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-import PlantCard from '../PlantCard/PlantCard';
+import PopularArticleCard from '../PopularArticleCard/PopularArticleCard';
+import articles from '../../assets/data/blog-articles.json';
 
-import plants from '../../assets/data/plants.json';
-
-const MostPopularPlants = () => {
+const MostPopularArticles = () => {
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
   return (
@@ -24,21 +23,23 @@ const MostPopularPlants = () => {
         justify={'space-between'}
         spacing={{ base: 5 }}
       >
-        <Heading textAlign={{ base: 'center' }}>Најпопуларни растенија</Heading>
-        <Button>Сите растенија</Button>
+        <Heading textAlign={{ base: 'center' }}>
+          Популарни статии од нашиот блог
+        </Heading>
+        <Button>Сите статии</Button>
       </Stack>
       <Divider borderColor={dividerColor} borderRadius={'lg'} />
       <Stack
-        direction={['column', 'row']}
+        direction={'column'}
         flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'nowrap' }}
         justify={'center'}
       >
-        {plants.map((plant) => (
-          <PlantCard {...plant}></PlantCard>
+        {articles.map((article) => (
+          <PopularArticleCard {...article} />
         ))}
       </Stack>
     </Flex>
   );
 };
 
-export default MostPopularPlants;
+export default MostPopularArticles;
