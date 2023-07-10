@@ -1,0 +1,17 @@
+[
+  {
+    "id": "8e88b6a8-36d7-4f0a-ae61-6a26f47d2c69",
+    "name": "Ружа",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  {
+    "id": "2e60015e-0cb2-4586-904c-cbc8556233d4",
+    "name": "Лале",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  {
+    "id": "f7b81936-da42-47f2-bda5-51887a451a8b",
+    "name": "Камилица",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  }
+]
