@@ -50,7 +50,7 @@ const PlantCard = ({ id, name, description }: PlantCardProps) => {
           <Text fontSize={'lg'} fontWeight={500}>
             {name}
           </Text>
-          <Text fontSize={'sm'} color={'gray.500'} noOfLines={[1, 2, 3]}>
+          <Text fontSize={'sm'} color={'gray.500'} noOfLines={3}>
             {description}
           </Text>
         </Stack>
