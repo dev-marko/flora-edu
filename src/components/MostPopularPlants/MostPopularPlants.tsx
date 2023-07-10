@@ -9,6 +9,8 @@ import {
 
 import PlantCard from '../PlantCard/PlantCard';
 
+import plants from '../../assets/data/plants.json';
+
 const MostPopularPlants = () => {
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -31,10 +33,9 @@ const MostPopularPlants = () => {
         flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'nowrap' }}
         justify={'center'}
       >
-        <PlantCard></PlantCard>
-        <PlantCard></PlantCard>
-        <PlantCard></PlantCard>
-        <PlantCard></PlantCard>
+        {plants.map((plant) => (
+          <PlantCard {...plant}></PlantCard>
+        ))}
       </Stack>
     </Flex>
   );
