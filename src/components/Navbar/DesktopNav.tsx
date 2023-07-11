@@ -6,6 +6,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { NAV_ITEMS } from '@/constants/nav-items';
+import { NavLink } from 'react-router-dom';
 
 export const DesktopNav = () => {
   const theme = useTheme();
@@ -23,14 +24,19 @@ export const DesktopNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Link
+            key={navItem.label}
+            as={NavLink}
+            to={navItem.href}
             p={2}
-            href={navItem.href ?? '#'}
             fontSize={'md'}
             fontWeight={600}
             color={linkColor}
             _hover={{
-              textDecoration: 'none',
+              textDecoration: 'underline',
               color: linkHoverColor,
+            }}
+            _activeLink={{
+              color: theme.colors.primary[500],
             }}
           >
             {navItem.label}
