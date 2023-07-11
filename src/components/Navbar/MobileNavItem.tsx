@@ -12,6 +12,7 @@ import {
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 import { NavItem } from '@/interfaces/nav-item';
+import { NavLink } from 'react-router-dom';
 
 export const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -34,7 +35,13 @@ export const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: 'none',
         }}
       >
-        <Text fontWeight={600} color={labelColor}>
+        <Text
+          fontWeight={600}
+          color={labelColor}
+          _activeLink={{
+            color: theme.colors.primary[500],
+          }}
+        >
           {label}
         </Text>
         {children && (
@@ -59,7 +66,7 @@ export const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link key={child.label} as={NavLink} to={child.href} py={2}>
                 {child.label}
               </Link>
             ))}

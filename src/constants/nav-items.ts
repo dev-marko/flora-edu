@@ -3,22 +3,22 @@ import { NavItem } from '@/interfaces/nav-item';
 export const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Дома',
-    href: '#',
+    href: '/',
   },
   {
     label: 'Растенија',
-    href: '#',
+    href: '/plants',
   },
   {
     label: 'Блог',
-    href: '#',
+    href: '/blog',
   },
   {
     label: 'За Нас',
-    href: '#',
+    href: '/about-us',
   },
   {
     label: 'Упатство',
-    href: '#',
+    href: '/guide',
   },
 ];
