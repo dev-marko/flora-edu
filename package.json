@@ -41,5 +41,6 @@
   },
   "prettier": {
     "singleQuote": true
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }
