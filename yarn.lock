@@ -3450,6 +3450,7 @@ __metadata:
     formik: ^2.4.5
     framer-motion: ^10.16.5
     react: ^18.2.0
+    react-bootstrap-icons: ^1.10.3
     react-dom: ^18.2.0
     react-router-dom: ^6.19.0
     typescript: ^5.3.2
@@ -4526,7 +4527,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -4548,6 +4549,17 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
+  languageName: node
+  linkType: hard
+
+"react-bootstrap-icons@npm:^1.10.3":
+  version: 1.10.3
+  resolution: "react-bootstrap-icons@npm:1.10.3"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16.8.6"
+  checksum: afc9a4a558217c9e4abf77734d902fa658be38f61eb99a0c6dd574eaf8289517ff17fe1e2cd62735901975a8da8f2dc363d3f964a322377726b4d825a09febfa
   languageName: node
   linkType: hard
 
