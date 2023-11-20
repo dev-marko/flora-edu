@@ -19,6 +19,6 @@ export const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Упатство',
-    href: '/guide',
+    href: '/user-manual',
   },
 ];
