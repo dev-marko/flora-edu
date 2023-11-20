@@ -15,24 +15,34 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/',
+        index: true,
         element: <Home />,
       },
       {
         path: 'plants',
-        element: <Plants />,
-      },
-      {
-        path: 'plants/:id',
-        element: <PlantDetails />,
+        children: [
+          {
+            index: true,
+            element: <Plants />,
+          },
+          {
+            path: ':id',
+            element: <PlantDetails />,
+          },
+        ],
       },
       {
         path: 'blog',
-        element: <Blog />,
-      },
-      {
-        path: 'blog/:id',
-        element: <Article />,
+        children: [
+          {
+            index: true,
+            element: <Blog />,
+          },
+          {
+            path: ':id',
+            element: <Article />,
+          },
+        ],
       },
       {
         path: 'about-us',
