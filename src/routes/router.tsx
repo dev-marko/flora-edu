@@ -9,6 +9,7 @@ import PlantDetails from '@/pages/plants/PlantDetails';
 import UserManual from '@/pages/UserManual';
 import Blog from '@/pages/blog/Blog';
 import Article from '@/pages/blog/Article';
+import Login from '@/pages/auth/Login';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         element: <UserManual />,
       },
     ],
+  },
+  {
+    path: 'login',
+    element: <Login />,
   },
 ]);
 
