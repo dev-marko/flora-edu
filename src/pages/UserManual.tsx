@@ -11,6 +11,7 @@ import {
   HStack,
   UnorderedList,
   ListItem,
+  Hide,
 } from '@chakra-ui/react';
 import { InfoCircleFill } from 'react-bootstrap-icons';
 
@@ -23,22 +24,31 @@ const UserManual = () => {
   );
 
   return (
-    <Container maxW={'container.xl'} m={5} p={5} bg={bgColor} rounded={'lg'}>
+    <Container
+      maxW={'container.xl'}
+      my={{ base: 3, md: 5 }}
+      mx={{ base: 0, md: 3 }}
+      p={5}
+      bg={bgColor}
+      rounded={'lg'}
+    >
       <Flex flexDir={'column'} align={'center'} justify={'center'} gap={3}>
         <VStack w={'full'}>
-          <Heading as="h2" size="xl">
+          <Heading as="h2" size="xl" textAlign={{ base: 'center' }}>
             Кратко упатство за употреба
           </Heading>
           <Divider borderColor={'black'} />
         </VStack>
         <HStack>
-          <Icon as={InfoCircleFill} />
-          <Text>
+          <Hide below="sm">
+            <Icon as={InfoCircleFill} />
+          </Hide>
+          <Text textAlign={{ base: 'center' }}>
             Ова претставува кратко упатство кое служи за да ве воведе во
             главните функционалности на страницата.
           </Text>
         </HStack>
-        <VStack align={'start'} spacing={8}>
+        <VStack align={'start'} spacing={{ base: 4, md: 8 }}>
           <VStack align={'start'}>
             <Heading as="h3" size="md">
               1. Сите растенија
