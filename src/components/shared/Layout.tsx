@@ -59,7 +59,7 @@ const Layout = () => {
 
   return (
     <ChakraProvider theme={mergedTheme}>
-      <Container maxW={'container.xl'}>
+      <Container maxW={'container.xl'} minH={'100vh'}>
         <Navbar onOpenDisplayPreferencesCallback={onDisplayOpen}></Navbar>
         <DisplayPreferences
           openModalDisclosure={isDisplayOpen}
