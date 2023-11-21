@@ -10,6 +10,7 @@ import {
 import PlantCard from '../PlantCard/PlantCard';
 
 import plants from '../../assets/data/plants.json';
+import { Link } from 'react-router-dom';
 
 const MostPopularPlants = () => {
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
@@ -25,7 +26,9 @@ const MostPopularPlants = () => {
         spacing={{ base: 5 }}
       >
         <Heading textAlign={{ base: 'center' }}>Најпопуларни растенија</Heading>
-        <Button>Сите растенија</Button>
+        <Link to="plants">
+          <Button>Сите растенија</Button>
+        </Link>
       </Stack>
       <Divider borderColor={dividerColor} borderRadius={'lg'} />
       <Stack
