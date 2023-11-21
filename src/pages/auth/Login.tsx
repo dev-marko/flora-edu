@@ -14,11 +14,13 @@ import {
   FormErrorMessage,
   Divider,
   AbsoluteCenter,
+  Link as ChakraLink,
 } from '@chakra-ui/react';
 
-import { color, useColorModeValue, useTheme } from '@chakra-ui/system';
-import { Field, Formik, FormikHelpers, FormikProps } from 'formik';
+import { useColorModeValue } from '@chakra-ui/system';
+import { Field, Formik, FormikProps } from 'formik';
 import { Facebook, Google } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 type LoginFormInputs = {
   username: string;
@@ -26,8 +28,6 @@ type LoginFormInputs = {
 };
 
 const Login = () => {
-  const theme = useTheme();
-
   const validateUsername = (username: string) => {
     let error;
     if (!username) {
@@ -38,8 +38,14 @@ const Login = () => {
 
   const validatePassword = (password: string) => {
     let error;
+    const passwordRegex = /(?=.*[0-9])/;
     if (!password) {
       error = 'Лозинка е задолжителна';
+    } else if (password.length < 12) {
+      error = 'Лозинката мора да е долга најмалку 12 карактери';
+    } else if (!passwordRegex.test(password)) {
+      error =
+        'Невалидна лозинка. Лозинката мора да содржи најмалку една бројка';
     }
     return error;
   };
@@ -64,7 +70,13 @@ const Login = () => {
           justify={'center'}
           bg={useColorModeValue('gray.50', 'gray.800')}
         >
-          <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+          <Stack
+            spacing={8}
+            mx={'auto'}
+            w={{ base: 'sm', md: 'xl' }}
+            py={12}
+            px={6}
+          >
             <Stack align={'center'}>
               <Heading
                 as="h2"
@@ -138,7 +150,7 @@ const Login = () => {
                             fontFamily={'Inter'}
                             type="password"
                             name="password"
-                            placeholder="Вашето тајна лозинка..."
+                            placeholder="Вашата тајна лозинка..."
                             autoComplete="off"
                           />
                           <FormErrorMessage>
@@ -192,8 +204,12 @@ const Login = () => {
                 <Text fontFamily={'Inter'} fontSize={'sm'}>
                   Немате кориснички профил?
                 </Text>
-                <Text fontFamily={'Inter'} fontSize={'sm'}>
-                  Кликнете тука за да се регистрирате!
+                <Text mt={1} fontFamily={'Inter'} fontSize={'sm'}>
+                  Кликнете
+                  <ChakraLink color={feGreen.colors.primary[500]}>
+                    <Link to="/register"> тука </Link>
+                  </ChakraLink>
+                  за да се регистрирате!
                 </Text>
               </Flex>
               <Box position="relative" padding="3">
