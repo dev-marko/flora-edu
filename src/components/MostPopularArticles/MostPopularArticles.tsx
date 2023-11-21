@@ -9,6 +9,7 @@ import {
 
 import PopularArticleCard from '../PopularArticleCard/PopularArticleCard';
 import articles from '../../assets/data/blog-articles.json';
+import { Link } from 'react-router-dom';
 
 const MostPopularArticles = () => {
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
@@ -26,7 +27,9 @@ const MostPopularArticles = () => {
         <Heading textAlign={{ base: 'center' }}>
           Популарни статии од нашиот блог
         </Heading>
-        <Button>Сите статии</Button>
+        <Link to="blog">
+          <Button>Сите статии</Button>
+        </Link>
       </Stack>
       <Divider borderColor={dividerColor} borderRadius={'lg'} />
       <Stack

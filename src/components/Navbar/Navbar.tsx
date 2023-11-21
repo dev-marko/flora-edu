@@ -17,6 +17,7 @@ import { HamburgerIcon, CloseIcon, SettingsIcon } from '@chakra-ui/icons';
 
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
+import { Link } from 'react-router-dom';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -69,12 +70,10 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
           </Flex>
           <Stack justify={'start'} direction={'row'} spacing={2}>
             <Button
-              as={'a'}
               variant={'link'}
               size={{ base: 'xs', md: 'md', lg: 'lg', xl: 'sm' }}
-              href={'#'}
             >
-              Најава
+              <Link to="/login">Најава</Link>
             </Button>
             <Button
               as={'a'}
