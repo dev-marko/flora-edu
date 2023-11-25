@@ -1,0 +1,15 @@
+import { ErrorCodes } from '@/enum/error-codes';
+
+const errorCodeMessages = new Map<ErrorCodes, string>([
+  [ErrorCodes.NotFound, 'Бараниот ресурс не е пронајден.'],
+  [ErrorCodes.BadRequest, 'Настаната е клиентска грешка, обидете се повторно.'],
+  [
+    ErrorCodes.InternalServerError,
+    'Настаната е серверска грешка, обидете се повторно',
+  ],
+  [ErrorCodes.OperationFailed, 'Неуспешна операција.'],
+  [ErrorCodes.UserNotFound, 'Корисникот не е пронајден.'],
+  [ErrorCodes.PasswordMismatchException, 'Погрешна лозинка.'],
+]);
+
+export default errorCodeMessages;
