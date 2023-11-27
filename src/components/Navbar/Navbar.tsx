@@ -18,6 +18,7 @@ import { HamburgerIcon, CloseIcon, SettingsIcon } from '@chakra-ui/icons';
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
 import { Link } from 'react-router-dom';
+import { isLoggedIn } from '@/utils/is-logged-in';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -70,12 +71,14 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
           </Flex>
           <Stack justify={'start'} direction={'row'} spacing={2}>
             <Button
+              hidden={isLoggedIn()}
               variant={'link'}
               size={{ base: 'xs', md: 'md', lg: 'lg', xl: 'sm' }}
             >
               <Link to="/login">Најава</Link>
             </Button>
             <Button
+              hidden={isLoggedIn()}
               as={'a'}
               display={{
                 base: 'none',
@@ -89,6 +92,7 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
               Регистрација
             </Button>
             <Button
+              hidden={!isLoggedIn()}
               onClick={onOpenDisplayPreferencesCallback}
               size={'sm'}
               display={{
