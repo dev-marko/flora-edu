@@ -1,5 +1,4 @@
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
-import errorCodeMessages from '@/utils/error-code-translator';
 import axios, { AxiosError } from 'axios';
 
 const instance = axios.create({
