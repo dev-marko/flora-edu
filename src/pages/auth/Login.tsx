@@ -1,4 +1,3 @@
-import feGreen from '@/styles/themes/feGreen';
 import {
   Flex,
   Stack,
@@ -17,21 +16,19 @@ import {
   Link as ChakraLink,
   useToast,
 } from '@chakra-ui/react';
-
-import { LoginRequest } from '@/interfaces/auth/login-request';
-
 import { useColorModeValue } from '@chakra-ui/system';
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik';
 import { Facebook, Google } from 'react-bootstrap-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+
+import feGreen from '@/styles/themes/feGreen';
 import authService from '@/services/auth-service';
-import { LoginResponse } from '@/interfaces/auth/login-response';
-import useLocalStorage from '@/hooks/useLocalStorage';
-import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
-import { ProblemDetails } from '@/interfaces/error/problem-details';
-import { ErrorCodes } from '@/enum/error-codes';
-import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import errorCodeMessages from '@/utils/error-code-translator';
+import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
+import { ErrorCodes } from '@/enum/error-codes';
+import { ProblemDetails } from '@/interfaces/error/problem-details';
+import { LoginRequest } from '@/interfaces/auth/login-request';
+import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 
 type LoginFormInputs = {
   username: string;
@@ -41,7 +38,7 @@ type LoginFormInputs = {
 const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  const [jwtToken, setJwtToken] = useLocalStorage(JWT_TOKEN_KEY, {});
+  const [searchParams] = useSearchParams();
 
   const validateUsername = (username: string) => {
     let error;
@@ -108,7 +105,7 @@ const Login = () => {
             >
               <Formik
                 initialValues={initialValues}
-                onSubmit={async (
+                onSubmit={(
                   values: LoginFormInputs,
                   { setSubmitting, resetForm }: FormikHelpers<LoginFormInputs>
                 ) => {
@@ -117,13 +114,16 @@ const Login = () => {
                     password: values.password.trimStart().trimEnd(),
                   };
 
-                  await authService
+                  authService
                     .login(loginRequest)
-                    .then((response: LoginResponse) => {
-                      setJwtToken(response);
+                    .then((response) => {
+                      const data = response.data;
+                      localStorage.setItem(JWT_TOKEN_KEY, data.accessToken);
                       setSubmitting(false);
                       resetForm();
-                      navigate('/');
+                      const redirectPath =
+                        searchParams.get('redirectTo') || '/';
+                      navigate(redirectPath, { replace: true });
                     })
                     .catch((error: CustomAxiosError) => {
                       const statusCode = error.axiosError.response?.status;
@@ -153,6 +153,7 @@ const Login = () => {
                       } else {
                         error.handleGlobally && error.handleGlobally();
                       }
+                      setSubmitting(false);
                     });
                 }}
               >
