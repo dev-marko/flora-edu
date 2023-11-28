@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  Text,
   IconButton,
   Button,
   Stack,
@@ -9,32 +8,17 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-  HStack,
   Heading,
   useTheme,
-  Menu,
-  Avatar,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  VStack,
-  Icon,
 } from '@chakra-ui/react';
 
-import { HamburgerIcon, CloseIcon, SettingsIcon } from '@chakra-ui/icons';
-import { ChevronDown } from 'react-bootstrap-icons';
-import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/solid';
-
-import useUserStore from '@/stores/useUserStore';
-import { shallow } from 'zustand/shallow';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { isLoggedIn } from '@/utils/is-logged-in';
 
-import { JWT_TOKEN_KEY, USER_INFO_KEY } from '@/constants/local-storage-keys';
 import UserMenu from './UserMenu';
 
 type Props = {

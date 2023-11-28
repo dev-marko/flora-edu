@@ -30,7 +30,6 @@ import { ProblemDetails } from '@/interfaces/error/problem-details';
 import { LoginRequest } from '@/interfaces/auth/login-request';
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import useUserStore from '@/stores/useUserStore';
-import useLocalStorage from '@/hooks/useLocalStorage';
 
 type LoginFormInputs = {
   username: string;

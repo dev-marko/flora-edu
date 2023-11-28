@@ -70,8 +70,7 @@ const Register = () => {
     } else if (password.length < 8) {
       error = 'Лозинката мора да е долга најмалку 8 карактери';
     } else if (!passwordRegex.test(password)) {
-      error =
-        'Лозинката мора да содржи најмалку една бројка и голема буква';
+      error = 'Лозинката мора да содржи најмалку една бројка и голема буква';
     }
     return error;
   };
