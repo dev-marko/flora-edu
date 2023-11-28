@@ -29,6 +29,8 @@ import { ErrorCodes } from '@/enum/error-codes';
 import { ProblemDetails } from '@/interfaces/error/problem-details';
 import { LoginRequest } from '@/interfaces/auth/login-request';
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
+import useUserStore from '@/stores/useUserStore';
+import useLocalStorage from '@/hooks/useLocalStorage';
 
 type LoginFormInputs = {
   username: string;
@@ -39,6 +41,7 @@ const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const setUser = useUserStore((state) => state.setUser);
 
   const validateUsername = (username: string) => {
     let error;
@@ -119,6 +122,7 @@ const Login = () => {
                     .then((response) => {
                       const data = response.data;
                       localStorage.setItem(JWT_TOKEN_KEY, data.accessToken);
+                      setUser(data.userInfo);
                       setSubmitting(false);
                       resetForm();
                       const redirectPath =
