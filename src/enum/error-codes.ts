@@ -4,5 +4,6 @@ export enum ErrorCodes {
   InternalServerError,
   OperationFailed,
   UserNotFound,
+  UserExists,
   PasswordMismatchException,
 }

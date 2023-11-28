@@ -1,4 +1,10 @@
+import { ErrorCodes } from '@/enum/error-codes';
+import { RegisterRequest } from '@/interfaces/auth/register-request';
+import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
+import { ProblemDetails } from '@/interfaces/error/problem-details';
+import authService from '@/services/auth-service';
 import feGreen from '@/styles/themes/feGreen';
+import errorCodeMessages from '@/utils/error-code-translator';
 import {
   Flex,
   Stack,
@@ -14,12 +20,13 @@ import {
   Divider,
   AbsoluteCenter,
   Link as ChakraLink,
+  useToast,
 } from '@chakra-ui/react';
 
 import { useColorModeValue } from '@chakra-ui/system';
-import { Field, Formik, FormikProps } from 'formik';
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik';
 import { Facebook, Google } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type RegisterFormInputs = {
   username: string;
@@ -31,6 +38,9 @@ type RegisterFormInputs = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
+  const toast = useToast();
+
   const validateUsername = (username: string) => {
     let error;
     if (!username) {
@@ -53,14 +63,15 @@ const Register = () => {
 
   const validatePassword = (password: string) => {
     let error;
-    const passwordRegex = /(?=.*[0-9])/;
+    const passwordRegex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
     if (!password) {
       error = 'Лозинка е задолжителна';
-    } else if (password.length < 12) {
-      error = 'Лозинката мора да е долга најмалку 12 карактери';
+    } else if (password.length < 8) {
+      error = 'Лозинката мора да е долга најмалку 8 карактери';
     } else if (!passwordRegex.test(password)) {
       error =
-        'Невалидна лозинка. Лозинката мора да содржи најмалку една бројка';
+        'Лозинката мора да содржи најмалку една бројка и голема буква';
     }
     return error;
   };
@@ -110,7 +121,7 @@ const Register = () => {
             spacing={8}
             mx={'auto'}
             w={{ base: 'sm', md: 'xl' }}
-            py={12}
+            py={6}
             px={6}
           >
             <Stack align={'center'}>
@@ -123,7 +134,7 @@ const Register = () => {
               >
                 ФлораЕду
               </Heading>
-              <Text fontSize={{ base: 'sm', md: 'md' }} fontFamily={'Inter'}>
+              <Text fontSize={'sm'} fontFamily={'Inter'}>
                 Добредојдовте во светот на растенијата 🌳
               </Text>
             </Stack>
@@ -135,176 +146,245 @@ const Register = () => {
             >
               <Formik
                 initialValues={initialValues}
-                onSubmit={async () => {
-                  console.log('alo');
+                onSubmit={(
+                  values: RegisterFormInputs,
+                  {
+                    setSubmitting,
+                    resetForm,
+                  }: FormikHelpers<RegisterFormInputs>
+                ) => {
+                  const registerRequest: RegisterRequest = {
+                    firstName: values.name?.trimStart().trimEnd(),
+                    lastName: values.surname?.trimStart().trimEnd(),
+                    username: values.username.trimStart().trimEnd(),
+                    email: values.email.trimStart().trimEnd(),
+                    password: values.password.trimStart().trimEnd(),
+                  };
+
+                  authService
+                    .register(registerRequest)
+                    .then(() => {
+                      setSubmitting(false);
+                      resetForm();
+                      navigate('/login', { replace: true });
+                    })
+                    .catch((error: CustomAxiosError) => {
+                      const statusCode = error.axiosError.response?.status;
+                      const problemDetails = error.axiosError.response
+                        ?.data as ProblemDetails;
+                      const errorCode: ErrorCodes =
+                        ErrorCodes[
+                          problemDetails.title as keyof typeof ErrorCodes
+                        ];
+
+                      if (statusCode === 409) {
+                        toast({
+                          title: 'Настаната грешка.',
+                          description: errorCodeMessages.get(errorCode),
+                          status: 'error',
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                      } else if (statusCode === 500) {
+                        toast({
+                          title: 'Настаната грешка.',
+                          description: errorCodeMessages.get(errorCode),
+                          status: 'error',
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                      } else {
+                        error.handleGlobally && error.handleGlobally();
+                      }
+                      setSubmitting(false);
+                    });
                 }}
               >
-                {(props: FormikProps<RegisterFormInputs>) => (
-                  <Stack spacing={4}>
-                    <Field name="username" validate={validateUsername}>
-                      {({ field, form }: any) => (
-                        <FormControl
-                          isInvalid={
-                            form.errors.username && form.touched.username
-                          }
-                        >
-                          <FormLabel
-                            fontFamily={'Inter'}
-                            fontWeight={'semibold'}
+                {({
+                  isSubmitting,
+                  values,
+                }: FormikProps<RegisterFormInputs>) => (
+                  <Form>
+                    <Stack spacing={4}>
+                      <Field name="username" validate={validateUsername}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={
+                              form.errors.username && form.touched.username
+                            }
                           >
-                            Корисничко име
-                          </FormLabel>
-                          <Input
-                            {...field}
-                            fontFamily={'Inter'}
-                            type="text"
-                            name="username"
-                            placeholder="Вашето корисничко име..."
-                            autoComplete="off"
-                          />
-                          <FormErrorMessage>
-                            {form.errors.username}
-                          </FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Field name="email" validate={validateEmail}>
-                      {({ field, form }: any) => (
-                        <FormControl
-                          isInvalid={form.errors.email && form.touched.email}
-                        >
-                          <FormLabel
-                            fontFamily={'Inter'}
-                            fontWeight={'semibold'}
+                            <FormLabel
+                              fontSize={'sm'}
+                              fontFamily={'Inter'}
+                              fontWeight={'semibold'}
+                            >
+                              Корисничко име
+                            </FormLabel>
+                            <Input
+                              {...field}
+                              size={'sm'}
+                              fontFamily={'Inter'}
+                              type="text"
+                              name="username"
+                              placeholder="Вашето корисничко име..."
+                              autoComplete="off"
+                            />
+                            <FormErrorMessage>
+                              {form.errors.username}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field name="email" validate={validateEmail}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.email && form.touched.email}
                           >
-                            Е-пошта
-                          </FormLabel>
-                          <Input
-                            {...field}
-                            fontFamily={'Inter'}
-                            type="email"
-                            name="email"
-                            placeholder="Вашата е-пошта..."
-                            autoComplete="off"
-                          />
-                          <FormErrorMessage>
-                            {form.errors.email}
-                          </FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Field name="name">
-                      {({ field }: any) => (
-                        <FormControl>
-                          <FormLabel
-                            fontFamily={'Inter'}
-                            fontWeight={'semibold'}
+                            <FormLabel
+                              fontSize={'sm'}
+                              fontFamily={'Inter'}
+                              fontWeight={'semibold'}
+                            >
+                              Е-пошта
+                            </FormLabel>
+                            <Input
+                              {...field}
+                              size={'sm'}
+                              fontFamily={'Inter'}
+                              type="email"
+                              name="email"
+                              placeholder="Вашата е-пошта..."
+                              autoComplete="off"
+                            />
+                            <FormErrorMessage>
+                              {form.errors.email}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field name="name">
+                        {({ field }: any) => (
+                          <FormControl>
+                            <FormLabel
+                              fontSize={'sm'}
+                              fontFamily={'Inter'}
+                              fontWeight={'semibold'}
+                            >
+                              Име
+                            </FormLabel>
+                            <Input
+                              {...field}
+                              size={'sm'}
+                              fontFamily={'Inter'}
+                              type="text"
+                              name="name"
+                              placeholder="Вашето име..."
+                              autoComplete="off"
+                            />
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field name="surname">
+                        {({ field }: any) => (
+                          <FormControl>
+                            <FormLabel
+                              fontSize={'sm'}
+                              fontFamily={'Inter'}
+                              fontWeight={'semibold'}
+                            >
+                              Презиме
+                            </FormLabel>
+                            <Input
+                              {...field}
+                              size={'sm'}
+                              fontFamily={'Inter'}
+                              type="text"
+                              name="surname"
+                              placeholder="Вашето презиме..."
+                              autoComplete="off"
+                            />
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field name="password" validate={validatePassword}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={
+                              form.errors.password && form.touched.password
+                            }
                           >
-                            Име
-                          </FormLabel>
-                          <Input
-                            {...field}
-                            fontFamily={'Inter'}
-                            type="text"
-                            name="name"
-                            placeholder="Вашето име..."
-                            autoComplete="off"
-                          />
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Field name="surname">
-                      {({ field }: any) => (
-                        <FormControl>
-                          <FormLabel
-                            fontFamily={'Inter'}
-                            fontWeight={'semibold'}
-                          >
-                            Презиме
-                          </FormLabel>
-                          <Input
-                            {...field}
-                            fontFamily={'Inter'}
-                            type="text"
-                            name="surname"
-                            placeholder="Вашето презиме..."
-                            autoComplete="off"
-                          />
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Field name="password" validate={validatePassword}>
-                      {({ field, form }: any) => (
-                        <FormControl
-                          isInvalid={
-                            form.errors.password && form.touched.password
-                          }
-                        >
-                          <FormLabel
-                            fontFamily={'Inter'}
-                            fontWeight={'semibold'}
-                          >
-                            Лозинка
-                          </FormLabel>
-                          <Input
-                            {...field}
-                            fontFamily={'Inter'}
-                            type="password"
-                            name="password"
-                            placeholder="Вашата тајна лозинка..."
-                            autoComplete="off"
-                          />
-                          <FormErrorMessage>
-                            {form.errors.password}
-                          </FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Field
-                      name="confirmPassword"
-                      validate={(value: string) =>
-                        validateConfirmPassword(props.values.password, value)
-                      }
-                    >
-                      {({ field, form }: any) => (
-                        <FormControl
-                          isInvalid={
-                            form.errors.confirmPassword &&
-                            form.touched.confirmPassword
-                          }
-                        >
-                          <FormLabel
-                            fontFamily={'Inter'}
-                            fontWeight={'semibold'}
-                          >
-                            Потврдете лозинка
-                          </FormLabel>
-                          <Input
-                            {...field}
-                            fontFamily={'Inter'}
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="Потврди лозинка..."
-                            autoComplete="off"
-                          />
-                          <FormErrorMessage>
-                            {form.errors.confirmPassword}
-                          </FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Stack spacing={8}>
-                      <Button
-                        color={'white'}
-                        bgColor={feGreen.colors.primary[400]}
-                        _hover={{
-                          bg: feGreen.colors.primary[500],
-                        }}
+                            <FormLabel
+                              fontSize={'sm'}
+                              fontFamily={'Inter'}
+                              fontWeight={'semibold'}
+                            >
+                              Лозинка
+                            </FormLabel>
+                            <Input
+                              {...field}
+                              size={'sm'}
+                              fontFamily={'Inter'}
+                              type="password"
+                              name="password"
+                              placeholder="Вашата тајна лозинка..."
+                              autoComplete="off"
+                            />
+                            <FormErrorMessage>
+                              {form.errors.password}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field
+                        name="confirmPassword"
+                        validate={(value: string) =>
+                          validateConfirmPassword(values.password, value)
+                        }
                       >
-                        Регистрирај се
-                      </Button>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={
+                              form.errors.confirmPassword &&
+                              form.touched.confirmPassword
+                            }
+                          >
+                            <FormLabel
+                              fontSize={'sm'}
+                              fontFamily={'Inter'}
+                              fontWeight={'semibold'}
+                            >
+                              Потврдете лозинка
+                            </FormLabel>
+                            <Input
+                              {...field}
+                              size={'sm'}
+                              fontFamily={'Inter'}
+                              type="password"
+                              name="confirmPassword"
+                              placeholder="Потврди лозинка..."
+                              autoComplete="off"
+                            />
+                            <FormErrorMessage>
+                              {form.errors.confirmPassword}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Stack spacing={8}>
+                        <Button
+                          color={'white'}
+                          bgColor={feGreen.colors.primary[400]}
+                          _hover={{
+                            bg: feGreen.colors.primary[500],
+                          }}
+                          isLoading={isSubmitting}
+                          type="submit"
+                        >
+                          Регистрирај се
+                        </Button>
+                      </Stack>
                     </Stack>
-                  </Stack>
+                  </Form>
                 )}
               </Formik>
               <Flex

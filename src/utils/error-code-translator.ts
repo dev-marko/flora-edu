@@ -9,6 +9,7 @@ const errorCodeMessages = new Map<ErrorCodes, string>([
   ],
   [ErrorCodes.OperationFailed, 'Неуспешна операција.'],
   [ErrorCodes.UserNotFound, 'Корисникот не е пронајден.'],
+  [ErrorCodes.UserExists, 'Корисникот веќе постои.'],
   [ErrorCodes.PasswordMismatchException, 'Погрешна лозинка.'],
 ]);
 
