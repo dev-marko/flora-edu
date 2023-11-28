@@ -12,13 +12,30 @@ import {
   HStack,
   Heading,
   useTheme,
+  Menu,
+  Avatar,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  VStack,
+  Icon,
 } from '@chakra-ui/react';
+
 import { HamburgerIcon, CloseIcon, SettingsIcon } from '@chakra-ui/icons';
+import { ChevronDown } from 'react-bootstrap-icons';
+import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/solid';
+
+import useUserStore from '@/stores/useUserStore';
+import { shallow } from 'zustand/shallow';
 
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isLoggedIn } from '@/utils/is-logged-in';
+
+import { JWT_TOKEN_KEY, USER_INFO_KEY } from '@/constants/local-storage-keys';
+import UserMenu from './UserMenu';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -77,37 +94,24 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
             >
               <Link to="/login">Најава</Link>
             </Button>
-            <Button
-              hidden={isLoggedIn()}
-              as={'a'}
-              display={{
-                base: 'none',
-                md: 'none',
-                lg: 'none',
-                xl: 'inline-flex',
-              }}
-              size={'sm'}
-              href={'#'}
-            >
-              Регистрација
-            </Button>
-            <Button
-              hidden={!isLoggedIn()}
-              onClick={onOpenDisplayPreferencesCallback}
-              size={'sm'}
-              display={{
-                base: 'none',
-                md: 'none',
-                lg: 'none',
-                xl: 'inline-flex',
-              }}
-            >
-              <HStack>
-                <SettingsIcon></SettingsIcon>
-                <Text fontSize={'sm'}>Поставки</Text>
-              </HStack>
-            </Button>
+            <Link to="/register">
+              <Button
+                hidden={isLoggedIn()}
+                display={{
+                  base: 'none',
+                  md: 'none',
+                  lg: 'none',
+                  xl: 'inline-flex',
+                }}
+                size={'sm'}
+              >
+                Регистрација
+              </Button>
+            </Link>
           </Stack>
+          <UserMenu
+            onOpenDisplayPreferencesCallback={onOpenDisplayPreferencesCallback}
+          />
         </Flex>
       </Flex>
 
