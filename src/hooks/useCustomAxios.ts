@@ -1,0 +1,53 @@
+import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
+import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
+import axios, { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const useCustomAxios = () => {
+  const navigate = useNavigate();
+
+  const errorComposer = (error: AxiosError) => {
+    return () => {
+      const statusCode = error.response?.status;
+
+      if (statusCode === 401) {
+        console.error(error.response?.statusText);
+        navigate('/login');
+      }
+
+      if (statusCode === 404) {
+        console.error(error.response?.statusText);
+        navigate('*');
+      }
+    };
+  };
+
+  const instance = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+
+  instance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+    JWT_TOKEN_KEY
+  )}`;
+
+  instance.interceptors.response.use(undefined, (error) => {
+    const globalErroHandler = errorComposer(error);
+    globalErroHandler();
+
+    const customAxiosError: CustomAxiosError = {
+      axiosError: error,
+      handleGlobally: errorComposer(error),
+    };
+
+    return Promise.reject(customAxiosError);
+  });
+
+  return instance;
+};
+
+export default useCustomAxios;
