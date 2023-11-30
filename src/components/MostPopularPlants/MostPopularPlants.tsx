@@ -26,9 +26,9 @@ const MostPopularPlants = () => {
         spacing={{ base: 5 }}
       >
         <Heading textAlign={{ base: 'center' }}>Најпопуларни растенија</Heading>
-        <Link to="plants">
-          <Button>Сите растенија</Button>
-        </Link>
+        <Button>
+          <Link to="plants">Сите растенија</Link>
+        </Button>
       </Stack>
       <Divider borderColor={dividerColor} borderRadius={'lg'} />
       <Stack
