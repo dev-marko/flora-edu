@@ -22,8 +22,10 @@ import useUserStore from '@/stores/useUserStore';
 import { shallow } from 'zustand/shallow';
 import { useNavigate } from 'react-router-dom';
 
-import { isLoggedIn } from '@/utils/is-logged-in';
 import { JWT_TOKEN_KEY, USER_INFO_KEY } from '@/constants/local-storage-keys';
+import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
+import { useLocalStorage } from 'usehooks-ts';
+import emptyUserInfo from '@/constants/empty-user-info';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -34,14 +36,19 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
 
   const navigate = useNavigate();
 
+  const isAuth = useIsAuthenticated();
+  const [, setJwtToken] = useLocalStorage(JWT_TOKEN_KEY, { token: '' });
+  const [, setUserInfo] = useLocalStorage(USER_INFO_KEY, emptyUserInfo);
+
   const logout = () => {
-    localStorage.removeItem(JWT_TOKEN_KEY);
-    localStorage.removeItem(USER_INFO_KEY);
+    setJwtToken({ token: '' });
+    setUserInfo(emptyUserInfo);
 
     navigate('/', { replace: true });
   };
+
   return (
-    <HStack hidden={!isLoggedIn()} spacing={{ base: '0', md: '6' }}>
+    <HStack hidden={!isAuth()} spacing={{ base: '0', md: '6' }}>
       <Flex alignItems={'center'}>
         <Menu>
           <MenuButton
