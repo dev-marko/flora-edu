@@ -5,5 +5,5 @@ export enum ErrorCodes {
   OperationFailed,
   UserNotFound,
   UserExists,
-  PasswordMismatchException,
+  PasswordMismatch,
 }
