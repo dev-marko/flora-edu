@@ -2,7 +2,7 @@ import { ErrorCodes } from '@/enum/error-codes';
 import { RegisterRequest } from '@/interfaces/auth/register-request';
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import { ProblemDetails } from '@/interfaces/error/problem-details';
-import authService from '@/services/auth-service';
+import useAuthService from '@/hooks/services/useAuthService';
 import feGreen from '@/styles/themes/feGreen';
 import errorCodeMessages from '@/utils/error-code-translator';
 import {
@@ -40,6 +40,7 @@ type RegisterFormInputs = {
 const Register = () => {
   const navigate = useNavigate();
   const toast = useToast();
+  const authService = useAuthService();
 
   const validateUsername = (username: string) => {
     let error;

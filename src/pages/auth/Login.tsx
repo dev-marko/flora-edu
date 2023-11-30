@@ -20,9 +20,9 @@ import { useColorModeValue } from '@chakra-ui/system';
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik';
 import { Facebook, Google } from 'react-bootstrap-icons';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocalStorage } from 'usehooks-ts';
 
 import feGreen from '@/styles/themes/feGreen';
-import authService from '@/services/auth-service';
 import errorCodeMessages from '@/utils/error-code-translator';
 import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
 import { ErrorCodes } from '@/enum/error-codes';
@@ -30,6 +30,7 @@ import { ProblemDetails } from '@/interfaces/error/problem-details';
 import { LoginRequest } from '@/interfaces/auth/login-request';
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import useUserStore from '@/stores/useUserStore';
+import useAuthService from '@/hooks/services/useAuthService';
 
 type LoginFormInputs = {
   username: string;
@@ -41,6 +42,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const setUser = useUserStore((state) => state.setUser);
+  const authService = useAuthService();
+  const [, setJwtToken] = useLocalStorage(JWT_TOKEN_KEY, { token: '' });
 
   const validateUsername = (username: string) => {
     let error;
@@ -120,7 +123,9 @@ const Login = () => {
                     .login(loginRequest)
                     .then((response) => {
                       const data = response.data;
-                      localStorage.setItem(JWT_TOKEN_KEY, data.accessToken);
+                      setJwtToken({
+                        token: data.accessToken,
+                      });
                       setUser(data.userInfo);
                       setSubmitting(false);
                       resetForm();
