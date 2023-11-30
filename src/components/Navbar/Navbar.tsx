@@ -17,9 +17,10 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
 import { Link } from 'react-router-dom';
-import { isLoggedIn } from '@/utils/is-logged-in';
+// import { isLoggedIn } from '@/hooks/useIsAuthenticated';
 
 import UserMenu from './UserMenu';
+import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -33,6 +34,8 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
     theme.colors.primary[500],
     theme.colors.primary[200]
   );
+
+  const isAuth = useIsAuthenticated();
 
   return (
     <Box>
@@ -70,9 +73,14 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
           <Flex display={{ base: 'none', md: 'none', lg: 'none', xl: 'flex' }}>
             <DesktopNav />
           </Flex>
-          <Stack justify={'start'} direction={'row'} spacing={2}>
+          <Stack
+            hidden={isAuth()}
+            justify={'start'}
+            direction={'row'}
+            spacing={2}
+          >
             <Button
-              hidden={isLoggedIn()}
+              hidden={isAuth()}
               variant={'link'}
               size={{ base: 'xs', md: 'md', lg: 'lg', xl: 'sm' }}
             >
@@ -80,7 +88,7 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
             </Button>
             <Link to="/register">
               <Button
-                hidden={isLoggedIn()}
+                hidden={isAuth()}
                 display={{
                   base: 'none',
                   md: 'none',

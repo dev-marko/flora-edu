@@ -13,7 +13,7 @@ import DisplayPreferences from '@components/DisplayPreferences/DisplayPreference
 import Navbar from '@components/Navbar/Navbar';
 import Footer from '@components/Footer/Footer';
 
-import useLocalStorage from '@hooks/useLocalStorage';
+import { useLocalStorage } from 'usehooks-ts';
 import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
 import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@/constants/theme-constants';
 
