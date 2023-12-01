@@ -27,9 +27,9 @@ const MostPopularArticles = () => {
         <Heading textAlign={{ base: 'center' }}>
           Популарни статии од нашиот блог
         </Heading>
-        <Link to="blog">
-          <Button>Сите статии</Button>
-        </Link>
+        <Button>
+          <Link to="blog">Сите статии</Link>
+        </Button>
       </Stack>
       <Divider borderColor={dividerColor} borderRadius={'lg'} />
       <Stack

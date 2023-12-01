@@ -1,4 +1,4 @@
-import useLocalStorage from '@/hooks/useLocalStorage';
+import { useLocalStorage } from 'usehooks-ts';
 
 import {
   Circle,

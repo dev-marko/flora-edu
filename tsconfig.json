@@ -28,7 +28,8 @@
       "@pages/*": ["src/pages/*"],
       "@public/*": ["public/*"],
       "@themes/*": ["src/styles/themes/*"],
-      "@interfaces/*": ["src/interfaces/*"]
+      "@interfaces/*": ["src/interfaces/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"],

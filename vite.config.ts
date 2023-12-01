@@ -14,6 +14,7 @@ export default defineConfig({
       '@public': `${path.resolve(__dirname, './public')}`,
       '@themes': `${path.resolve(__dirname, './src/styles/themes')}`,
       '@interfaces': `${path.resolve(__dirname, './src/interfaces')}`,
+      '@utils': `${path.resolve(__dirname, './src/utils')}`,
     },
   },
 });

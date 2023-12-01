@@ -1,9 +1,9 @@
 import {
-  Stack,
   Link,
   Box,
   useTheme,
   useColorModeValue,
+  HStack,
 } from '@chakra-ui/react';
 import { NAV_ITEMS } from '@/constants/nav-items';
 import { NavLink } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const DesktopNav = () => {
   );
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <HStack spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Link
@@ -43,6 +43,6 @@ export const DesktopNav = () => {
           </Link>
         </Box>
       ))}
-    </Stack>
+    </HStack>
   );
 };

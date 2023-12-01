@@ -11,6 +11,10 @@ import Blog from '@/pages/blog/Blog';
 import Article from '@/pages/blog/Article';
 import Login from '@/pages/auth/Login';
 import Register from '@/pages/auth/Register';
+import { requireAuth } from '@/utils/require-auth';
+import ErrorPage404 from '@/pages/error-pages/ErrorPage404';
+import ErrorPage403 from '@/pages/error-pages/ErrorPage403';
+import { useState } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +57,19 @@ const router = createBrowserRouter([
       {
         path: 'user-manual',
         element: <UserManual />,
+        loader: async ({ request }) => {
+          //! Temporary, remove in the future
+          await requireAuth(request);
+          return null;
+        },
+      },
+      {
+        path: '/403-forbidden',
+        element: <ErrorPage403 />,
+      },
+      {
+        path: '*',
+        element: <ErrorPage404 />,
       },
     ],
   },
