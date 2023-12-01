@@ -1,4 +1,4 @@
-import { ErrorCodes } from '@/enum/error-codes';
+import { ErrorCodes } from '@/enums/error-codes';
 import { RegisterRequest } from '@/interfaces/auth/register-request';
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import { ProblemDetails } from '@/interfaces/error/problem-details';

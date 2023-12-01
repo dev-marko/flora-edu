@@ -5,14 +5,22 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
 
 export async function requireAuth(request: any) {
+  console.log(request);
   const pathname = new URL(request.url).pathname;
-  const token = localStorage.getItem(JWT_TOKEN_KEY);
+  const tokenObjStringified = localStorage.getItem(JWT_TOKEN_KEY);
+  let tokenObj;
 
-  if (!token) {
+  if (tokenObjStringified) {
+    tokenObj = JSON.parse(tokenObjStringified);
+  } else {
     throw redirect(`/login?redirectTo=${pathname}`);
   }
 
-  const decoded = jwtDecode<JwtPayload>(token);
+  if (!tokenObj?.token) {
+    throw redirect(`/login?redirectTo=${pathname}`);
+  }
+
+  const decoded = jwtDecode<JwtPayload>(tokenObj.token);
 
   const now = moment().unix();
   const diff = moment(decoded.exp).diff(now);

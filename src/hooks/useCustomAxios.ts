@@ -2,9 +2,12 @@ import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
 import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useReadLocalStorage } from 'usehooks-ts';
 
 const useCustomAxios = () => {
   const navigate = useNavigate();
+
+  const tokenObj = useReadLocalStorage<{ token: string }>(JWT_TOKEN_KEY);
 
   const errorComposer = (error: AxiosError) => {
     return () => {
@@ -13,6 +16,11 @@ const useCustomAxios = () => {
       if (statusCode === 401) {
         console.error(error.response?.statusText);
         navigate('/login');
+      }
+
+      if (statusCode === 403) {
+        console.error(error.response?.statusText);
+        navigate('/403-forbidden');
       }
 
       if (statusCode === 404) {
@@ -31,9 +39,7 @@ const useCustomAxios = () => {
     },
   });
 
-  instance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
-    JWT_TOKEN_KEY
-  )}`;
+  instance.defaults.headers.common.Authorization = `Bearer ${tokenObj?.token}`;
 
   instance.interceptors.response.use(undefined, (error) => {
     const globalErroHandler = errorComposer(error);
