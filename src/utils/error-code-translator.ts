@@ -1,4 +1,4 @@
-import { ErrorCodes } from '@/enums/error-codes';
+import { ErrorCodes } from '@enums/error-codes';
 
 const errorCodeMessages = new Map<ErrorCodes, string>([
   [ErrorCodes.NotFound, 'Бараниот ресурс не е пронајден.'],

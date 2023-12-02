@@ -5,7 +5,7 @@ import {
   useColorModeValue,
   HStack,
 } from '@chakra-ui/react';
-import { NAV_ITEMS } from '@/constants/nav-items';
+import { NAV_ITEMS } from '@constants/nav-items';
 import { NavLink } from 'react-router-dom';
 
 export const DesktopNav = () => {

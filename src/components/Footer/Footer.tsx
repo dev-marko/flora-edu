@@ -11,7 +11,7 @@ import {
   useColorModeValue,
   useTheme,
 } from '@chakra-ui/react';
-import { NAV_ITEMS } from '@/constants/nav-items';
+import { NAV_ITEMS } from '@constants/nav-items';
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (

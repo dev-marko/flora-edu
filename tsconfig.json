@@ -28,7 +28,9 @@
       "@pages/*": ["src/pages/*"],
       "@public/*": ["public/*"],
       "@themes/*": ["src/styles/themes/*"],
-      "@interfaces/*": ["src/interfaces/*"],
+      "@interfaces/*": ["src/data/interfaces/*"],
+      "@enums/*": ["src/data/enums/*"],
+      "@constants/*": ["src/data/constants/*"],
       "@utils/*": ["src/utils/*"]
     }
   },

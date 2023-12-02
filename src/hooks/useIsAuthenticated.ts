@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
-import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
+import { JWT_TOKEN_KEY } from '@constants/local-storage-keys';
 import { useReadLocalStorage } from 'usehooks-ts';
 
 export function useIsAuthenticated() {

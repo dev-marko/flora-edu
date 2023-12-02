@@ -14,8 +14,8 @@ import Navbar from '@components/Navbar/Navbar';
 import Footer from '@components/Footer/Footer';
 
 import { useLocalStorage } from 'usehooks-ts';
-import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
-import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@/constants/theme-constants';
+import { FontSizeSliderValue } from '@/data/interfaces/font-size-slider-value';
+import { COLOR_THEME_KEY, FONT_SIZE_KEY } from '@constants/theme-constants';
 
 import customTheme from '@/styles/themes/custom-theme';
 import feGreen from '@/styles/themes/feGreen';

@@ -10,9 +10,9 @@ import {
   useTheme,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-
-import { NavItem } from '@/interfaces/nav-item';
 import { NavLink } from 'react-router-dom';
+
+import { NavItem } from '@interfaces/nav-item';
 
 export const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();

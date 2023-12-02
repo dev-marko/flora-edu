@@ -7,8 +7,8 @@ import {
   SliderTrack,
 } from '@chakra-ui/react';
 
-import { FONT_SIZE_KEY } from '@/constants/theme-constants';
-import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
+import { FONT_SIZE_KEY } from '@constants/theme-constants';
+import { FontSizeSliderValue } from '@/data/interfaces/font-size-slider-value';
 import { useLocalStorage } from 'usehooks-ts';
 
 type Props = {

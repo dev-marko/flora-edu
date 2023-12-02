@@ -1,7 +1,7 @@
-import { LoginRequest } from '@/interfaces/auth/login-request';
-import { LoginResponse } from '@/interfaces/auth/login-response';
 import { AxiosResponse } from 'axios';
-import { RegisterRequest } from '@/interfaces/auth/register-request';
+import { LoginRequest } from '@interfaces/auth/login-request';
+import { LoginResponse } from '@interfaces/auth/login-response';
+import { RegisterRequest } from '@interfaces/auth/register-request';
 import useCustomAxios from '../useCustomAxios';
 
 interface IAuthService {

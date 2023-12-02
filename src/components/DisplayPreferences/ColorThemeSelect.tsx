@@ -12,7 +12,7 @@ import {
   COLOR_THEME_KEY,
   colorThemeSelectOptions,
   customColorThemes,
-} from '@/constants/theme-constants';
+} from '@constants/theme-constants';
 
 import feGreen from '@themes/feGreen';
 import AppTheme from '@themes/interface/appTheme';
