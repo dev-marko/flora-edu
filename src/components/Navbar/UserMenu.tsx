@@ -22,10 +22,10 @@ import useUserStore from '@/stores/useUserStore';
 import { shallow } from 'zustand/shallow';
 import { useNavigate } from 'react-router-dom';
 
-import { JWT_TOKEN_KEY, USER_INFO_KEY } from '@/constants/local-storage-keys';
+import { JWT_TOKEN_KEY, USER_INFO_KEY } from '@constants/local-storage-keys';
 import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
 import { useLocalStorage } from 'usehooks-ts';
-import emptyUserInfo from '@/constants/empty-user-info';
+import emptyUserInfo from '@constants/empty-user-info';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;

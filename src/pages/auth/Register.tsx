@@ -1,7 +1,7 @@
-import { ErrorCodes } from '@/enums/error-codes';
-import { RegisterRequest } from '@/interfaces/auth/register-request';
-import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
-import { ProblemDetails } from '@/interfaces/error/problem-details';
+import { ErrorCodes } from '@enums/error-codes';
+import { RegisterRequest } from '@interfaces/auth/register-request';
+import { CustomAxiosError } from '@interfaces/error/custom-axios-error';
+import { ProblemDetails } from '@interfaces/error/problem-details';
 import useAuthService from '@/hooks/services/useAuthService';
 import feGreen from '@/styles/themes/feGreen';
 import errorCodeMessages from '@/utils/error-code-translator';

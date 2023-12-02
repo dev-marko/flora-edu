@@ -1,7 +1,7 @@
-import { UserInfo } from '@/interfaces/auth/user-info';
-import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import user from '@/constants/empty-user-info';
+import { create } from 'zustand';
+import { UserInfo } from '@interfaces/auth/user-info';
+import user from '@constants/empty-user-info';
 
 interface UserState {
   user: UserInfo;

@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { SettingsIcon } from '@chakra-ui/icons';
 
-import { NAV_ITEMS } from '@/constants/nav-items';
+import { NAV_ITEMS } from '@constants/nav-items';
 import { MobileNavItem } from './MobileNavItem';
 
 type Props = {

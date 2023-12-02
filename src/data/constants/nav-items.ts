@@ -1,4 +1,4 @@
-import { NavItem } from '@/interfaces/nav-item';
+import { NavItem } from '@/data/interfaces/nav-item';
 
 export const NAV_ITEMS: Array<NavItem> = [
   {

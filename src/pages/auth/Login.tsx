@@ -24,11 +24,11 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import feGreen from '@/styles/themes/feGreen';
 import errorCodeMessages from '@/utils/error-code-translator';
-import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
-import { ErrorCodes } from '@/enums/error-codes';
-import { ProblemDetails } from '@/interfaces/error/problem-details';
-import { LoginRequest } from '@/interfaces/auth/login-request';
-import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
+import { JWT_TOKEN_KEY } from '@constants/local-storage-keys';
+import { ErrorCodes } from '@enums/error-codes';
+import { ProblemDetails } from '@interfaces/error/problem-details';
+import { LoginRequest } from '@interfaces/auth/login-request';
+import { CustomAxiosError } from '@interfaces/error/custom-axios-error';
 import useUserStore from '@/stores/useUserStore';
 import useAuthService from '@/hooks/services/useAuthService';
 

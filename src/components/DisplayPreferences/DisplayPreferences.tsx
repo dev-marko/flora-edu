@@ -18,7 +18,7 @@ import {
 import FontSizeSlider from '@components/DisplayPreferences/FontSizeSlider';
 import ColorThemeSelect from '@components/DisplayPreferences/ColorThemeSelect';
 import AppTheme from '@/styles/themes/interface/appTheme';
-import { FontSizeSliderValue } from '@/interfaces/font-size-slider-value';
+import { FontSizeSliderValue } from '@interfaces/font-size-slider-value';
 import InfoTooltip from '../shared/InfoTooltip';
 
 type Props = {

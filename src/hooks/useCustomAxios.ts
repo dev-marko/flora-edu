@@ -1,8 +1,8 @@
-import { JWT_TOKEN_KEY } from '@/constants/local-storage-keys';
-import { CustomAxiosError } from '@/interfaces/error/custom-axios-error';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useReadLocalStorage } from 'usehooks-ts';
+import { JWT_TOKEN_KEY } from '@constants/local-storage-keys';
+import { CustomAxiosError } from '@interfaces/error/custom-axios-error';
 
 const useCustomAxios = () => {
   const navigate = useNavigate();
