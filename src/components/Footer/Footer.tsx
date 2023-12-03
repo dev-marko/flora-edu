@@ -38,8 +38,8 @@ const Footer = () => {
         >
           <Stack align={'flex-start'}>
             <ListHeader>Навигација</ListHeader>
-            {NAV_ITEMS.map((navItem) => (
-              <Link href={navItem.href ?? '#'}>{navItem.label}</Link>
+            {NAV_ITEMS.map((navItem, index) => (
+              <Link key={index} href={navItem.href ?? '#'}>{navItem.label}</Link>
             ))}
           </Stack>
           <Stack align={'flex-start'}>
