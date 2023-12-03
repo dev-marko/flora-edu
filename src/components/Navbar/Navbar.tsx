@@ -44,7 +44,7 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2, md: 6 }}
-        px={{ base: 4 }}
+        px={{ base: 4, md: 0 }}
         align={'center'}
       >
         <Flex
