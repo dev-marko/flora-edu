@@ -1,14 +1,14 @@
 import { persist } from 'zustand/middleware';
-import { create } from 'zustand';
 import { UserInfo } from '@interfaces/auth/user-info';
 import user from '@constants/empty-user-info';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 interface UserState {
   user: UserInfo;
   setUser: (user: UserInfo) => void;
 }
 
-const useUserStore = create<UserState>()(
+const useUserStore = createWithEqualityFn<UserState>()(
   persist(
     (set) => ({
       user,
