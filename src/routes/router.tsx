@@ -5,6 +5,8 @@ import Layout from '@/components/shared/Layout';
 import Home from '@/pages/Home';
 import AboutUs from '@/pages/AboutUs';
 import Plants from '@/pages/plants/Plants';
+import { loader as plantsLoader } from '@components/PlantsList/PlantsList';
+import { loader as plantDetailsLoader } from '@pages/plants/PlantDetails';
 import PlantDetails from '@/pages/plants/PlantDetails';
 import UserManual from '@/pages/UserManual';
 import Blog from '@/pages/blog/Blog';
@@ -14,11 +16,13 @@ import Register from '@/pages/auth/Register';
 import { requireAuth } from '@/utils/require-auth';
 import ErrorPage404 from '@/pages/error-pages/ErrorPage404';
 import ErrorPage403 from '@/pages/error-pages/ErrorPage403';
-import { useState } from 'react';
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    handle: {
+      crumb: () => 'Дома',
+    },
     children: [
       {
         index: true,
@@ -26,14 +30,25 @@ const router = createBrowserRouter([
       },
       {
         path: 'plants',
+        handle: {
+          crumb: () => 'Растенија',
+        },
         children: [
           {
             index: true,
             element: <Plants />,
+            loader: plantsLoader,
           },
           {
-            path: ':id',
+            id: 'plantDetails',
+            path: ':plantId',
             element: <PlantDetails />,
+            loader: ({ params }) => {
+              return plantDetailsLoader(params.plantId);
+            },
+            handle: {
+              crumb: () => 'Детали',
+            },
           },
         ],
       },
