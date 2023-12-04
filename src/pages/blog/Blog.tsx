@@ -1,3 +1,11 @@
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik';
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -17,20 +25,6 @@ import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
 import CustomDivider from '@/components/shared/CustomDivider';
 import ArticlesList from '@/components/ArticlesList/ArticlesList';
 import { SearchBarInput } from '@/data/formik-types/search-input';
-import {
-  Field,
-  Form,
-  Formik,
-  FormikHelpers,
-  FormikProps,
-  useFormikContext,
-} from 'formik';
-import {
-  createSearchParams,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 const Blog = () => {
   const navigate = useNavigate();
