@@ -18,6 +18,7 @@ import BookmarkButton from '@components/shared/BookmarkButton';
 
 import thumbnail from '../../assets/placeholder.png';
 import HeartButton from '../shared/HeartButton';
+import { useNavigate } from 'react-router-dom';
 
 type PlantCardProps = {
   id: string;
@@ -27,6 +28,8 @@ type PlantCardProps = {
 
 const PlantCard = ({ id, name, description }: PlantCardProps) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const buttonColor = useColorModeValue(
     theme.colors.primary[500],
     theme.colors.primary[200]
@@ -42,8 +45,19 @@ const PlantCard = ({ id, name, description }: PlantCardProps) => {
     setIsBookmarked(!isBookmarked);
   };
 
+  const handleDetailsClick = () => {
+    navigate(id);
+  };
+
   return (
-    <Card key={id} maxW={'2xs'} maxH={'md'} shadow={'md'} m={'10'}>
+    <Card
+      key={id}
+      maxW={'2xs'}
+      maxH={'md'}
+      shadow={'md'}
+      mx={'5'}
+      my={['5', '10']}
+    >
       <CardBody p={0}>
         <Image src={thumbnail} alt="Bouquet of roses" borderTopRadius={'md'} />
         <Stack p={5}>
@@ -62,7 +76,11 @@ const PlantCard = ({ id, name, description }: PlantCardProps) => {
             handleHeartClick={handleHeartClick}
             isActive={isHearted}
           ></HeartButton>
-          <Button color={buttonColor} variant={'outline'}>
+          <Button
+            color={buttonColor}
+            variant={'outline'}
+            onClick={handleDetailsClick}
+          >
             Види
           </Button>
           <BookmarkButton
