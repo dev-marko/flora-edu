@@ -18,28 +18,50 @@ import {
 import BookmarkButton from '@components/shared/BookmarkButton';
 
 import thumbnail from '../../assets/placeholder.png';
+import { AuthorDto } from '@/data/interfaces/author-dto';
+import { useNavigate } from 'react-router-dom';
 
-type PopularArticleCardProps = {
+type ArticleCardProps = {
   id: string;
   title: string;
-  author: string;
-  description: string;
+  shortDescription: string;
+  headerImageUrl: string;
+  createdAt: string;
+  author: AuthorDto;
+  isLiked: boolean;
+  isBookmarked: boolean;
 };
-const PopularArticleCard = ({
+const ArticleCard = ({
   id,
   title,
+  shortDescription,
   author,
-  description,
-}: PopularArticleCardProps) => {
+  isBookmarked,
+}: // id,
+// title,
+// shortDescription,
+// headerImageUrl,
+// createdAt,
+// author,
+// isLiked,
+// isBookmarked,
+ArticleCardProps) => {
   const theme = useTheme();
   const buttonColor = useColorModeValue(
     theme.colors.primary[500],
     theme.colors.primary[200]
   );
-  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [isArticleBookmarked, setIsBookmarked] = useState(isBookmarked);
 
   const handleBookmarkClick = () => {
-    setIsBookmarked(!isBookmarked);
+    setIsBookmarked(!isArticleBookmarked);
+  };
+
+  const handleDetailsClick = () => {
+    navigate(id);
   };
 
   return (
@@ -65,19 +87,25 @@ const PopularArticleCard = ({
           <Heading as="h3" size="lg">
             {title}
           </Heading>
-          <Text>Автор: {author}</Text>
+          <Text>
+            Автор: {author.firstName} {author.lastName}
+          </Text>
         </CardHeader>
         <CardBody>
-          <Text noOfLines={3}>{description}</Text>
+          <Text noOfLines={3}>{shortDescription}</Text>
         </CardBody>
         <CardFooter justify={'end'}>
           <ButtonGroup spacing={6}>
             <BookmarkButton
               tooltipLabel="Зачувај статија"
               handleBookmarkClick={handleBookmarkClick}
-              isActive={isBookmarked}
+              isActive={isArticleBookmarked}
             ></BookmarkButton>
-            <Button color={buttonColor} variant={'outline'}>
+            <Button
+              color={buttonColor}
+              variant={'outline'}
+              onClick={handleDetailsClick}
+            >
               Прочитај повеќе
             </Button>
           </ButtonGroup>
@@ -87,4 +115,4 @@ const PopularArticleCard = ({
   );
 };
 
-export default PopularArticleCard;
+export default ArticleCard;
