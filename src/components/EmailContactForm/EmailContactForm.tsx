@@ -152,6 +152,7 @@ const EmailContactForm = () => {
                       name="name"
                       placeholder="Вашето име..."
                       autoComplete="off"
+                      focusBorderColor="primary.300"
                     />
                   </InputGroup>
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -174,6 +175,7 @@ const EmailContactForm = () => {
                       name="email"
                       placeholder="Вашата е-пошта..."
                       autoComplete="off"
+                      focusBorderColor="primary.300"
                     />
                   </InputGroup>
                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
@@ -196,6 +198,7 @@ const EmailContactForm = () => {
                       name="subject"
                       placeholder="Наслов на пораката..."
                       autoComplete="off"
+                      focusBorderColor="primary.300"
                     />
                   </InputGroup>
                   <FormErrorMessage>{form.errors.subject}</FormErrorMessage>
@@ -213,6 +216,7 @@ const EmailContactForm = () => {
                     placeholder="Содржина на вашата порака..."
                     rows={6}
                     resize="none"
+                    focusBorderColor="primary.300"
                   />
                   <FormErrorMessage>{form.errors.message}</FormErrorMessage>
                 </FormControl>

@@ -34,6 +34,7 @@ const Plants = () => {
           fontFamily={'Inter'}
           onChange={(event) => handleSelectOnChange(event.target.value)}
           cursor={'pointer'}
+          focusBorderColor={'primary.300'}
         >
           {PlantTypesSelect.map((type) => {
             return (
@@ -51,6 +52,7 @@ const Plants = () => {
             type="text"
             fontFamily={'Inter'}
             placeholder="Пребарај растение"
+            focusBorderColor="primary.300"
           />
         </InputGroup>
       </Stack>

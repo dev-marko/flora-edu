@@ -228,6 +228,7 @@ const Register = () => {
                               name="username"
                               placeholder="Вашето корисничко име..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                             <FormErrorMessage>
                               {form.errors.username}
@@ -255,6 +256,7 @@ const Register = () => {
                               name="email"
                               placeholder="Вашата е-пошта..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                             <FormErrorMessage>
                               {form.errors.email}
@@ -280,6 +282,7 @@ const Register = () => {
                               name="name"
                               placeholder="Вашето име..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                           </FormControl>
                         )}
@@ -302,6 +305,7 @@ const Register = () => {
                               name="surname"
                               placeholder="Вашето презиме..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                           </FormControl>
                         )}
@@ -328,6 +332,7 @@ const Register = () => {
                               name="password"
                               placeholder="Вашата тајна лозинка..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                             <FormErrorMessage>
                               {form.errors.password}
@@ -363,6 +368,7 @@ const Register = () => {
                               name="confirmPassword"
                               placeholder="Потврди лозинка..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                             <FormErrorMessage>
                               {form.errors.confirmPassword}
