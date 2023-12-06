@@ -2,10 +2,11 @@ import axios from './custom-axios';
 import { AxiosResponse } from 'axios';
 
 import { ArticlesRequest } from '@/data/request-interfaces/articles-request';
+import { Article } from '@/data/interfaces/article';
 
 const baseUrl = 'articles';
 
-class ArticleApi {
+class ArticlesApi {
   static getArticles = async (
     requestDto: ArticlesRequest
   ): Promise<AxiosResponse> => {
@@ -19,12 +20,12 @@ class ArticleApi {
     return res;
   };
 
-  // static getPlantById = async (
-  //   plantId: string | undefined
-  // ): Promise<AxiosResponse> => {
-  //   const res = axios.get<PlantDetails>(`${baseUrl}/${plantId}`);
-  //   return res;
-  // };
+  static getArticleById = async (
+    authorId: string | undefined
+  ): Promise<AxiosResponse> => {
+    const res = axios.get<Article>(`${baseUrl}/${authorId}`);
+    return res;
+  };
 }
 
-export default ArticleApi;
+export default ArticlesApi;
