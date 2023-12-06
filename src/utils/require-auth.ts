@@ -5,7 +5,6 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { JWT_TOKEN_KEY } from '@constants/local-storage-keys';
 
 export async function requireAuth(request: any) {
-  console.log(request);
   const pathname = new URL(request.url).pathname;
   const tokenObjStringified = localStorage.getItem(JWT_TOKEN_KEY);
   let tokenObj;

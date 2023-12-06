@@ -21,6 +21,7 @@ const useUserStore = createWithEqualityFn<UserState>()(
             lastName: '',
             email: '',
             avatarUrl: '',
+            roles: [''],
           },
         })),
     }),
