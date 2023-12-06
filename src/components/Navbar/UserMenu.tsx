@@ -15,8 +15,12 @@ import {
 
 import { useColorModeValue } from '@chakra-ui/system';
 import { SettingsIcon } from '@chakra-ui/icons';
-import { UserIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid';
-import { ChevronDown } from 'react-bootstrap-icons';
+import {
+  UserIcon,
+  ArrowLeftOnRectangleIcon,
+  PencilSquareIcon,
+} from '@heroicons/react/20/solid';
+import { ChevronDown, Flower3 } from 'react-bootstrap-icons';
 
 import useUserStore from '@/stores/useUserStore';
 import { shallow } from 'zustand/shallow';
@@ -26,6 +30,7 @@ import { JWT_TOKEN_KEY, USER_INFO_KEY } from '@constants/local-storage-keys';
 import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
 import { useLocalStorage } from 'usehooks-ts';
 import emptyUserInfo from '@constants/empty-user-info';
+import { Roles } from '@/data/constants/user-roles';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -39,6 +44,10 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
   const isAuth = useIsAuthenticated();
   const [, setJwtToken] = useLocalStorage(JWT_TOKEN_KEY, { token: '' });
   const [, setUserInfo] = useLocalStorage(USER_INFO_KEY, emptyUserInfo);
+
+  const hasRoleSpecialist = () => {
+    return user.roles.includes(Roles.specialist);
+  };
 
   const logout = () => {
     setJwtToken({ token: '' });
@@ -90,6 +99,22 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
                 <Text>Мој Профил</Text>
               </HStack>
             </MenuItem>
+            {hasRoleSpecialist() ? (
+              <>
+                <MenuItem>
+                  <HStack spacing={2}>
+                    <Icon as={Flower3} />
+                    <Text>Мои растенија</Text>
+                  </HStack>
+                </MenuItem>
+                <MenuItem>
+                  <HStack spacing={2}>
+                    <Icon as={PencilSquareIcon} />
+                    <Text>Мои статии</Text>
+                  </HStack>
+                </MenuItem>
+              </>
+            ) : null}
             <MenuItem onClick={onOpenDisplayPreferencesCallback}>
               <HStack spacing={2}>
                 <SettingsIcon></SettingsIcon>
