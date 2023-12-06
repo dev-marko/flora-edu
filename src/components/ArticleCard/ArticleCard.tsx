@@ -11,6 +11,7 @@ import {
   Image,
   Stack,
   Text,
+  VStack,
   useColorModeValue,
   useTheme,
 } from '@chakra-ui/react';
@@ -20,13 +21,15 @@ import BookmarkButton from '@components/shared/BookmarkButton';
 import thumbnail from '../../assets/placeholder.png';
 import { AuthorDto } from '@/data/interfaces/author-dto';
 import { useNavigate } from 'react-router-dom';
+import moment, { Moment } from 'moment';
+import 'moment/dist/locale/mk';
 
 type ArticleCardProps = {
   id: string;
   title: string;
   shortDescription: string;
   headerImageUrl: string;
-  createdAt: string;
+  createdAt: Date;
   author: AuthorDto;
   isLiked: boolean;
   isBookmarked: boolean;
@@ -35,17 +38,12 @@ const ArticleCard = ({
   id,
   title,
   shortDescription,
+  headerImageUrl,
+  createdAt,
   author,
+  isLiked,
   isBookmarked,
-}: // id,
-// title,
-// shortDescription,
-// headerImageUrl,
-// createdAt,
-// author,
-// isLiked,
-// isBookmarked,
-ArticleCardProps) => {
+}: ArticleCardProps) => {
   const theme = useTheme();
   const buttonColor = useColorModeValue(
     theme.colors.primary[500],
@@ -62,6 +60,12 @@ ArticleCardProps) => {
 
   const handleDetailsClick = () => {
     navigate(id);
+  };
+
+  const showDate = (): string => {
+    const instance: Moment = moment(createdAt);
+    instance.locale('mk');
+    return instance.format('MMMM d, YYYY');
   };
 
   return (
@@ -84,12 +88,17 @@ ArticleCardProps) => {
       />
       <Stack spacing={0}>
         <CardHeader>
-          <Heading as="h3" size="lg">
-            {title}
-          </Heading>
-          <Text>
-            Автор: {author.firstName} {author.lastName}
-          </Text>
+          <VStack align={'start'} spacing={1}>
+            <Heading as="h3" size="lg">
+              {title}
+            </Heading>
+            <Text>
+              Автор: {author.firstName} {author.lastName}
+            </Text>
+            <Text fontSize={'sm'} color={'gray.500'}>
+              {showDate()}
+            </Text>
+          </VStack>
         </CardHeader>
         <CardBody>
           <Text noOfLines={3}>{shortDescription}</Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import { AxiosResponse } from 'axios';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
-import ArticleApi from '@/apis/blog-api';
+import ArticlesApi from '@/apis/blog-api';
 import { ArticlesRequest } from '@/data/request-interfaces/articles-request';
 import { ArticleCardData } from '@/data/interfaces/article-card-data';
 import LoadingSpinner from '../shared/LoadingSpinner';
@@ -24,7 +24,7 @@ export function loader({ request }: any) {
   };
 
   return defer({
-    articles: ArticleApi.getArticles(requestDto),
+    articles: ArticlesApi.getArticles(requestDto),
   });
 }
 
