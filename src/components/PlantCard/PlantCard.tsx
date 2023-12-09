@@ -9,7 +9,6 @@ import {
   Stack,
   ButtonGroup,
   Button,
-  IconButton,
   useTheme,
   useColorModeValue,
 } from '@chakra-ui/react';

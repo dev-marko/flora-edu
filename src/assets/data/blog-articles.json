@@ -1,20 +1,56 @@
 [
   {
     "id": "463ab1db-e358-47e6-98e3-54b4c3952db5",
-    "title": "Наслов",
-    "author": "Марко Спасеновски",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "title": "Наслов 1",
+    "author": {
+      "id": "aaa",
+      "authorBiography": "aaa",
+      "firstName": "Марко",
+      "lastName": "Спасеновски",
+      "createdAt": "2023-12-04T21:29:36Z",
+      "lastModified": "2023-12-04T21:29:36Z"
+    },
+    "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "createdAt": "2023-12-04T21:29:36Z",
+    "lastModified": "2023-12-04T21:29:36Z",
+    "isLiked": false,
+    "isBookmarked": false,
+    "headerImageUrl": "asdf"
   },
   {
     "id": "463ab1db-e358-47e6-98e3-54b4c3952db5",
-    "title": "Наслов",
-    "author": "Марко Спасеновски",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "title": "Наслов 2",
+    "author": {
+      "id": "aaa",
+      "authorBiography": "aaa",
+      "firstName": "Марко",
+      "lastName": "Спасеновски",
+      "createdAt": "2023-12-04T21:29:36Z",
+      "lastModified": "2023-12-04T21:29:36Z"
+    },
+    "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "createdAt": "2023-12-04T21:29:36Z",
+    "lastModified": "2023-12-04T21:29:36Z",
+    "isLiked": false,
+    "isBookmarked": false,
+    "headerImageUrl": "asdf"
   },
   {
     "id": "463ab1db-e358-47e6-98e3-54b4c3952db5",
-    "title": "Наслов",
-    "author": "Марко Спасеновски",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "title": "Наслов 3",
+    "author": {
+      "id": "aaa",
+      "authorBiography": "aaa",
+      "firstName": "Марко",
+      "lastName": "Спасеновски",
+      "createdAt": "2023-12-04T21:29:36Z",
+      "lastModified": "2023-12-04T21:29:36Z"
+    },
+    "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "createdAt": "2023-12-04T21:29:36Z",
+    "lastModified": "2023-12-04T21:29:36Z",
+    "isLiked": false,
+    "isBookmarked": false,
+    "headerImageUrl": "asdf"
   }
 ]

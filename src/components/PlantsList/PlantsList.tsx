@@ -1,4 +1,4 @@
-import { Flex, Spinner } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import React from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import PlantCard from '../PlantCard/PlantCard';

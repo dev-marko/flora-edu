@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-import PopularArticleCard from '../PopularArticleCard/PopularArticleCard';
+import ArticleCard from '../ArticleCard/ArticleCard';
 import articles from '../../assets/data/blog-articles.json';
 import { Link } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ const MostPopularArticles = () => {
         justify={'center'}
       >
         {articles.map((article) => (
-          <PopularArticleCard {...article} />
+          <ArticleCard {...article} />
         ))}
       </Stack>
     </Flex>

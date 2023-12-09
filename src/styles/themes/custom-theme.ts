@@ -69,7 +69,7 @@ const theme = {
 const customTheme = extendTheme(
   withDefaultColorScheme({
     colorScheme: 'primary',
-    components: ['Button', 'Switch', 'Slider', 'SliderTrack', 'Tabs'],
+    components: ['Button', 'Switch', 'Slider', 'SliderTrack', 'Tabs', 'Input'],
   }),
   withDefaultVariant({
     variant: 'variableFontSize',

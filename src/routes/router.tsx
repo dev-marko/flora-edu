@@ -7,6 +7,8 @@ import AboutUs from '@/pages/AboutUs';
 import Plants from '@/pages/plants/Plants';
 import { loader as plantsLoader } from '@components/PlantsList/PlantsList';
 import { loader as plantDetailsLoader } from '@pages/plants/PlantDetails';
+import { loader as articlesLoader } from '@components/ArticlesList/ArticlesList';
+import { loader as articleLoader } from '@pages/blog/Article';
 import PlantDetails from '@/pages/plants/PlantDetails';
 import UserManual from '@/pages/UserManual';
 import Blog from '@/pages/blog/Blog';
@@ -54,14 +56,24 @@ const router = createBrowserRouter([
       },
       {
         path: 'blog',
+        handle: {
+          crumb: () => 'Блог',
+        },
         children: [
           {
             index: true,
             element: <Blog />,
+            loader: articlesLoader,
           },
           {
-            path: ':id',
+            path: ':articleId',
             element: <Article />,
+            loader: ({ params }) => {
+              return articleLoader(params.articleId);
+            },
+            handle: {
+              crumb: () => 'Статија',
+            },
           },
         ],
       },

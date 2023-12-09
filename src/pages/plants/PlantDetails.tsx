@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 
 import {
-  Avatar,
   Box,
   Divider,
   HStack,
@@ -27,7 +26,9 @@ import { PlantDetails as PlantDetailsData } from '@/data/interfaces/plant-detail
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
 import HeartButton from '@/components/shared/HeartButton';
 import BookmarkButton from '@/components/shared/BookmarkButton';
-import placeholder from '../../assets/placeholder.png';
+import header from '../../assets/header.png';
+import CustomDivider from '@/components/shared/CustomDivider';
+import AuthorInfo from '@/components/AuthorInfo/AuthorInfo';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -71,10 +72,10 @@ const PlantDetails = () => {
       <>
         <Breadcrumbs />
         <Heading>{plantDetails.name}</Heading>
-        <Divider my={3} borderColor={dividerColor} borderRadius={'lg'} />
+        <CustomDivider dividerColor={dividerColor} />
         <VStack align={'start'} spacing={4} w={'fill'}>
           <HStack justify={'center'}>
-            <Image w={'50vh'} src={placeholder} />
+            <Image w={'full'} src={header} />
             {/* <Box h={'300px'} w={'100vh'} bgColor={'gray.500'}></Box> */}
           </HStack>
           <HStack spacing={4}>
@@ -105,53 +106,29 @@ const PlantDetails = () => {
               <TabPanels mt={3}>
                 <TabPanel px={0}>
                   <Heading>Опис</Heading>
-                  <Divider
-                    my={3}
-                    borderColor={dividerColor}
-                    borderRadius={'lg'}
-                  />
+                  <CustomDivider dividerColor={dividerColor} />
                   <Text>{plantDetails.description}</Text>
                 </TabPanel>
                 <TabPanel px={0}>
                   <Heading>Предуслови</Heading>
-                  <Divider
-                    my={3}
-                    borderColor={dividerColor}
-                    borderRadius={'lg'}
-                  />
+                  <CustomDivider dividerColor={dividerColor} />
                   <Text>{plantDetails.predispositions}</Text>
                 </TabPanel>
                 <TabPanel px={0}>
                   <Heading>Садење</Heading>
-                  <Divider
-                    my={3}
-                    borderColor={dividerColor}
-                    borderRadius={'lg'}
-                  />
+                  <CustomDivider dividerColor={dividerColor} />
                   <Text>{plantDetails.planting}</Text>
                 </TabPanel>
                 <TabPanel px={0}>
                   <Heading>Одржување</Heading>
-                  <Divider
-                    my={3}
-                    borderColor={dividerColor}
-                    borderRadius={'lg'}
-                  />
+                  <CustomDivider dividerColor={dividerColor} />
                   <Text>{plantDetails.maintenance}</Text>
                 </TabPanel>
               </TabPanels>
             </Tabs>
           </Stack>
           <Divider />
-          <HStack spacing={8}>
-            <Avatar />
-            <VStack align={'start'}>
-              <Text fontWeight={'semibold'}>
-                {plantDetails.author.firstName} {plantDetails.author.lastName}
-              </Text>
-              <Text>{plantDetails.author.authorBiography}</Text>
-            </VStack>
-          </HStack>
+          <AuthorInfo author={plantDetails.author} />
           <Divider />
           <Heading as="h3" size="lg">
             Коментари

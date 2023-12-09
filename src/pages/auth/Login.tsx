@@ -188,6 +188,7 @@ const Login = () => {
                               name="username"
                               placeholder="Вашето корисничко име..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                             <FormErrorMessage>
                               {form.errors.username}
@@ -215,6 +216,7 @@ const Login = () => {
                               name="password"
                               placeholder="Вашата тајна лозинка..."
                               autoComplete="off"
+                              focusBorderColor="green.300"
                             />
                             <FormErrorMessage>
                               {form.errors.password}
