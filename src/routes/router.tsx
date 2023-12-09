@@ -18,6 +18,9 @@ import Register from '@/pages/auth/Register';
 import { requireAuth } from '@/utils/require-auth';
 import ErrorPage404 from '@/pages/error-pages/ErrorPage404';
 import ErrorPage403 from '@/pages/error-pages/ErrorPage403';
+import DashboardLayout from '@/components/shared/DashboardLayout';
+import PlantEditor from '@/pages/dashboard/PlantEditor';
+import DashboardHome from '@/pages/dashboard/DashboardHome';
 
 const router = createBrowserRouter([
   {
@@ -97,6 +100,24 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: <ErrorPage404 />,
+      },
+    ],
+  },
+  {
+    element: <DashboardLayout />,
+    path: 'dashboard',
+    loader: async ({ request }) => {
+      await requireAuth(request);
+      return null;
+    },
+    children: [
+      {
+        index: true,
+        element: <DashboardHome />,
+      },
+      {
+        path: 'plant-editor',
+        element: <PlantEditor />,
       },
     ],
   },
