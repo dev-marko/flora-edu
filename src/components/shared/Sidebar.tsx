@@ -17,22 +17,90 @@ import {
   Divider,
   HStack,
   Center,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from '@chakra-ui/react';
 
-import { Flower3, House, List, PencilSquare } from 'react-bootstrap-icons';
+import {
+  ChevronDown,
+  FileText,
+  Flower3,
+  House,
+  List,
+  PencilSquare,
+} from 'react-bootstrap-icons';
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid';
 import { NavLink } from 'react-router-dom';
+
+interface LinkProps {
+  name: string;
+  icon: any;
+  path: string;
+}
 
 interface LinkItemProps {
   name: string;
   icon: any;
   path: string;
+  isMenu: boolean;
+  menuContent?: LinkProps[];
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Дома', icon: House, path: '/dashboard' },
-  { name: 'Мои статии', icon: PencilSquare, path: 'article-editor' },
-  { name: 'Мои растенија', icon: Flower3, path: 'plant-editor' },
-  { name: 'Kон ФлораЕду', icon: ArrowLeftOnRectangleIcon, path: '/' },
+  { name: 'Дома', icon: House, path: '/dashboard', isMenu: false },
+  {
+    name: 'Мои статии',
+    icon: ChevronDown,
+    path: 'article-editor',
+    isMenu: true,
+    menuContent: [
+      {
+        name: 'Прегледај',
+        icon: List,
+        path: 'articles',
+      },
+      {
+        name: 'Нова',
+        icon: PencilSquare,
+        path: 'editor',
+      },
+      {
+        name: 'Нацрти',
+        icon: FileText,
+        path: 'drafts',
+      },
+    ],
+  },
+  {
+    name: 'Мои растенија',
+    icon: ChevronDown,
+    path: 'plant-editor',
+    isMenu: true,
+    menuContent: [
+      {
+        name: 'Прегледај',
+        icon: Flower3,
+        path: 'plants',
+      },
+      {
+        name: 'Ново',
+        icon: PencilSquare,
+        path: 'editor',
+      },
+      {
+        name: 'Нацрти',
+        icon: FileText,
+        path: 'drafts',
+      },
+    ],
+  },
+  {
+    name: 'Kон ФлораЕду',
+    icon: ArrowLeftOnRectangleIcon,
+    path: '/',
+    isMenu: false,
+  },
 ];
 
 export default function Sidebar({ children }: { children: ReactNode }) {
@@ -91,7 +159,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       </Flex>
       <Divider my={3} />
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} path={link.path}>
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          path={link.path}
+          isMenu={link.isMenu}
+          menuContent={link.menuContent}
+        >
           {link.name}
         </NavItem>
       ))}
@@ -102,39 +176,108 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: any;
   path: string;
+  isMenu: boolean;
+  menuContent?: LinkProps[];
   children: any;
 }
-const NavItem = ({ icon, path, children, ...rest }: NavItemProps) => {
+const NavItem = ({
+  icon,
+  path,
+  children,
+  isMenu,
+  menuContent,
+  ...rest
+}: NavItemProps) => {
   return (
-    <NavLink to={path}>
-      <Link style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
-        <Flex
-          align="center"
-          p="4"
-          mx="4"
-          borderRadius="lg"
-          role="group"
-          cursor="pointer"
-          _hover={{
-            bg: 'primary.400',
-            color: 'white',
-          }}
-          {...rest}
-        >
-          {icon && (
-            <Icon
-              mr="4"
-              fontSize="16"
-              _groupHover={{
+    <>
+      {!isMenu ? (
+        <NavLink to={path}>
+          <Link
+            style={{ textDecoration: 'none' }}
+            _focus={{ boxShadow: 'none' }}
+          >
+            <Flex
+              align="center"
+              p="4"
+              mx="4"
+              borderRadius="lg"
+              role="group"
+              cursor="pointer"
+              _hover={{
+                bg: 'primary.400',
                 color: 'white',
               }}
-              as={icon}
-            />
-          )}
-          {children}
-        </Flex>
-      </Link>
-    </NavLink>
+              {...rest}
+            >
+              {icon && (
+                <Icon
+                  mr="4"
+                  fontSize="16"
+                  _groupHover={{
+                    color: 'white',
+                  }}
+                  as={icon}
+                />
+              )}
+              {children}
+            </Flex>
+          </Link>
+        </NavLink>
+      ) : (
+        <Menu autoSelect={false}>
+          <MenuButton
+            w={['22.5em', '13em']}
+            style={{ textDecoration: 'none' }}
+            _focus={{ boxShadow: 'none' }}
+            _hover={{
+              bg: 'primary.400',
+              color: 'white',
+            }}
+            p={'4'}
+            mx="4"
+            borderRadius="lg"
+            role="group"
+            cursor="pointer"
+          >
+            <Flex
+              align="center"
+              borderRadius="lg"
+              role="group"
+              cursor="pointer"
+            >
+              {icon && (
+                <Icon
+                  mr="4"
+                  fontSize="16"
+                  _groupHover={{
+                    color: 'white',
+                  }}
+                  as={icon}
+                />
+              )}
+              {children}
+            </Flex>
+          </MenuButton>
+          <MenuList autoFocus={false}>
+            {menuContent?.map((item) => (
+              <MenuItem
+                style={{ textDecoration: 'none' }}
+                _focus={{ boxShadow: 'none' }}
+                _hover={{
+                  bg: 'primary.400',
+                  color: 'white',
+                }}
+              >
+                <HStack spacing={4}>
+                  <Icon as={item.icon} />
+                  <Text>{item.name}</Text>
+                </HStack>
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
+      )}
+    </>
   );
 };
 

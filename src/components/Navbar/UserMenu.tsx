@@ -63,7 +63,7 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
   return (
     <HStack hidden={!isAuth()} spacing={{ base: '0', md: '6' }}>
       <Flex alignItems={'center'}>
-        <Menu>
+        <Menu autoSelect={false}>
           <MenuButton
             py={2}
             transition="all 0.3s"
@@ -84,9 +84,6 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
                     {user.firstName} {user.lastName}
                   </Text>
                 )}
-                {/* <Text fontSize="xs" color="gray.600">
-                Корисник
-              </Text> */}
               </VStack>
               <Box display={{ base: 'none', md: 'flex' }}>
                 <Icon as={ChevronDown} />
