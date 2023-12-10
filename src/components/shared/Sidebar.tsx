@@ -260,19 +260,21 @@ const NavItem = ({
           </MenuButton>
           <MenuList autoFocus={false}>
             {menuContent?.map((item) => (
-              <MenuItem
-                style={{ textDecoration: 'none' }}
-                _focus={{ boxShadow: 'none' }}
-                _hover={{
-                  bg: 'primary.400',
-                  color: 'white',
-                }}
-              >
-                <HStack spacing={4}>
-                  <Icon as={item.icon} />
-                  <Text>{item.name}</Text>
-                </HStack>
-              </MenuItem>
+              <NavLink to={item.path}>
+                <MenuItem
+                  style={{ textDecoration: 'none' }}
+                  _focus={{ boxShadow: 'none' }}
+                  _hover={{
+                    bg: 'primary.400',
+                    color: 'white',
+                  }}
+                >
+                  <HStack spacing={4}>
+                    <Icon as={item.icon} />
+                    <Text>{item.name}</Text>
+                  </HStack>
+                </MenuItem>
+              </NavLink>
             ))}
           </MenuList>
         </Menu>
