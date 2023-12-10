@@ -1,4 +1,4 @@
-const plantTypeTranslator = new Map<string, string>([
+const plantTypeTranslatorMkdToEng = new Map<string, string>([
   ['Сите', 'Unknown'],
   ['Овошје', 'Fruit'],
   ['Зеленчук', 'Vegetable'],
@@ -9,4 +9,4 @@ const plantTypeTranslator = new Map<string, string>([
   ['Билки', 'Herbs'],
 ]);
 
-export default plantTypeTranslator;
+export default plantTypeTranslatorMkdToEng;
