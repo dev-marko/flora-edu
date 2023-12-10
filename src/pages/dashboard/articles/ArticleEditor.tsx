@@ -15,7 +15,7 @@ import {
 import { useState } from 'react';
 import Markdown from 'react-markdown';
 
-const PlantEditor = () => {
+const ArticleEditor = () => {
   const [markdown, setMarkdown] = useState('...прегледај ја содржината!');
   return (
     <Flex w={'full'} align={'start'} justify={'space-between'} gap={8}>
@@ -62,4 +62,4 @@ const PlantEditor = () => {
   );
 };
 
-export default PlantEditor;
+export default ArticleEditor;
