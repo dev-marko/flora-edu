@@ -30,9 +30,13 @@ function renderPlants(axiosResponse: AxiosResponse) {
   const plantCards = plants.map((plant: PlantCardData) => {
     return (
       <PlantCard
+        key={plant.id}
         id={plant.id}
         name={plant.name}
         description={plant.description}
+        likeCount={plant.likeCount}
+        isLiked={plant.isLiked}
+        isBookmarked={plant.isBookmarked}
       />
     );
   });

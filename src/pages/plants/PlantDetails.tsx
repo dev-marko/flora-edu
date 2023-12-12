@@ -14,7 +14,6 @@ import {
   Text,
   VStack,
   Stack,
-  Image,
   useColorModeValue,
   useBreakpointValue,
   Textarea,
@@ -25,14 +24,13 @@ import PlantsApi from '@/apis/plants-api';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import { PlantDetails as PlantDetailsData } from '@/data/interfaces/plant-details';
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
-import HeartButton from '@/components/shared/HeartButton';
-import BookmarkButton from '@/components/shared/BookmarkButton';
 import header from '../../assets/header.png';
 import CustomDivider from '@/components/shared/CustomDivider';
 import AuthorInfo from '@/components/AuthorInfo/AuthorInfo';
 import Comment from '@/components/shared/Comment';
 import { Send } from 'react-bootstrap-icons';
 import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
+import PlantDetailsHeader from './PlantDetailsHeader';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -51,8 +49,6 @@ const PlantDetails = () => {
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
-  const [isHearted, setIsHearted] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [commentContent, setCommentContent] = useState('');
 
   const tabsOrientation: 'horizontal' | 'vertical' | undefined =
@@ -70,20 +66,13 @@ const PlantDetails = () => {
   ) => {
     const plantDetails = axiosResponse.data;
 
-    const handleHeartClick = () => {
-      setIsHearted(!isHearted);
-    };
-
-    const handleBookmarkClick = () => {
-      setIsBookmarked(!isBookmarked);
-    };
-
     const handleCommentSend = () => {
       const newPlantComment: NewPlantComment = {
         plantId: plantDetails.id,
         content: commentContent,
       };
 
+      setCommentContent('');
       PlantsApi.addNewComment(newPlantComment)
         .then(() => {
           revalidator.revalidate();
@@ -97,22 +86,12 @@ const PlantDetails = () => {
         <Heading>{plantDetails.name}</Heading>
         <CustomDivider dividerColor={dividerColor} />
         <VStack align={'start'} spacing={4} w={'fill'}>
-          <HStack justify={'center'}>
-            <Image w={'full'} src={header} />
-            {/* <Box h={'300px'} w={'100vh'} bgColor={'gray.500'}></Box> */}
-          </HStack>
-          <HStack spacing={4}>
-            <HeartButton
-              tooltipLabel="Ми се допаѓа"
-              handleHeartClick={handleHeartClick}
-              isActive={isHearted}
-            ></HeartButton>
-            <BookmarkButton
-              tooltipLabel="Зачувај растение"
-              handleBookmarkClick={handleBookmarkClick}
-              isActive={isBookmarked}
-            ></BookmarkButton>
-          </HStack>
+          <PlantDetailsHeader
+            id={plantDetails.id}
+            headerImage={header}
+            isLiked={plantDetails.isLiked}
+            likeCount={plantDetails.likeCount}
+          />
           <Stack direction={{ base: 'column', md: 'row' }}>
             <Tabs
               isFitted
