@@ -18,6 +18,7 @@ import {
   useBreakpointValue,
   Textarea,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
 
 import PlantsApi from '@/apis/plants-api';
@@ -46,6 +47,7 @@ export function loader(plantId: string | undefined) {
 const PlantDetails = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
+  const toast = useToast();
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -77,7 +79,16 @@ const PlantDetails = () => {
         .then(() => {
           revalidator.revalidate();
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          toast({
+            title: 'Настаната грешка.',
+            description: 'Ве молиме обидете се повторно.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     };
 
     return (

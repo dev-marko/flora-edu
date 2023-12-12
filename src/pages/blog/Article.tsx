@@ -1,9 +1,7 @@
 import ArticlesApi from '@/apis/blog-api';
 import AuthorInfo from '@/components/AuthorInfo/AuthorInfo';
-import BookmarkButton from '@/components/shared/BookmarkButton';
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
 import CustomDivider from '@/components/shared/CustomDivider';
-import HeartButton from '@/components/shared/HeartButton';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import { Article as ArticleData } from '@/data/interfaces/article';
 import {
@@ -16,6 +14,7 @@ import {
   useColorModeValue,
   Textarea,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
 import React from 'react';
@@ -41,6 +40,7 @@ export function loader(articleId: string | undefined) {
 const Article = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
+  const toast = useToast();
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -64,7 +64,16 @@ const Article = () => {
         .then(() => {
           revalidator.revalidate();
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          toast({
+            title: 'Настаната грешка.',
+            description: 'Ве молиме обидете се повторно.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     };
 
     return (
