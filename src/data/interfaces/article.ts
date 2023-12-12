@@ -1,3 +1,4 @@
+import { ArticleCommentDto } from './article-comment-dto';
 import { AuthorDto } from './author-dto';
 
 export interface Article {
@@ -10,7 +11,7 @@ export interface Article {
   author: AuthorDto;
   isLiked: boolean;
   isBookmarked: boolean;
-  // TODO: comments array
+  comments: ArticleCommentDto[];
   createdAt: Date;
   lastModified: Date;
 }

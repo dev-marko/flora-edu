@@ -3,6 +3,6 @@ export interface UserInfo {
   firstName: string;
   lastName: string;
   email: string;
-  avatarUrl: string;
+  avatarUrl: string | undefined;
   roles: string[];
 }
