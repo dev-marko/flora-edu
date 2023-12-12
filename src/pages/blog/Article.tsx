@@ -14,12 +14,17 @@ import {
   VStack,
   Image,
   useColorModeValue,
+  Textarea,
+  IconButton,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
 import React from 'react';
 import { useState } from 'react';
-import { Await, defer, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData, useRevalidator } from 'react-router-dom';
 import header from '../../assets/header.png';
+import { NewArticleComment } from '@/data/interfaces/new-article-comment';
+import { Send } from 'react-bootstrap-icons';
+import Comment from '@components/shared/Comment';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -34,14 +39,21 @@ export function loader(articleId: string | undefined) {
 
 const Article = () => {
   const dataPromise = useLoaderData() as DeferData;
+  const revalidator = useRevalidator();
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
   const [isHearted, setIsHearted] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [commentContent, setCommentContent] = useState('');
+
+  const handleCommentOnChange = (value: string) => {
+    setCommentContent(value);
+  };
 
   const renderArticle = (axiosResponse: AxiosResponse<ArticleData>) => {
     const article = axiosResponse.data;
+    console.log(article);
 
     const handleHeartClick = () => {
       setIsHearted(!isHearted);
@@ -49,6 +61,20 @@ const Article = () => {
 
     const handleBookmarkClick = () => {
       setIsBookmarked(!isBookmarked);
+    };
+
+    const handleCommentSend = () => {
+      const newArticleComment: NewArticleComment = {
+        articleId: article.id,
+        content: commentContent,
+      };
+
+      setCommentContent('');
+      ArticlesApi.addNewComment(newArticleComment)
+        .then(() => {
+          revalidator.revalidate();
+        })
+        .catch((err) => console.error(err));
     };
 
     return (
@@ -80,9 +106,40 @@ const Article = () => {
           <AuthorInfo author={article.author} />
           <Divider />
           <Heading as="h3" size="lg">
-            Коментари
+            ({article.comments.length}) Коментари
           </Heading>
-          <Text>TODO: Load comments</Text>
+          <CustomDivider dividerColor={dividerColor} />
+          <HStack w={'full'} align={'start'} mb={5}>
+            <Textarea
+              placeholder="Остави коментар..."
+              value={commentContent}
+              focusBorderColor={'primary.300'}
+              onChange={(event) => handleCommentOnChange(event.target.value)}
+            />
+            <IconButton
+              hidden={!commentContent}
+              icon={<Send />}
+              isRound={true}
+              variant="outline"
+              colorScheme={'gray'}
+              aria-label={'Прати коментар'}
+              onClick={handleCommentSend}
+            />
+          </HStack>
+          <VStack w={'full'} spacing={8} mb={5}>
+            {article.comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                id={comment.id}
+                user={comment.user}
+                content={comment.content}
+                date={comment.createdAt}
+                isLiked={comment.isLiked}
+                likeCount={comment.likeCount}
+                isPlantComment={false}
+              />
+            ))}
+          </VStack>
         </VStack>
       </>
     );
