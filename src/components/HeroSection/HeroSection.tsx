@@ -1,8 +1,10 @@
 import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 import heroSectionHeader from '../../assets/images/hero-section/hero-section-header.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <Flex
       bgImage={heroSectionHeader}
@@ -29,7 +31,7 @@ const HeroSection = () => {
             dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua.
           </Text>
-          <Button>Прочитај повеќе</Button>
+          <Button onClick={() => navigate('about-us')}>Прочитај повеќе</Button>
         </Stack>
       </Box>
     </Flex>
