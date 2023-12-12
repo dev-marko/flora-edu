@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { AxiosResponse } from 'axios';
-import { Await, defer, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData, useRevalidator } from 'react-router-dom';
 
 import {
-  Box,
   Divider,
   HStack,
   Heading,
@@ -18,6 +17,8 @@ import {
   Image,
   useColorModeValue,
   useBreakpointValue,
+  Textarea,
+  IconButton,
 } from '@chakra-ui/react';
 
 import PlantsApi from '@/apis/plants-api';
@@ -29,6 +30,9 @@ import BookmarkButton from '@/components/shared/BookmarkButton';
 import header from '../../assets/header.png';
 import CustomDivider from '@/components/shared/CustomDivider';
 import AuthorInfo from '@/components/AuthorInfo/AuthorInfo';
+import Comment from '@/components/shared/Comment';
+import { Send } from 'react-bootstrap-icons';
+import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -43,17 +47,23 @@ export function loader(plantId: string | undefined) {
 
 const PlantDetails = () => {
   const dataPromise = useLoaderData() as DeferData;
+  const revalidator = useRevalidator();
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
   const [isHearted, setIsHearted] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [commentContent, setCommentContent] = useState('');
 
   const tabsOrientation: 'horizontal' | 'vertical' | undefined =
     useBreakpointValue({
       base: 'vertical',
       md: 'horizontal',
     });
+
+  const handleCommentOnChange = (value: string) => {
+    setCommentContent(value);
+  };
 
   const renderPlantDetails = (
     axiosResponse: AxiosResponse<PlantDetailsData>
@@ -66,6 +76,19 @@ const PlantDetails = () => {
 
     const handleBookmarkClick = () => {
       setIsBookmarked(!isBookmarked);
+    };
+
+    const handleCommentSend = () => {
+      const newPlantComment: NewPlantComment = {
+        plantId: plantDetails.id,
+        content: commentContent,
+      };
+
+      PlantsApi.addNewComment(newPlantComment)
+        .then(() => {
+          revalidator.revalidate();
+        })
+        .catch((err) => console.error(err));
     };
 
     return (
@@ -131,9 +154,39 @@ const PlantDetails = () => {
           <AuthorInfo author={plantDetails.author} />
           <Divider />
           <Heading as="h3" size="lg">
-            Коментари
+            ({plantDetails.comments.length}) Коментари
           </Heading>
-          <Text>TODO: Load comments</Text>
+          <CustomDivider dividerColor={dividerColor} />
+          <HStack w={'full'} align={'start'} mb={5}>
+            <Textarea
+              placeholder="Остави коментар..."
+              focusBorderColor={'primary.300'}
+              onChange={(event) => handleCommentOnChange(event.target.value)}
+            />
+            <IconButton
+              hidden={!commentContent}
+              icon={<Send />}
+              isRound={true}
+              variant="outline"
+              colorScheme={'gray'}
+              aria-label={'Прати коментар'}
+              onClick={handleCommentSend}
+            />
+          </HStack>
+          <VStack w={'full'} spacing={8} mb={5}>
+            {plantDetails.comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                id={comment.id}
+                user={comment.user}
+                content={comment.content}
+                date={comment.createdAt}
+                isLiked={comment.isLiked}
+                likeCount={comment.likeCount}
+                isPlantComment={true}
+              />
+            ))}
+          </VStack>
         </VStack>
       </>
     );
