@@ -17,7 +17,7 @@ import { CommentUserInfo } from '@/data/interfaces/comment-user-info';
 
 type CommentProps = {
   id: string;
-  user: CommentUserInfo;
+  user?: CommentUserInfo;
   content: string;
   date: Date;
   isLiked: boolean;
@@ -56,7 +56,7 @@ const Comment = ({
         setLikeNum(++likeCount);
         await ArticlesApi.likeComment(commentId);
       } else {
-        setLikeNum(--likeCount);
+        setLikeNum(likeCount);
         await ArticlesApi.unlikeComment(commentId);
       }
     }
@@ -65,13 +65,13 @@ const Comment = ({
   return (
     <Flex w={'full'} key={id}>
       <Box px={3}>
-        <Avatar size={'sm'} src={user.avatarImageUrl} />
+        <Avatar size={'sm'} src={user?.avatarImageUrl} />
       </Box>
       <Box flex={1}>
         <VStack align={'start'}>
           <HStack>
             <Text fontWeight={'semibold'}>
-              {user.firstName} {user.lastName}
+              {user?.firstName} {user?.lastName}
             </Text>
             <Text>{moment(date).format('LLL')}</Text>
           </HStack>
@@ -83,12 +83,8 @@ const Comment = ({
               tooltipLabel="Ми се допаѓа"
               handleHeartClick={() => handleHeartClick(id)}
               isActive={isHearted}
+              count={likeNum}
             ></HeartButton>
-            /* TODO: Refactor this, move the likeCount into the
-            HeartButtoncomponent */
-            <Text ms={-3} color={'red'}>
-              {likeNum}
-            </Text>
             <Text hidden={true}>Реплика</Text>
           </HStack>
         </VStack>
