@@ -31,6 +31,11 @@ import { LoginRequest } from '@interfaces/auth/login-request';
 import { CustomAxiosError } from '@interfaces/error/custom-axios-error';
 import useUserStore from '@/stores/useUserStore';
 import useAuthService from '@/hooks/services/useAuthService';
+import {
+  forgotPassword,
+  loginSocials,
+  rememberMe,
+} from '@/utils/feature-flags';
 
 type LoginFormInputs = {
   username: string;
@@ -224,6 +229,7 @@ const Login = () => {
                           justify={'space-between'}
                         >
                           <Checkbox
+                            hidden={!rememberMe}
                             colorScheme={'green'}
                             fontFamily={'Inter'}
                             size={{ base: 'md', md: 'sm' }}
@@ -231,6 +237,7 @@ const Login = () => {
                             Запомни ме
                           </Checkbox>
                           <Text
+                            hidden={!forgotPassword}
                             color={'black'}
                             fontFamily={'Inter'}
                             fontSize={'sm'}
@@ -273,7 +280,7 @@ const Login = () => {
                   за да се регистрирате!
                 </Text>
               </Flex>
-              <Box position="relative" padding="3">
+              <Box hidden={!loginSocials} position="relative" padding="3">
                 <Divider borderColor={'gray'} />
                 <AbsoluteCenter bg="white" px="4">
                   <Text fontFamily={'Inter'} fontSize={'sm'}>
@@ -282,6 +289,7 @@ const Login = () => {
                 </AbsoluteCenter>
               </Box>
               <Flex
+                hidden={!loginSocials}
                 mt={'5'}
                 gap={2}
                 flexDir={'column'}

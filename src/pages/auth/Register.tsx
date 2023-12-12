@@ -27,6 +27,7 @@ import { useColorModeValue } from '@chakra-ui/system';
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik';
 import { Facebook, Google } from 'react-bootstrap-icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginSocials } from '@/utils/feature-flags';
 
 type RegisterFormInputs = {
   username: string;
@@ -411,7 +412,7 @@ const Register = () => {
                   за да се најавите!
                 </Text>
               </Flex>
-              <Box position="relative" padding="3">
+              <Box hidden={!loginSocials} position="relative" padding="3">
                 <Divider borderColor={'gray'} />
                 <AbsoluteCenter bg="white" px="4">
                   <Text fontFamily={'Inter'} fontSize={'sm'}>
@@ -420,6 +421,7 @@ const Register = () => {
                 </AbsoluteCenter>
               </Box>
               <Flex
+                hidden={!loginSocials}
                 mt={'5'}
                 gap={2}
                 flexDir={'column'}
