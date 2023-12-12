@@ -31,6 +31,25 @@ const errorComposer = (error: AxiosError) => {
   };
 };
 
+axios.interceptors.request.use(
+  async (config) => {
+    const tokenObjJson = localStorage.getItem(JWT_TOKEN_KEY);
+
+    let tokenObj;
+
+    if (tokenObjJson !== null) {
+      tokenObj = JSON.parse(tokenObjJson);
+    }
+
+    if (tokenObj?.token) {
+      config.headers.Authorization = `Bearer ${tokenObj?.token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
@@ -42,9 +61,28 @@ const instance = axios.create({
 
 instance.defaults.headers.common.Authorization = `Bearer ${tokenObj?.token}`;
 
+instance.interceptors.request.use(
+  async (config) => {
+    const tokenObjJson = localStorage.getItem(JWT_TOKEN_KEY);
+
+    let tokenObj;
+
+    if (tokenObjJson !== null) {
+      tokenObj = JSON.parse(tokenObjJson);
+    }
+
+    if (tokenObj?.token) {
+      config.headers.Authorization = `Bearer ${tokenObj?.token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 instance.interceptors.response.use(undefined, (error) => {
-  const globalErroHandler = errorComposer(error);
-  globalErroHandler();
+  const globalErrorHandler = errorComposer(error);
+  globalErrorHandler();
 
   const customAxiosError: CustomAxiosError = {
     axiosError: error,

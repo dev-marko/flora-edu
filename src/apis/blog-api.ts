@@ -38,7 +38,6 @@ class ArticlesApi {
   static likeComment = async (
     articleCommentId: string | undefined
   ): Promise<AxiosResponse> => {
-    console.log(articleCommentId);
     const res = await axios.post(`${baseUrl}/like-comment`, articleCommentId);
     return res;
   };
