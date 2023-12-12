@@ -5,6 +5,7 @@ export interface PlantCardData {
   name: string;
   description: string;
   type: PlantTypeEnum;
+  likeCount: number;
   isLiked: boolean;
   isBookmarked: boolean;
 }

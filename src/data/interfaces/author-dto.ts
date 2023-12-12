@@ -3,8 +3,7 @@ export interface AuthorDto {
   firstName: string;
   lastName: string;
   authorBiography: string;
-  createdAt: string; // ! Change this after testing
-  lastModified: string;
-  // createdAt: Date;
-  // lastModified: Date;
+  avatarImageUrl?: string;
+  createdAt: Date;
+  lastModified: Date;
 }

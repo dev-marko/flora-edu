@@ -10,6 +10,9 @@ export interface PlantDetails {
   planting: string;
   maintenance: string;
   author: AuthorDto;
+  likeCount: number;
+  isLiked: boolean;
+  isBookmarked: boolean;
   comments: PlantCommentDto[];
   createdAt: Date;
   lastModified: Date;
