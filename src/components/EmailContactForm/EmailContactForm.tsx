@@ -125,12 +125,7 @@ const EmailContactForm = () => {
             resetForm();
             onOpen();
           } catch (error) {
-            console.log(error);
-            console.log({
-              service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-              template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-              public_key: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-            });
+            console.error(error);
           }
         }}
       >

@@ -53,7 +53,6 @@ const Article = () => {
 
   const renderArticle = (axiosResponse: AxiosResponse<ArticleData>) => {
     const article = axiosResponse.data;
-    console.log(article);
 
     const handleHeartClick = () => {
       setIsHearted(!isHearted);

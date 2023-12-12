@@ -61,7 +61,6 @@ const Blog = () => {
                 { setSubmitting }: FormikHelpers<SearchBarInput>
               ) => {
                 if (value.searchTerm !== '') {
-                  console.log('alo');
                   navigate({
                     pathname: '.',
                     search: createSearchParams({

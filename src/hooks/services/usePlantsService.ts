@@ -9,10 +9,8 @@ interface IPlantService {
 const usePlantsService = (): IPlantService => {
   const axios = useCustomAxios();
 
-  const getAllPlants = async (alo: string) => {
-    console.log(alo);
+  const getAllPlants = async () => {
     const res = await axios.get(basePath);
-    console.log(res);
     return res;
   };
 
