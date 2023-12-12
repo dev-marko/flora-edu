@@ -142,15 +142,7 @@ const Login = () => {
                           problemDetails.title as keyof typeof ErrorCodes
                         ];
 
-                      if (statusCode === 404) {
-                        toast({
-                          title: 'Настаната грешка.',
-                          description: errorCodeMessages.get(errorCode),
-                          status: 'error',
-                          duration: 5000,
-                          isClosable: true,
-                        });
-                      } else if (statusCode === 400) {
+                      if (statusCode === 400) {
                         toast({
                           title: 'Настаната грешка.',
                           description: errorCodeMessages.get(errorCode),
@@ -161,6 +153,7 @@ const Login = () => {
                       } else {
                         error.handleGlobally && error.handleGlobally();
                       }
+
                       setSubmitting(false);
                     });
                 }}
