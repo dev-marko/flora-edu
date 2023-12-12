@@ -28,6 +28,20 @@ class ArticlesApi {
     return res;
   };
 
+  static likeArticle = async (
+    articleId: string | undefined
+  ): Promise<AxiosResponse> => {
+    const res = await axios.post(`${baseUrl}/like-article`, articleId);
+    return res;
+  };
+
+  static unlikeArticle = async (
+    articleId: string | undefined
+  ): Promise<AxiosResponse> => {
+    const res = await axios.post(`${baseUrl}/unlike-article`, articleId);
+    return res;
+  };
+
   static addNewComment = async (
     newArticleComment: NewArticleComment
   ): Promise<AxiosResponse> => {

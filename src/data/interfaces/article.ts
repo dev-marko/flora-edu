@@ -11,6 +11,7 @@ export interface Article {
   author: AuthorDto;
   isLiked: boolean;
   isBookmarked: boolean;
+  likeCount: number;
   comments: ArticleCommentDto[];
   createdAt: Date;
   lastModified: Date;

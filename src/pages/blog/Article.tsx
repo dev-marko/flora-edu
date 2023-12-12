@@ -25,6 +25,7 @@ import header from '../../assets/header.png';
 import { NewArticleComment } from '@/data/interfaces/new-article-comment';
 import { Send } from 'react-bootstrap-icons';
 import Comment from '@components/shared/Comment';
+import ArticleActionBar from './ArticleActionBar';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -43,8 +44,6 @@ const Article = () => {
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
-  const [isHearted, setIsHearted] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [commentContent, setCommentContent] = useState('');
 
   const handleCommentOnChange = (value: string) => {
@@ -53,14 +52,6 @@ const Article = () => {
 
   const renderArticle = (axiosResponse: AxiosResponse<ArticleData>) => {
     const article = axiosResponse.data;
-
-    const handleHeartClick = () => {
-      setIsHearted(!isHearted);
-    };
-
-    const handleBookmarkClick = () => {
-      setIsBookmarked(!isBookmarked);
-    };
 
     const handleCommentSend = () => {
       const newArticleComment: NewArticleComment = {
@@ -89,18 +80,12 @@ const Article = () => {
           <CustomDivider dividerColor={dividerColor} />
           <Text>{article.content}</Text>
           <CustomDivider dividerColor={dividerColor} />
-          <HStack spacing={4}>
-            <HeartButton
-              tooltipLabel="Ми се допаѓа"
-              handleHeartClick={handleHeartClick}
-              isActive={isHearted}
-            ></HeartButton>
-            <BookmarkButton
-              tooltipLabel="Зачувај растение"
-              handleBookmarkClick={handleBookmarkClick}
-              isActive={isBookmarked}
-            ></BookmarkButton>
-          </HStack>
+          <ArticleActionBar
+            id={article.id}
+            isLiked={article.isLiked}
+            isBookmarked={article.isBookmarked}
+            likeCount={article.likeCount}
+          />
           <Divider />
           <AuthorInfo author={article.author} />
           <Divider />
