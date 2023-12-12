@@ -61,7 +61,7 @@ const PlantCard = ({
       await PlantsApi.likePlant(id);
     } else {
       setLikeNum(--likeCount);
-      await PlantsApi.likePlant(id);
+      await PlantsApi.unlikePlant(id);
     }
   };
 
