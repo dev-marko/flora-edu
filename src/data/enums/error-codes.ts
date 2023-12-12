@@ -3,7 +3,7 @@ export enum ErrorCodes {
   BadRequest,
   InternalServerError,
   OperationFailed,
-  UserNotFound,
+  UserNonExistant,
   UserExists,
   PasswordMismatch,
 }
