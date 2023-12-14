@@ -20,24 +20,6 @@ const PlantDetailsHeader = ({
   likeCount,
   isBookmarked,
 }: PlantDetailsHeaderProps) => {
-  const [isHearted, setIsHearted] = useState(isLiked);
-  const [likeNum, setLikeNum] = useState(likeCount);
-
-  useEffect(() => {
-    setLikeNum(likeCount);
-  }, [likeCount]);
-
-  const handleHeartClick = async (id: string) => {
-    setIsHearted(!isHearted);
-
-    if (!isHearted) {
-      setLikeNum(++likeCount);
-      await PlantsApi.likePlant(id);
-    } else {
-      setLikeNum(--likeCount);
-      await PlantsApi.unlikePlant(id);
-    }
-  };
   return (
     <>
       <HStack justify={'center'}>
@@ -46,10 +28,11 @@ const PlantDetailsHeader = ({
       </HStack>
       <HStack spacing={4}>
         <HeartButton
-          tooltipLabel="Ми се допаѓа"
-          handleHeartClick={() => handleHeartClick(id)}
-          isActive={isHearted}
-          count={likeNum}
+          entityId={id}
+          entityBeingLiked={FeatureEntities.Plant}
+          tooltipLabel="Зачувај растение"
+          initLikeStatus={isLiked}
+          count={likeCount}
         ></HeartButton>
         <BookmarkButton
           entityId={id}

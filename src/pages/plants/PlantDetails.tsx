@@ -32,6 +32,7 @@ import Comment from '@/components/shared/Comment';
 import { Send } from 'react-bootstrap-icons';
 import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import PlantDetailsHeader from './PlantDetailsHeader';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -174,7 +175,7 @@ const PlantDetails = () => {
                 date={comment.createdAt}
                 isLiked={comment.isLiked}
                 likeCount={comment.likeCount}
-                isPlantComment={true}
+                featureEntity={FeatureEntities.PlantComment}
               />
             ))}
           </VStack>

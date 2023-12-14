@@ -42,13 +42,6 @@ class PlantsApi {
     return res;
   };
 
-  static unlikePlant = async (
-    plantId: string | undefined
-  ): Promise<AxiosResponse> => {
-    const res = await axios.post(`${baseUrl}/unlike-plant`, plantId);
-    return res;
-  };
-
   static addNewComment = async (
     newPlantComment: NewPlantComment
   ): Promise<AxiosResponse> => {
@@ -63,13 +56,6 @@ class PlantsApi {
     plantCommentId: string | undefined
   ): Promise<AxiosResponse> => {
     const res = await axios.post(`${baseUrl}/like-comment`, plantCommentId);
-    return res;
-  };
-
-  static unlikeComment = async (
-    plantCommentId: string | undefined
-  ): Promise<AxiosResponse> => {
-    const res = await axios.post(`${baseUrl}/unlike-comment`, plantCommentId);
     return res;
   };
 }
