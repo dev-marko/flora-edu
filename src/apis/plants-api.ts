@@ -21,6 +21,19 @@ class PlantsApi {
     return res;
   };
 
+  static getBookmarkedPlants = async (
+    requestDto: PlantsRequest
+  ): Promise<AxiosResponse> => {
+    const res = axios.get(`${baseUrl}/bookmarks`, {
+      params: {
+        type: requestDto.type,
+        page: requestDto.page,
+        size: requestDto.size,
+      },
+    });
+    return res;
+  };
+
   static getPlantById = async (
     plantId: string | undefined
   ): Promise<AxiosResponse> => {

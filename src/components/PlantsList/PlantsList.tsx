@@ -7,20 +7,30 @@ import PlantsApi from '@/apis/plants-api';
 import { AxiosResponse } from 'axios';
 import { PlantCardData } from '@/data/interfaces/plant-card-data';
 import LoadingSpinner from '../shared/LoadingSpinner';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type DeferData = {
   plants: Promise<AxiosResponse>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function loader() {
+export function loader(entity?: FeatureEntities) {
   const requestDto: PlantsRequest = {
     page: 1,
     size: 5,
   };
 
+  let apiCall: Promise<AxiosResponse>;
+  switch (entity) {
+    case FeatureEntities.BookmarkedPlants:
+      apiCall = PlantsApi.getBookmarkedPlants(requestDto);
+      break;
+    default:
+      apiCall = PlantsApi.getPlants(requestDto);
+  }
+
   return defer({
-    plants: PlantsApi.getPlants(requestDto),
+    plants: apiCall,
   });
 }
 

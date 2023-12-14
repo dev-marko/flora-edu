@@ -21,6 +21,19 @@ class ArticlesApi {
     return res;
   };
 
+  static getBookmarkedArticles = async (
+    requestDto: ArticlesRequest
+  ): Promise<AxiosResponse> => {
+    const res = axios.get(`${baseUrl}/bookmarks`, {
+      params: {
+        searchTerm: requestDto.searchTerm,
+        page: requestDto.page,
+        size: requestDto.size,
+      },
+    });
+    return res;
+  };
+
   static getArticleById = async (
     authorId: string | undefined
   ): Promise<AxiosResponse> => {

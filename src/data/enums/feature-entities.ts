@@ -3,4 +3,6 @@ export enum FeatureEntities {
   Article,
   PlantComment,
   ArticleComment,
+  BookmarkedPlants,
+  BookmarkedArticles,
 }

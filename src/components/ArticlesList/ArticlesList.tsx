@@ -7,13 +7,14 @@ import { ArticlesRequest } from '@/data/request-interfaces/articles-request';
 import { ArticleCardData } from '@/data/interfaces/article-card-data';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import ArticleCard from '../ArticleCard/ArticleCard';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type DeferData = {
   articles: Promise<AxiosResponse>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function loader({ request }: any) {
+export function loader({ request }: any, entity?: FeatureEntities) {
   const url = new URL(request.url);
   const searchTerm = url.searchParams.get('searchTerm');
 
@@ -23,8 +24,17 @@ export function loader({ request }: any) {
     searchTerm: searchTerm ?? '',
   };
 
+  let apiCall: Promise<AxiosResponse>;
+  switch (entity) {
+    case FeatureEntities.BookmarkedArticles:
+      apiCall = ArticlesApi.getBookmarkedArticles(requestDto);
+      break;
+    default:
+      apiCall = ArticlesApi.getArticles(requestDto);
+  }
+
   return defer({
-    articles: ArticlesApi.getArticles(requestDto),
+    articles: apiCall,
   });
 }
 
