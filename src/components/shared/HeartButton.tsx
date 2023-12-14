@@ -2,20 +2,57 @@ import { IconButton, Tooltip, Text, HStack } from '@chakra-ui/react';
 
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
+import { FeatureEntities } from '@/data/enums/feature-entities';
+import { useState } from 'react';
+import PlantsApi from '@/apis/plants-api';
+import ArticlesApi from '@/apis/blog-api';
 
 type HeartButtonProps = {
+  entityId: string;
   tooltipLabel: string;
-  handleHeartClick: () => void;
-  isActive: boolean;
+  initLikeStatus: boolean;
+  entityBeingLiked: FeatureEntities;
   count?: number;
 };
 
 const HeartButton = ({
+  entityId,
   tooltipLabel,
-  handleHeartClick,
-  isActive,
-  count,
+  initLikeStatus: initBookmarkStatus,
+  entityBeingLiked,
+  count = 0,
 }: HeartButtonProps) => {
+  const [isLiked, setIsLiked] = useState(initBookmarkStatus);
+  const [likeCount, setLikeCount] = useState(count);
+
+  const handleHeartClick = async () => {
+    setIsLiked(!isLiked);
+    switch (entityBeingLiked) {
+      case FeatureEntities.Plant:
+        await PlantsApi.likePlant(entityId);
+        break;
+      case FeatureEntities.Article:
+        await ArticlesApi.likeArticle(entityId);
+        break;
+      case FeatureEntities.PlantComment:
+        await PlantsApi.likeComment(entityId);
+        break;
+      case FeatureEntities.ArticleComment:
+        await ArticlesApi.likeComment(entityId);
+        break;
+    }
+
+    let tempCount = likeCount;
+
+    if (!isLiked) {
+      setLikeCount(++tempCount);
+    } else if (count > 0) {
+      setLikeCount(--tempCount);
+    } else {
+      setLikeCount(0);
+    }
+  };
+
   return (
     <>
       <HStack spacing={1}>
@@ -29,14 +66,14 @@ const HeartButton = ({
             onClick={handleHeartClick}
             size={'sm'}
             aria-label="Like button"
-            icon={isActive ? <HeartIconSolid /> : <HeartIconOutline />}
+            icon={isLiked ? <HeartIconSolid /> : <HeartIconOutline />}
             variant={'link'}
             color={'red.500'}
           />
         </Tooltip>
-        {count ? (
+        {likeCount !== 0 ? (
           <Text color={'red'} p={0} m={0}>
-            {count}
+            {likeCount}
           </Text>
         ) : null}
       </HStack>
