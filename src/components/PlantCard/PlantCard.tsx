@@ -19,6 +19,7 @@ import thumbnail from '../../assets/placeholder.png';
 import HeartButton from '../shared/HeartButton';
 import { useNavigate } from 'react-router-dom';
 import PlantsApi from '@/apis/plants-api';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type PlantCardProps = {
   id: string;
@@ -44,7 +45,6 @@ const PlantCard = ({
     theme.colors.primary[500],
     theme.colors.primary[200]
   );
-  // const [bookmarked, setIsBookmarked] = useState(false);
 
   const [isHearted, setIsHearted] = useState(isLiked);
   const [likeNum, setLikeNum] = useState(likeCount);
@@ -63,10 +63,6 @@ const PlantCard = ({
       setLikeNum(--likeCount);
       await PlantsApi.unlikePlant(id);
     }
-  };
-
-  const handleBookmarkClick = () => {
-    // setIsBookmarked(!isBookmarked);
   };
 
   const handleDetailsClick = () => {
@@ -109,9 +105,10 @@ const PlantCard = ({
             Види
           </Button>
           <BookmarkButton
+            entityId={id}
+            entityBeingBookmarked={FeatureEntities.Plant}
             tooltipLabel="Зачувај растение"
-            handleBookmarkClick={handleBookmarkClick}
-            isActive={isBookmarked}
+            initBookmarkStatus={isBookmarked}
           ></BookmarkButton>
         </ButtonGroup>
       </CardFooter>

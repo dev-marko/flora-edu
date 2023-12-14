@@ -102,6 +102,7 @@ const PlantDetails = () => {
             headerImage={header}
             isLiked={plantDetails.isLiked}
             likeCount={plantDetails.likeCount}
+            isBookmarked={plantDetails.isBookmarked}
           />
           <Stack direction={{ base: 'column', md: 'row' }}>
             <Tabs

@@ -28,6 +28,13 @@ class PlantsApi {
     return res;
   };
 
+  static bookmarkPlant = async (
+    plantId: string | undefined
+  ): Promise<AxiosResponse> => {
+    const res = await axios.post(`${baseUrl}/bookmark`, plantId);
+    return res;
+  };
+
   static likePlant = async (
     plantId: string | undefined
   ): Promise<AxiosResponse> => {

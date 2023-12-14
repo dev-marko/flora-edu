@@ -22,7 +22,7 @@ const Plants = () => {
   };
 
   useEffect(() => {
-    console.log('TODO: Refetch data');
+    console.log('TODO: Refetch data for filter');
   }, [currType]);
 
   return (
