@@ -23,6 +23,7 @@ import { AuthorDto } from '@/data/interfaces/author-dto';
 import { useNavigate } from 'react-router-dom';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/mk';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type ArticleCardProps = {
   id: string;
@@ -31,7 +32,6 @@ type ArticleCardProps = {
   headerImageUrl: string;
   createdAt: Date;
   author: AuthorDto;
-  isLiked: boolean;
   isBookmarked: boolean;
 };
 const ArticleCard = ({
@@ -41,7 +41,6 @@ const ArticleCard = ({
   headerImageUrl,
   createdAt,
   author,
-  isLiked,
   isBookmarked,
 }: ArticleCardProps) => {
   const theme = useTheme();
@@ -51,12 +50,6 @@ const ArticleCard = ({
   );
 
   const navigate = useNavigate();
-
-  const [isArticleBookmarked, setIsBookmarked] = useState(isBookmarked);
-
-  const handleBookmarkClick = () => {
-    setIsBookmarked(!isArticleBookmarked);
-  };
 
   const handleDetailsClick = () => {
     navigate(id);
@@ -106,9 +99,10 @@ const ArticleCard = ({
         <CardFooter justify={'end'}>
           <ButtonGroup spacing={6}>
             <BookmarkButton
+              entityId={id}
+              entityBeingBookmarked={FeatureEntities.Article}
               tooltipLabel="Зачувај статија"
-              handleBookmarkClick={handleBookmarkClick}
-              isActive={isArticleBookmarked}
+              initBookmarkStatus={isBookmarked}
             ></BookmarkButton>
             <Button
               color={buttonColor}

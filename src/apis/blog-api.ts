@@ -28,6 +28,13 @@ class ArticlesApi {
     return res;
   };
 
+  static bookmarkArticle = async (
+    articleId: string | undefined
+  ): Promise<AxiosResponse> => {
+    const res = await axios.post(`${baseUrl}/bookmark`, articleId);
+    return res;
+  };
+
   static likeArticle = async (
     articleId: string | undefined
   ): Promise<AxiosResponse> => {

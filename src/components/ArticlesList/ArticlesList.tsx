@@ -41,7 +41,6 @@ function renderArticles(axiosResponse: AxiosResponse) {
         headerImageUrl={article.headerImageUrl}
         author={article.author}
         createdAt={article.createdAt}
-        isLiked={article.isLiked}
         isBookmarked={article.isBookmarked}
       />
     );
