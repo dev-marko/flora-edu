@@ -11,7 +11,7 @@ const BookmarkedPlants = () => {
       <Breadcrumbs />
       <Stack w={'full'} justify={'space-between'} direction={['column', 'row']}>
         <Heading>Зачувани растенија</Heading>
-        <SearchBar />
+        <SearchBar placeholderText='Пребарај зачувано растение...'/>
       </Stack>
       <CustomDivider dividerColor={dividerColor} />
       <PlantsList />
