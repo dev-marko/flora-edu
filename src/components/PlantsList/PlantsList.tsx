@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import PlantCard from '../PlantCard/PlantCard';
@@ -8,16 +8,35 @@ import { AxiosResponse } from 'axios';
 import { PlantCardData } from '@/data/interfaces/plant-card-data';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import { FeatureEntities } from '@/data/enums/feature-entities';
+import Pagination from '../shared/Pagination';
+import { PagedList } from '@/data/interfaces/paged-list';
 
 type DeferData = {
   plants: Promise<AxiosResponse>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function loader(entity?: FeatureEntities) {
+export function loader({ request }: any, entity?: FeatureEntities) {
+  const url = new URL(request.url);
+  const searchTerm = url.searchParams.get('searchTerm');
+  const typeTerm = url.searchParams.get('type');
+
+  let page = 0;
+  let size = 0;
+
+  if (url.searchParams.get('page') !== null) {
+    page = parseInt(url.searchParams.get('page')!);
+  }
+
+  if (url.searchParams.get('page') !== null) {
+    size = parseInt(url.searchParams.get('size')!);
+  }
+
   const requestDto: PlantsRequest = {
-    page: 1,
-    size: 5,
+    searchTerm: searchTerm ?? '',
+    type: typeTerm ?? '',
+    page: page !== 0 ? page : 1,
+    size: size !== 0 ? size : 8,
   };
 
   let apiCall: Promise<AxiosResponse>;
@@ -34,7 +53,7 @@ export function loader(entity?: FeatureEntities) {
   });
 }
 
-function renderPlants(axiosResponse: AxiosResponse) {
+const renderPlantCards = (axiosResponse: AxiosResponse) => {
   const plants = axiosResponse.data.items;
 
   const plantCards = plants.map((plant: PlantCardData) => {
@@ -52,22 +71,40 @@ function renderPlants(axiosResponse: AxiosResponse) {
   });
 
   return plantCards;
-}
+};
+
+const renderPaginationArray = (axiosResponse: AxiosResponse) => {
+  const pagedList: PagedList<PlantCardData> = axiosResponse.data;
+
+  return <Pagination pagedListData={pagedList} />;
+};
 
 const PlantsList = () => {
   const dataPromise = useLoaderData() as DeferData;
 
   return (
-    <Flex w={'100%'} justify={'space-around'} flexWrap={'wrap'}>
-      <React.Suspense fallback={<LoadingSpinner />}>
-        <Await
-          resolve={dataPromise.plants}
-          errorElement={<p>Error loading plants data!</p>}
-        >
-          {renderPlants}
-        </Await>
-      </React.Suspense>
-    </Flex>
+    <>
+      <Flex w={'100%'} justify={['center', 'start']} flexWrap={'wrap'}>
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Await
+            resolve={dataPromise.plants}
+            errorElement={<p>Error loading plants data!</p>}
+          >
+            {renderPlantCards}
+          </Await>
+        </React.Suspense>
+      </Flex>
+      <VStack>
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Await
+            resolve={dataPromise.plants}
+            errorElement={<p>Error loading plants data!</p>}
+          >
+            {renderPaginationArray}
+          </Await>
+        </React.Suspense>
+      </VStack>
+    </>
   );
 };
 

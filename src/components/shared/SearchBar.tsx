@@ -20,7 +20,11 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 
-const SearchBar = () => {
+type SearchBarProps = {
+  placeholderText: string;
+};
+
+const SearchBar = ({ placeholderText }: SearchBarProps) => {
   const navigate = useNavigate();
   const revalidator = useRevalidator();
 
@@ -32,12 +36,13 @@ const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (searchParams.size > 0 && formValues.searchTerm === '') {
+    if (formValues.searchTerm === '') {
       searchParams.delete('searchTerm');
       setSearchParams(searchParams);
       revalidator.revalidate();
     }
-  }, [formValues, searchParams, navigate, revalidator, setSearchParams]);
+  }, [formValues]);
+
   return (
     <Box>
       <Formik
@@ -74,7 +79,7 @@ const SearchBar = () => {
                         name="searchTerm"
                         fontFamily={'Inter'}
                         type="text"
-                        placeholder="Пребарај зачувана статија..."
+                        placeholder={placeholderText}
                         autoComplete={'off'}
                         focusBorderColor="primary.300"
                       />
