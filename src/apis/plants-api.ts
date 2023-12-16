@@ -4,15 +4,18 @@ import { AxiosResponse } from 'axios';
 import { PlantDetails } from '@/data/interfaces/plant-details';
 import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import { PlantCommentDto } from '@/data/interfaces/plant-comment-dto';
+import { PagedList } from '@/data/interfaces/paged-list';
+import { PlantCardData } from '@/data/interfaces/plant-card-data';
 
 const baseUrl = 'plants';
 
 class PlantsApi {
   static getPlants = async (
     requestDto: PlantsRequest
-  ): Promise<AxiosResponse> => {
-    const res = axios.get(baseUrl, {
+  ): Promise<AxiosResponse<PagedList<PlantCardData>>> => {
+    const res = axios.get<PagedList<PlantCardData>>(baseUrl, {
       params: {
+        searchTerm: requestDto.searchTerm,
         type: requestDto.type,
         page: requestDto.page,
         size: requestDto.size,

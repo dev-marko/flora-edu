@@ -1,61 +1,38 @@
-import { useEffect, useState } from 'react';
-import { SearchIcon } from '@chakra-ui/icons';
 import {
-  Input,
-  InputGroup,
-  InputRightElement,
-  Select,
   VStack,
   Stack,
+  HStack,
+  useColorModeValue,
+  Heading,
 } from '@chakra-ui/react';
 
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
-import { PlantTypesSelectFilter } from '@/data/constants/plant-types-select-filter';
-import { PlantTypeEnum } from '@/data/enums/plant-type-enum';
 import PlantsList from '@/components/PlantsList/PlantsList';
+import SearchBar from '@/components/shared/SearchBar';
+import PlantTypeFilter from './SelectComp';
+import CustomDivider from '@/components/shared/CustomDivider';
 
 const Plants = () => {
-  const [currType, setCurrType] = useState(PlantTypeEnum.Unknown);
-
-  const handleSelectOnChange = (value: string) => {
-    setCurrType(+value);
-  };
-
-  useEffect(() => {
-    console.log('TODO: Refetch data for filter');
-  }, [currType]);
+  const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
   return (
-    <VStack align={'start'} mt={{ base: 0, md: 5 }}>
-      <Breadcrumbs />
-      <Stack direction={['column', 'row']} spacing={4} w={{ base: 'full' }}>
-        <Select
-          placeholder="Вид на растение"
-          fontFamily={'Inter'}
-          onChange={(event) => handleSelectOnChange(event.target.value)}
-          cursor={'pointer'}
-          focusBorderColor={'primary.300'}
-        >
-          {PlantTypesSelectFilter.map((type) => {
-            return (
-              <option key={type.value} value={type.value}>
-                {type.displayName}
-              </option>
-            );
-          })}
-        </Select>
-        <InputGroup>
-          <InputRightElement pointerEvents="none">
-            <SearchIcon color="gray.300" />
-          </InputRightElement>
-          <Input
-            type="text"
-            fontFamily={'Inter'}
-            placeholder="Пребарај растение"
-            focusBorderColor="primary.300"
-          />
-        </InputGroup>
+    <VStack align={'center'} my={{ base: 0, md: 5 }}>
+      <HStack w={'full'} align={'start'}>
+        <Breadcrumbs />
+      </HStack>
+      <Stack
+        w={'full'}
+        justify={'space-between'}
+        direction={['column', 'row']}
+        spacing={4}
+      >
+        <Heading>Растенија</Heading>
+        <Stack direction={['column', 'row']}>
+          <PlantTypeFilter />
+          <SearchBar placeholderText="Пребарај растение..." />
+        </Stack>
       </Stack>
+      <CustomDivider dividerColor={dividerColor} />
       <PlantsList />
     </VStack>
   );

@@ -20,7 +20,7 @@ const Articles = ({ pageHeading }: ArticlesProps) => {
           direction={['column', 'row']}
         >
           <Heading>{pageHeading}</Heading>
-          <SearchBar />
+          <SearchBar placeholderText="Пребарај статија..." />
         </Stack>
         <CustomDivider dividerColor={dividerColor} />
         <ArticlesList />

@@ -48,14 +48,7 @@ const PlantCard = ({
   };
 
   return (
-    <Card
-      key={id}
-      maxW={'2xs'}
-      maxH={'md'}
-      shadow={'md'}
-      mx={'5'}
-      my={['5', '10']}
-    >
+    <Card key={id} maxW={'2xs'} maxH={'md'} shadow={'md'} mx={5} my={5}>
       <CardBody p={0}>
         <Image src={thumbnail} alt="Bouquet of roses" borderTopRadius={'md'} />
         <Stack p={5}>

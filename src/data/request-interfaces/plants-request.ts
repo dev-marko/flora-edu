@@ -1,7 +1,8 @@
 import { PlantTypeEnum } from '../enums/plant-type-enum';
 
 export interface PlantsRequest {
-  type?: PlantTypeEnum;
+  searchTerm?: string;
+  type?: string;
   page?: number;
   size?: number;
 }
