@@ -11,7 +11,7 @@ import { loader as articlesLoader } from '@components/ArticlesList/ArticlesList'
 import { loader as articleLoader } from '@pages/blog/Article';
 import { loader as dashboardPlantsLoader } from '@pages/dashboard/plants/PlantsTable';
 import { loader as homePageLoader } from '@pages/Home';
-import { loader as plantAnalyticsLoader } from '@pages/dashboard/analytics/PlantAnalytics';
+import { loader as dashboardGeneralAnalyticsLoader } from '@pages/dashboard/DashboardHome';
 import PlantEditor, {
   loader as plantLoader,
 } from '@pages/dashboard/plants/PlantEditor';
@@ -138,7 +138,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DashboardHome />,
-        loader: plantAnalyticsLoader,
+        loader: dashboardGeneralAnalyticsLoader,
       },
       {
         path: 'plants',

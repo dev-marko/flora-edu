@@ -33,7 +33,9 @@ const Plants = () => {
         </Stack>
       </Stack>
       <CustomDivider dividerColor={dividerColor} />
-      <PlantsList />
+      <VStack ps={[0, 8]}>
+        <PlantsList />
+      </VStack>
     </VStack>
   );
 };

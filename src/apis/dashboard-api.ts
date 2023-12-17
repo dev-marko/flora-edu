@@ -3,7 +3,7 @@ import axios from './custom-axios';
 import { AxiosResponse } from 'axios';
 import { PlantDetails } from '@/data/interfaces/plant-details';
 import { PlantEditDto } from '@/data/interfaces/plant-edit-dto';
-import { PlantAnalytics } from '@/data/interfaces/plant-analytics';
+import { GeneralAnalytics } from '@/data/interfaces/general-analytics';
 
 const baseUrl = 'dashboard';
 
@@ -28,7 +28,12 @@ class DashboardApi {
   };
 
   static getPlantAnalytics = async (): Promise<AxiosResponse> => {
-    const res = axios.get<PlantAnalytics>(`${baseUrl}/plant-analytics`);
+    const res = axios.get<GeneralAnalytics>(`${baseUrl}/plant-analytics`);
+    return res;
+  };
+
+  static getArticleAnalytics = async (): Promise<AxiosResponse> => {
+    const res = axios.get<GeneralAnalytics>(`${baseUrl}/article-analytics`);
     return res;
   };
 

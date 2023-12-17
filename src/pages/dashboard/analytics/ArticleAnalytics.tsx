@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
 import React from 'react';
-import { GeneralAnalytics as PlantAnalyticsData } from '@/data/interfaces/general-analytics';
+import { GeneralAnalytics as ArticleAnalyticsData } from '@/data/interfaces/general-analytics';
 import { Await, useLoaderData } from 'react-router-dom';
 import {
   BookmarkFill,
@@ -20,29 +20,29 @@ import {
 } from 'react-bootstrap-icons';
 
 type DeferData = {
-  plantAnalytics: Promise<AxiosResponse>;
+  articleAnalytics: Promise<AxiosResponse>;
 };
 
-const PlantAnalytics = () => {
+const ArticleAnalytics = () => {
   const dataPromise = useLoaderData() as DeferData;
 
-  const renderPlantAnalytics = (axiosResponse: AxiosResponse) => {
-    const plantAnalytics: PlantAnalyticsData = axiosResponse.data;
+  const renderArticleAnalytics = (axiosResponse: AxiosResponse) => {
+    const articleAnalytics: ArticleAnalyticsData = axiosResponse.data;
 
     if (
-      !plantAnalytics.mostPopularByBookmarks &&
-      !plantAnalytics.mostPopularByLikes &&
-      !plantAnalytics.mostPopularByNumberOfComments &&
-      !plantAnalytics.mostPopularByUniqueVisitors
+      !articleAnalytics.mostPopularByBookmarks &&
+      !articleAnalytics.mostPopularByLikes &&
+      !articleAnalytics.mostPopularByNumberOfComments &&
+      !articleAnalytics.mostPopularByUniqueVisitors
     ) {
-      return <Text>Немате напишано растенија! 😟</Text>;
+      return <Text>Немате напишано статија! 😟</Text>;
     }
 
     return (
       <>
         <VStack align={'start'}>
           <Text fontSize="lg" fontFamily={'Inter'}>
-            Најпопуларно растение, според:
+            Најпопуларна статија, според:
           </Text>
           <List ps={4}>
             <ListItem>
@@ -53,8 +53,8 @@ const PlantAnalytics = () => {
                 </HStack>
                 <Text>
                   <strong>
-                    {plantAnalytics.mostPopularByLikes} (
-                    {plantAnalytics.mostPopularByLikesCount})
+                    {articleAnalytics.mostPopularByLikes} (
+                    {articleAnalytics.mostPopularByLikesCount})
                   </strong>
                 </Text>
               </HStack>
@@ -67,8 +67,8 @@ const PlantAnalytics = () => {
                 </HStack>
                 <Text>
                   <strong>
-                    {plantAnalytics.mostPopularByBookmarks} (
-                    {plantAnalytics.mostPopularByBookmarksCount})
+                    {articleAnalytics.mostPopularByBookmarks} (
+                    {articleAnalytics.mostPopularByBookmarksCount})
                   </strong>
                 </Text>
               </HStack>
@@ -77,7 +77,7 @@ const PlantAnalytics = () => {
         </VStack>
         <VStack align={'start'}>
           <Text fontSize="lg" fontFamily={'Inter'}>
-            Растенија со најголема интеракција:
+            Статија со најголема интеракција:
           </Text>
           <List ps={5}>
             <ListItem>
@@ -88,8 +88,8 @@ const PlantAnalytics = () => {
                 </HStack>
                 <Text>
                   <strong>
-                    {plantAnalytics.mostPopularByNumberOfComments} (
-                    {plantAnalytics.mostPopularByNumberOfCommentsCount})
+                    {articleAnalytics.mostPopularByNumberOfComments} (
+                    {articleAnalytics.mostPopularByNumberOfCommentsCount})
                   </strong>
                 </Text>
               </HStack>
@@ -102,8 +102,8 @@ const PlantAnalytics = () => {
                 </HStack>
                 <Text>
                   <strong>
-                    {plantAnalytics.mostPopularByUniqueVisitors} (
-                    {plantAnalytics.mostPopularByUniqueVisitorsCount})
+                    {articleAnalytics.mostPopularByUniqueVisitors} (
+                    {articleAnalytics.mostPopularByUniqueVisitorsCount})
                   </strong>
                 </Text>
               </HStack>
@@ -117,18 +117,18 @@ const PlantAnalytics = () => {
   return (
     <VStack align={'start'} spacing={4} mx={2}>
       <Heading as="h3" size="lg" fontFamily={'Inter'}>
-        Статистика за вашите растенија 🌱:
+        Статистика за вашите статии 📝:
       </Heading>
       <React.Suspense fallback={<LoadingSpinner />}>
         <Await
-          resolve={dataPromise.plantAnalytics}
+          resolve={dataPromise.articleAnalytics}
           errorElement={<p>Error loading plant data!</p>}
         >
-          {renderPlantAnalytics}
+          {renderArticleAnalytics}
         </Await>
       </React.Suspense>
     </VStack>
   );
 };
 
-export default PlantAnalytics;
+export default ArticleAnalytics;
