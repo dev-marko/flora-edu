@@ -3,6 +3,7 @@ import axios from './custom-axios';
 import { AxiosResponse } from 'axios';
 import { PlantDetails } from '@/data/interfaces/plant-details';
 import { PlantEditDto } from '@/data/interfaces/plant-edit-dto';
+import { PlantAnalytics } from '@/data/interfaces/plant-analytics';
 
 const baseUrl = 'dashboard';
 
@@ -23,6 +24,11 @@ class DashboardApi {
     plantId: string | undefined
   ): Promise<AxiosResponse> => {
     const res = axios.get<PlantDetails>(`${baseUrl}/plants/${plantId}`);
+    return res;
+  };
+
+  static getPlantAnalytics = async (): Promise<AxiosResponse> => {
+    const res = axios.get<PlantAnalytics>(`${baseUrl}/plant-analytics`);
     return res;
   };
 
