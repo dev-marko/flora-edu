@@ -4,6 +4,7 @@ import { AxiosResponse } from 'axios';
 import { ArticlesRequest } from '@/data/request-interfaces/articles-request';
 import { Article } from '@/data/interfaces/article';
 import { NewArticleComment } from '@/data/interfaces/new-article-comment';
+import { ArticleCardData } from '@/data/interfaces/article-card-data';
 
 const baseUrl = 'articles';
 
@@ -33,6 +34,11 @@ class ArticlesApi {
     });
     return res;
   };
+
+  static getMostPopularArticles = async (): Promise<AxiosResponse<ArticleCardData[]>> => {
+    const res = axios.get(`${baseUrl}/most-popular`);
+    return res;
+  }
 
   static getArticleById = async (
     authorId: string | undefined

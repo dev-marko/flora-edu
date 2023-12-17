@@ -1,14 +1,10 @@
 import { Stack, VStack, Heading, useColorModeValue } from '@chakra-ui/react';
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
 import CustomDivider from '@/components/shared/CustomDivider';
-import ArticlesList from '@/components/ArticlesList/ArticlesList';
 import SearchBar from '@/components/shared/SearchBar';
+import BookmarkedArticlesList from '@/components/ArticlesList/BookmarkedArticlesList';
 
-type ArticlesProps = {
-  pageHeading: string;
-};
-
-const Articles = ({ pageHeading }: ArticlesProps) => {
+const BookmarkedArticles = () => {
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
   return (
     <>
@@ -19,14 +15,14 @@ const Articles = ({ pageHeading }: ArticlesProps) => {
           justify={'space-between'}
           direction={['column', 'row']}
         >
-          <Heading>{pageHeading}</Heading>
+          <Heading>Зачувани статии</Heading>
           <SearchBar placeholderText="Пребарај статија..." />
         </Stack>
         <CustomDivider dividerColor={dividerColor} />
-        <ArticlesList />
+        <BookmarkedArticlesList />
       </VStack>
     </>
   );
 };
 
-export default Articles;
+export default BookmarkedArticles;

@@ -26,6 +26,7 @@ import { Send } from 'react-bootstrap-icons';
 import Comment from '@components/shared/Comment';
 import ArticleActionBar from './ArticleActionBar';
 import { FeatureEntities } from '@/data/enums/feature-entities';
+import ScrollToTop from '@/components/shared/ScrollToTop';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -79,6 +80,7 @@ const Article = () => {
 
     return (
       <>
+        <ScrollToTop />
         <Breadcrumbs />
         <VStack align={'start'} spacing={4} w={'fill'}>
           <HStack justify={'center'}>

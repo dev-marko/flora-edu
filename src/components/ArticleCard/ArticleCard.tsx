@@ -31,6 +31,7 @@ type ArticleCardProps = {
   createdAt: Date;
   author: AuthorDto;
   isBookmarked: boolean;
+  withConfirmationDialog: boolean;
 };
 const ArticleCard = ({
   id,
@@ -40,6 +41,7 @@ const ArticleCard = ({
   createdAt,
   author,
   isBookmarked,
+  withConfirmationDialog,
 }: ArticleCardProps) => {
   const theme = useTheme();
   const buttonColor = useColorModeValue(
@@ -50,7 +52,7 @@ const ArticleCard = ({
   const navigate = useNavigate();
 
   const handleDetailsClick = () => {
-    navigate(id);
+    navigate(`${import.meta.env.BASE_URL}blog/${id}`);
   };
 
   const showDate = (): string => {
@@ -101,6 +103,7 @@ const ArticleCard = ({
               entityBeingBookmarked={FeatureEntities.Article}
               tooltipLabel="Зачувај статија"
               initBookmarkStatus={isBookmarked}
+              withConfirmDialog={withConfirmationDialog}
             ></BookmarkButton>
             <Button
               color={buttonColor}
