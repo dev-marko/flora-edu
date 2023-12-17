@@ -33,6 +33,7 @@ import { Send } from 'react-bootstrap-icons';
 import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import PlantDetailsHeader from './PlantDetailsHeader';
 import { FeatureEntities } from '@/data/enums/feature-entities';
+import ScrollToTop from '@/components/shared/ScrollToTop';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -94,6 +95,7 @@ const PlantDetails = () => {
 
     return (
       <>
+        <ScrollToTop />
         <Breadcrumbs />
         <Heading>{plantDetails.name}</Heading>
         <CustomDivider dividerColor={dividerColor} />

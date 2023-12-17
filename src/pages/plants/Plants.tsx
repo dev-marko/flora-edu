@@ -16,7 +16,7 @@ const Plants = () => {
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
   return (
-    <VStack align={'center'} my={{ base: 0, md: 5 }}>
+    <VStack align={'center'} my={5}>
       <HStack w={'full'} align={'start'}>
         <Breadcrumbs />
       </HStack>
