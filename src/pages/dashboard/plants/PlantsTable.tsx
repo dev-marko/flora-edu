@@ -1,11 +1,4 @@
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Button,
   Flex,
   IconButton,
   Table,
@@ -36,6 +29,7 @@ import moment from 'moment';
 import { PlantTableData } from '@/data/interfaces/plant-table-data';
 import plantTypeTranslatorEngToMkd from '@/utils/plant-type-translator-eng-to-mkd';
 import { Pencil, Trash } from 'react-bootstrap-icons';
+import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 
 type DeferData = {
   plants: Promise<AxiosResponse>;
@@ -175,37 +169,15 @@ const PlantsTable = () => {
           </Tfoot>
         </Table>
       </TableContainer>
-      <AlertDialog
+      <ConfirmationDialog
         isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
         onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Избриши растение
-            </AlertDialogHeader>
-
-            <AlertDialogBody>Дали сте сигурни?</AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Откажи
-              </Button>
-              <Button
-                colorScheme="red"
-                onClick={() => {
-                  handleDelete();
-                  onClose();
-                }}
-                ml={3}
-              >
-                Избриши
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        cancelRef={cancelRef}
+        headerText="Избриши растение"
+        bodyText="Дали сте сигурни?"
+        mainAction={handleDelete}
+        mainActionButtonText="Избриши"
+      />
     </Flex>
   );
 };
