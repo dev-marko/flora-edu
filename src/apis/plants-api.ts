@@ -29,11 +29,19 @@ class PlantsApi {
   ): Promise<AxiosResponse> => {
     const res = axios.get(`${baseUrl}/bookmarks`, {
       params: {
+        searchTerm: requestDto.searchTerm,
         type: requestDto.type,
         page: requestDto.page,
         size: requestDto.size,
       },
     });
+    return res;
+  };
+
+  static getMostPopularPlants = async (): Promise<
+    AxiosResponse<PlantCardData[]>
+  > => {
+    const res = axios.get(`${baseUrl}/most-popular`);
     return res;
   };
 

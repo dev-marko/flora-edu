@@ -1,3 +1,4 @@
+import { PlantCardData } from '@/data/interfaces/plant-card-data';
 import {
   Button,
   Divider,
@@ -7,13 +8,40 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
+import { Await, Link, useLoaderData } from 'react-router-dom';
 import PlantCard from '../PlantCard/PlantCard';
+import { AxiosResponse } from 'axios';
+import React from 'react';
+import LoadingSpinner from '../shared/LoadingSpinner';
 
-import plants from '../../assets/data/plants.json';
-import { Link } from 'react-router-dom';
+type DeferData = {
+  mostPopularPlants: Promise<AxiosResponse>;
+};
 
 const MostPopularPlants = () => {
+  const dataPromise = useLoaderData() as DeferData;
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
+
+  const renderMostPopularPlants = (axiosResponse: AxiosResponse) => {
+    const plants = axiosResponse.data;
+
+    const plantCards = plants.map((plant: PlantCardData) => {
+      return (
+        <PlantCard
+          key={plant.id}
+          id={plant.id}
+          name={plant.name}
+          description={plant.description}
+          likeCount={plant.likeCount}
+          isLiked={plant.isLiked}
+          isBookmarked={plant.isBookmarked}
+          withConfirmationDialog={false}
+        />
+      );
+    });
+
+    return plantCards;
+  };
 
   return (
     <Flex flexDir={'column'}>
@@ -36,9 +64,14 @@ const MostPopularPlants = () => {
         flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'nowrap' }}
         justify={'center'}
       >
-        {plants.map((plant) => (
-          <PlantCard {...plant}></PlantCard>
-        ))}
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Await
+            resolve={dataPromise.mostPopularPlants}
+            errorElement={<p>Error loading plants data!</p>}
+          >
+            {renderMostPopularPlants}
+          </Await>
+        </React.Suspense>
       </Stack>
     </Flex>
   );

@@ -25,6 +25,7 @@ type PlantCardProps = {
   likeCount: number;
   isLiked: boolean;
   isBookmarked: boolean;
+  withConfirmationDialog: boolean;
 };
 
 const PlantCard = ({
@@ -34,6 +35,7 @@ const PlantCard = ({
   likeCount,
   isLiked,
   isBookmarked,
+  withConfirmationDialog,
 }: PlantCardProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const PlantCard = ({
   );
 
   const handleDetailsClick = () => {
-    navigate(id);
+    navigate(`${import.meta.env.BASE_URL}plants/${id}`);
   };
 
   return (
@@ -81,6 +83,7 @@ const PlantCard = ({
             entityBeingBookmarked={FeatureEntities.Plant}
             tooltipLabel="Зачувај растение"
             initBookmarkStatus={isBookmarked}
+            withConfirmDialog={withConfirmationDialog}
           ></BookmarkButton>
         </ButtonGroup>
       </CardFooter>
