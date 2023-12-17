@@ -79,13 +79,15 @@ const Navbar = ({ onOpenDisplayPreferencesCallback }: Props) => {
             direction={'row'}
             spacing={2}
           >
-            <Button
-              hidden={isAuth()}
-              variant={'link'}
-              size={{ base: 'xs', md: 'md', lg: 'lg', xl: 'sm' }}
-            >
-              <Link to="/login">Најава</Link>
-            </Button>
+            <Link to="/login">
+              <Button
+                hidden={isAuth()}
+                variant={'link'}
+                size={{ base: 'xs', md: 'md', lg: 'lg', xl: 'sm' }}
+              >
+                Најава
+              </Button>
+            </Link>
             <Link to="/register">
               <Button
                 hidden={isAuth()}

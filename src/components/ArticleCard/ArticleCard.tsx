@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
   Button,
   ButtonGroup,
@@ -23,6 +21,7 @@ import { AuthorDto } from '@/data/interfaces/author-dto';
 import { useNavigate } from 'react-router-dom';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/mk';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type ArticleCardProps = {
   id: string;
@@ -31,8 +30,8 @@ type ArticleCardProps = {
   headerImageUrl: string;
   createdAt: Date;
   author: AuthorDto;
-  isLiked: boolean;
   isBookmarked: boolean;
+  withConfirmationDialog: boolean;
 };
 const ArticleCard = ({
   id,
@@ -41,8 +40,8 @@ const ArticleCard = ({
   headerImageUrl,
   createdAt,
   author,
-  isLiked,
   isBookmarked,
+  withConfirmationDialog,
 }: ArticleCardProps) => {
   const theme = useTheme();
   const buttonColor = useColorModeValue(
@@ -52,14 +51,8 @@ const ArticleCard = ({
 
   const navigate = useNavigate();
 
-  const [isArticleBookmarked, setIsBookmarked] = useState(isBookmarked);
-
-  const handleBookmarkClick = () => {
-    setIsBookmarked(!isArticleBookmarked);
-  };
-
   const handleDetailsClick = () => {
-    navigate(id);
+    navigate(`${import.meta.env.BASE_URL}blog/${id}`);
   };
 
   const showDate = (): string => {
@@ -106,9 +99,11 @@ const ArticleCard = ({
         <CardFooter justify={'end'}>
           <ButtonGroup spacing={6}>
             <BookmarkButton
+              entityId={id}
+              entityBeingBookmarked={FeatureEntities.Article}
               tooltipLabel="Зачувај статија"
-              handleBookmarkClick={handleBookmarkClick}
-              isActive={isArticleBookmarked}
+              initBookmarkStatus={isBookmarked}
+              withConfirmDialog={withConfirmationDialog}
             ></BookmarkButton>
             <Button
               color={buttonColor}

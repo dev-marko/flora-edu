@@ -8,11 +8,42 @@ import {
 } from '@chakra-ui/react';
 
 import ArticleCard from '../ArticleCard/ArticleCard';
-import articles from '../../assets/data/blog-articles.json';
-import { Link } from 'react-router-dom';
+import { Await, Link, useLoaderData } from 'react-router-dom';
+import React from 'react';
+import { ArticleCardData } from '@/data/interfaces/article-card-data';
+import { AxiosResponse } from 'axios';
+import LoadingSpinner from '../shared/LoadingSpinner';
+
+type DeferData = {
+  mostPopularArticles: Promise<AxiosResponse>;
+};
 
 const MostPopularArticles = () => {
+  const dataPromise = useLoaderData() as DeferData;
+
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
+
+  const renderMostPopularArticles = (axiosResponse: AxiosResponse) => {
+    const articles = axiosResponse.data;
+
+    const articleCards = articles.map((article: ArticleCardData) => {
+      return (
+        <ArticleCard
+          key={article.id}
+          id={article.id}
+          title={article.title}
+          shortDescription={article.shortDescription}
+          headerImageUrl={article.headerImageUrl}
+          author={article.author}
+          createdAt={article.createdAt}
+          isBookmarked={article.isBookmarked}
+          withConfirmationDialog={false}
+        />
+      );
+    });
+
+    return articleCards;
+  };
 
   return (
     <Flex flexDir={'column'}>
@@ -37,9 +68,14 @@ const MostPopularArticles = () => {
         flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'nowrap' }}
         justify={'center'}
       >
-        {articles.map((article) => (
-          <ArticleCard {...article} />
-        ))}
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Await
+            resolve={dataPromise.mostPopularArticles}
+            errorElement={<p>Error loading articles data!</p>}
+          >
+            {renderMostPopularArticles}
+          </Await>
+        </React.Suspense>
       </Stack>
     </Flex>
   );

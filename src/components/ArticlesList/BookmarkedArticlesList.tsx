@@ -64,7 +64,7 @@ const renderArticles = (axiosResponse: AxiosResponse) => {
         author={article.author}
         createdAt={article.createdAt}
         isBookmarked={article.isBookmarked}
-        withConfirmationDialog={false}
+        withConfirmationDialog={true}
       />
     );
   });
@@ -78,7 +78,7 @@ const renderPaginationArray = (axiosResponse: AxiosResponse) => {
   return <Pagination pagedListData={pagedList} />;
 };
 
-const ArticlesList = () => {
+const BookmarkedArticlesList = () => {
   const dataPromise = useLoaderData() as DeferData;
 
   return (
@@ -102,4 +102,4 @@ const ArticlesList = () => {
   );
 };
 
-export default ArticlesList;
+export default BookmarkedArticlesList;

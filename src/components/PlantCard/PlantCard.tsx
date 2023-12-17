@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import {
   Card,
   CardBody,
@@ -18,7 +16,7 @@ import BookmarkButton from '@components/shared/BookmarkButton';
 import thumbnail from '../../assets/placeholder.png';
 import HeartButton from '../shared/HeartButton';
 import { useNavigate } from 'react-router-dom';
-import PlantsApi from '@/apis/plants-api';
+import { FeatureEntities } from '@/data/enums/feature-entities';
 
 type PlantCardProps = {
   id: string;
@@ -27,6 +25,7 @@ type PlantCardProps = {
   likeCount: number;
   isLiked: boolean;
   isBookmarked: boolean;
+  withConfirmationDialog: boolean;
 };
 
 const PlantCard = ({
@@ -36,6 +35,7 @@ const PlantCard = ({
   likeCount,
   isLiked,
   isBookmarked,
+  withConfirmationDialog,
 }: PlantCardProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -44,44 +44,13 @@ const PlantCard = ({
     theme.colors.primary[500],
     theme.colors.primary[200]
   );
-  // const [bookmarked, setIsBookmarked] = useState(false);
-
-  const [isHearted, setIsHearted] = useState(isLiked);
-  const [likeNum, setLikeNum] = useState(likeCount);
-
-  useEffect(() => {
-    setLikeNum(likeCount);
-  }, [likeCount]);
-
-  const handleHeartClick = async (id: string) => {
-    setIsHearted(!isHearted);
-
-    if (!isHearted) {
-      setLikeNum(++likeCount);
-      await PlantsApi.likePlant(id);
-    } else {
-      setLikeNum(--likeCount);
-      await PlantsApi.unlikePlant(id);
-    }
-  };
-
-  const handleBookmarkClick = () => {
-    // setIsBookmarked(!isBookmarked);
-  };
 
   const handleDetailsClick = () => {
-    navigate(id);
+    navigate(`${import.meta.env.BASE_URL}plants/${id}`);
   };
 
   return (
-    <Card
-      key={id}
-      maxW={'2xs'}
-      maxH={'md'}
-      shadow={'md'}
-      mx={'5'}
-      my={['5', '10']}
-    >
+    <Card key={id} maxW={'2xs'} maxH={'md'} shadow={'md'} mx={5} my={5}>
       <CardBody p={0}>
         <Image src={thumbnail} alt="Bouquet of roses" borderTopRadius={'md'} />
         <Stack p={5}>
@@ -96,10 +65,11 @@ const PlantCard = ({
       <CardFooter justify={'center'}>
         <ButtonGroup spacing={6}>
           <HeartButton
-            tooltipLabel="Ми се допаѓа"
-            handleHeartClick={() => handleHeartClick(id)}
-            isActive={isHearted}
-            count={likeNum}
+            entityId={id}
+            entityBeingLiked={FeatureEntities.Plant}
+            tooltipLabel="Зачувај растение"
+            initLikeStatus={isLiked}
+            count={likeCount}
           ></HeartButton>
           <Button
             color={buttonColor}
@@ -109,9 +79,11 @@ const PlantCard = ({
             Види
           </Button>
           <BookmarkButton
+            entityId={id}
+            entityBeingBookmarked={FeatureEntities.Plant}
             tooltipLabel="Зачувај растение"
-            handleBookmarkClick={handleBookmarkClick}
-            isActive={isBookmarked}
+            initBookmarkStatus={isBookmarked}
+            withConfirmDialog={withConfirmationDialog}
           ></BookmarkButton>
         </ButtonGroup>
       </CardFooter>

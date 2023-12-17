@@ -18,6 +18,7 @@ import {
   useBreakpointValue,
   Textarea,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
 
 import PlantsApi from '@/apis/plants-api';
@@ -31,6 +32,8 @@ import Comment from '@/components/shared/Comment';
 import { Send } from 'react-bootstrap-icons';
 import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import PlantDetailsHeader from './PlantDetailsHeader';
+import { FeatureEntities } from '@/data/enums/feature-entities';
+import ScrollToTop from '@/components/shared/ScrollToTop';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -46,6 +49,7 @@ export function loader(plantId: string | undefined) {
 const PlantDetails = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
+  const toast = useToast();
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -77,11 +81,21 @@ const PlantDetails = () => {
         .then(() => {
           revalidator.revalidate();
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          toast({
+            title: 'Настаната грешка.',
+            description: 'Ве молиме обидете се повторно.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     };
 
     return (
       <>
+        <ScrollToTop />
         <Breadcrumbs />
         <Heading>{plantDetails.name}</Heading>
         <CustomDivider dividerColor={dividerColor} />
@@ -91,6 +105,7 @@ const PlantDetails = () => {
             headerImage={header}
             isLiked={plantDetails.isLiked}
             likeCount={plantDetails.likeCount}
+            isBookmarked={plantDetails.isBookmarked}
           />
           <Stack direction={{ base: 'column', md: 'row' }}>
             <Tabs
@@ -162,7 +177,7 @@ const PlantDetails = () => {
                 date={comment.createdAt}
                 isLiked={comment.isLiked}
                 likeCount={comment.likeCount}
-                isPlantComment={true}
+                featureEntity={FeatureEntities.PlantComment}
               />
             ))}
           </VStack>

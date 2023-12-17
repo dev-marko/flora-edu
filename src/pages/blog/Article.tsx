@@ -1,9 +1,7 @@
 import ArticlesApi from '@/apis/blog-api';
 import AuthorInfo from '@/components/AuthorInfo/AuthorInfo';
-import BookmarkButton from '@/components/shared/BookmarkButton';
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
 import CustomDivider from '@/components/shared/CustomDivider';
-import HeartButton from '@/components/shared/HeartButton';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import { Article as ArticleData } from '@/data/interfaces/article';
 import {
@@ -16,6 +14,7 @@ import {
   useColorModeValue,
   Textarea,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
 import React from 'react';
@@ -26,6 +25,8 @@ import { NewArticleComment } from '@/data/interfaces/new-article-comment';
 import { Send } from 'react-bootstrap-icons';
 import Comment from '@components/shared/Comment';
 import ArticleActionBar from './ArticleActionBar';
+import { FeatureEntities } from '@/data/enums/feature-entities';
+import ScrollToTop from '@/components/shared/ScrollToTop';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -41,6 +42,7 @@ export function loader(articleId: string | undefined) {
 const Article = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
+  const toast = useToast();
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -64,11 +66,21 @@ const Article = () => {
         .then(() => {
           revalidator.revalidate();
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          toast({
+            title: 'Настаната грешка.',
+            description: 'Ве молиме обидете се повторно.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     };
 
     return (
       <>
+        <ScrollToTop />
         <Breadcrumbs />
         <VStack align={'start'} spacing={4} w={'fill'}>
           <HStack justify={'center'}>
@@ -120,7 +132,7 @@ const Article = () => {
                 date={comment.createdAt}
                 isLiked={comment.isLiked}
                 likeCount={comment.likeCount}
-                isPlantComment={false}
+                featureEntity={FeatureEntities.ArticleComment}
               />
             ))}
           </VStack>

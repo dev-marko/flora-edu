@@ -10,12 +10,13 @@ import { loader as plantDetailsLoader } from '@pages/plants/PlantDetails';
 import { loader as articlesLoader } from '@components/ArticlesList/ArticlesList';
 import { loader as articleLoader } from '@pages/blog/Article';
 import { loader as dashboardPlantsLoader } from '@pages/dashboard/plants/PlantsTable';
+import { loader as homePageLoader } from '@pages/Home';
 import PlantEditor, {
   loader as plantLoader,
 } from '@pages/dashboard/plants/PlantEditor';
 import PlantDetails from '@/pages/plants/PlantDetails';
 import UserManual from '@/pages/UserManual';
-import Blog from '@/pages/blog/Blog';
+import Articles from '@/pages/blog/Articles';
 import Article from '@/pages/blog/Article';
 import Login from '@/pages/auth/Login';
 import Register from '@/pages/auth/Register';
@@ -26,6 +27,10 @@ import DashboardLayout from '@/components/shared/DashboardLayout';
 // import ArticleEditor from '@/pages/dashboard/articles/ArticleEditor';
 import DashboardHome from '@/pages/dashboard/DashboardHome';
 import PlantsTable from '@/pages/dashboard/plants/PlantsTable';
+import ArticleEditor from '@/pages/dashboard/articles/ArticleEditor';
+import BookmarkedPlants from '@/pages/user-specific/BookmarkedPlants';
+import { FeatureEntities } from '@/data/enums/feature-entities';
+import BookmarkedArticles from '@/pages/user-specific/BookmarkedArticles';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +42,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: homePageLoader,
       },
       {
         path: 'plants',
@@ -47,10 +53,9 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Plants />,
-            loader: plantsLoader,
+            loader: async ({ request }) => plantsLoader({ request }),
           },
           {
-            id: 'plantDetails',
             path: ':plantId',
             element: <PlantDetails />,
             loader: ({ params }) => {
@@ -58,6 +63,15 @@ const router = createBrowserRouter([
             },
             handle: {
               crumb: () => 'Детали',
+            },
+          },
+          {
+            path: 'my-bookmarked-plants',
+            element: <BookmarkedPlants />,
+            loader: ({ request }) =>
+              plantsLoader({ request }, FeatureEntities.BookmarkedPlants),
+            handle: {
+              crumb: () => 'Зачувани растенија',
             },
           },
         ],
@@ -70,7 +84,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Blog />,
+            element: <Articles pageHeading="Блог" />,
             loader: articlesLoader,
           },
           {
@@ -81,6 +95,15 @@ const router = createBrowserRouter([
             },
             handle: {
               crumb: () => 'Статија',
+            },
+          },
+          {
+            path: 'my-bookmarked-articles',
+            element: <BookmarkedArticles />,
+            loader: ({ request }) =>
+              articlesLoader({ request }, FeatureEntities.BookmarkedArticles),
+            handle: {
+              crumb: () => 'Зачувани статии',
             },
           },
         ],
@@ -132,10 +155,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // {
-      //   path: 'plant-editor',
-      //   element: <ArticleEditor />,
-      // },
+      {
+        path: 'plant-editor',
+        element: <ArticleEditor />,
+      },
     ],
   },
   {

@@ -16,7 +16,9 @@ import {
 import { useColorModeValue } from '@chakra-ui/system';
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid';
 import {
+  BookmarkCheck,
   ChevronDown,
+  Flower3,
   GearFill,
   GridFill,
   PersonCircle,
@@ -31,6 +33,7 @@ import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
 import { useLocalStorage } from 'usehooks-ts';
 import emptyUserInfo from '@constants/empty-user-info';
 import { Roles } from '@/data/constants/user-roles';
+import { myProfilePage } from '@/utils/feature-flags';
 
 type Props = {
   onOpenDisplayPreferencesCallback: () => void;
@@ -94,10 +97,22 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
             bg={useColorModeValue('white', 'gray.900')}
             borderColor={useColorModeValue('gray.200', 'gray.700')}
           >
-            <MenuItem>
+            <MenuItem hidden={!myProfilePage}>
               <HStack spacing={2}>
                 <Icon as={PersonCircle} />
                 <Text>Мој Профил</Text>
+              </HStack>
+            </MenuItem>
+            <MenuItem onClick={() => navigate('plants/my-bookmarked-plants')}>
+              <HStack spacing={2}>
+                <Icon as={Flower3} />
+                <Text>Зачувани растенија</Text>
+              </HStack>
+            </MenuItem>
+            <MenuItem onClick={() => navigate('blog/my-bookmarked-articles')}>
+              <HStack spacing={2}>
+                <Icon as={BookmarkCheck} />
+                <Text>Зачувани статии</Text>
               </HStack>
             </MenuItem>
             {hasRoleSpecialist() ? (

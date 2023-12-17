@@ -14,9 +14,11 @@ import EmailContactForm from '@/components/EmailContactForm/EmailContactForm';
 import aboutUsImage1 from '../assets/images/about-us/about-us-1.jpg';
 import aboutUsImage2 from '../assets/images/about-us/about-us-2.jpg';
 import aboutUsImage3 from '../assets/images/about-us/about-us-3.jpg';
+import ScrollToTop from '@/components/shared/ScrollToTop';
 
 const AboutUs = () => (
   <Stack my={10} spacing={12}>
+    <ScrollToTop/>
     <Box>
       <Stack spacing={8}>
         <Box>
