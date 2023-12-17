@@ -14,13 +14,13 @@ import {
 } from '@chakra-ui/react';
 
 import { useColorModeValue } from '@chakra-ui/system';
-import { SettingsIcon } from '@chakra-ui/icons';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid';
 import {
-  UserIcon,
-  ArrowLeftOnRectangleIcon,
-  PencilSquareIcon,
-} from '@heroicons/react/20/solid';
-import { ChevronDown, Flower3 } from 'react-bootstrap-icons';
+  ChevronDown,
+  GearFill,
+  GridFill,
+  PersonCircle,
+} from 'react-bootstrap-icons';
 
 import useUserStore from '@/stores/useUserStore';
 import { shallow } from 'zustand/shallow';
@@ -49,6 +49,10 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
     return user.roles.includes(Roles.specialist);
   };
 
+  const handleOnDashboardClick = () => {
+    navigate('dashboard');
+  };
+
   const logout = () => {
     setJwtToken({ token: '' });
     setUserInfo(emptyUserInfo);
@@ -59,7 +63,7 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
   return (
     <HStack hidden={!isAuth()} spacing={{ base: '0', md: '6' }}>
       <Flex alignItems={'center'}>
-        <Menu>
+        <Menu autoSelect={false}>
           <MenuButton
             py={2}
             transition="all 0.3s"
@@ -80,9 +84,6 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
                     {user.firstName} {user.lastName}
                   </Text>
                 )}
-                {/* <Text fontSize="xs" color="gray.600">
-                Корисник
-              </Text> */}
               </VStack>
               <Box display={{ base: 'none', md: 'flex' }}>
                 <Icon as={ChevronDown} />
@@ -95,29 +96,21 @@ const UserMenu = ({ onOpenDisplayPreferencesCallback }: Props) => {
           >
             <MenuItem>
               <HStack spacing={2}>
-                <Icon as={UserIcon} />
+                <Icon as={PersonCircle} />
                 <Text>Мој Профил</Text>
               </HStack>
             </MenuItem>
             {hasRoleSpecialist() ? (
-              <>
-                <MenuItem>
-                  <HStack spacing={2}>
-                    <Icon as={Flower3} />
-                    <Text>Мои растенија</Text>
-                  </HStack>
-                </MenuItem>
-                <MenuItem>
-                  <HStack spacing={2}>
-                    <Icon as={PencilSquareIcon} />
-                    <Text>Мои статии</Text>
-                  </HStack>
-                </MenuItem>
-              </>
+              <MenuItem onClick={handleOnDashboardClick}>
+                <HStack spacing={2}>
+                  <Icon as={GridFill} />
+                  <Text>Контролен панел</Text>
+                </HStack>
+              </MenuItem>
             ) : null}
             <MenuItem onClick={onOpenDisplayPreferencesCallback}>
               <HStack spacing={2}>
-                <SettingsIcon></SettingsIcon>
+                <Icon as={GearFill} />
                 <Text>Поставки</Text>
               </HStack>
             </MenuItem>

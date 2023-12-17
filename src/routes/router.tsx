@@ -9,6 +9,10 @@ import { loader as plantsLoader } from '@components/PlantsList/PlantsList';
 import { loader as plantDetailsLoader } from '@pages/plants/PlantDetails';
 import { loader as articlesLoader } from '@components/ArticlesList/ArticlesList';
 import { loader as articleLoader } from '@pages/blog/Article';
+import { loader as dashboardPlantsLoader } from '@pages/dashboard/plants/PlantsTable';
+import PlantEditor, {
+  loader as plantLoader,
+} from '@pages/dashboard/plants/PlantEditor';
 import PlantDetails from '@/pages/plants/PlantDetails';
 import UserManual from '@/pages/UserManual';
 import Blog from '@/pages/blog/Blog';
@@ -18,6 +22,10 @@ import Register from '@/pages/auth/Register';
 import { requireAuth } from '@/utils/require-auth';
 import ErrorPage404 from '@/pages/error-pages/ErrorPage404';
 import ErrorPage403 from '@/pages/error-pages/ErrorPage403';
+import DashboardLayout from '@/components/shared/DashboardLayout';
+// import ArticleEditor from '@/pages/dashboard/articles/ArticleEditor';
+import DashboardHome from '@/pages/dashboard/DashboardHome';
+import PlantsTable from '@/pages/dashboard/plants/PlantsTable';
 
 const router = createBrowserRouter([
   {
@@ -84,11 +92,6 @@ const router = createBrowserRouter([
       {
         path: 'user-manual',
         element: <UserManual />,
-        loader: async ({ request }) => {
-          //! Temporary, remove in the future
-          await requireAuth(request);
-          return null;
-        },
       },
       {
         path: '/403-forbidden',
@@ -98,6 +101,41 @@ const router = createBrowserRouter([
         path: '*',
         element: <ErrorPage404 />,
       },
+    ],
+  },
+  {
+    element: <DashboardLayout />,
+    path: 'dashboard',
+    loader: async ({ request }) => {
+      await requireAuth(request);
+      return null;
+    },
+    children: [
+      {
+        index: true,
+        element: <DashboardHome />,
+      },
+      {
+        path: 'plants',
+        children: [
+          {
+            index: true,
+            element: <PlantsTable />,
+            loader: dashboardPlantsLoader,
+          },
+          {
+            path: ':plantId',
+            element: <PlantEditor />,
+            loader: ({ params }) => {
+              return plantLoader(params.plantId);
+            },
+          },
+        ],
+      },
+      // {
+      //   path: 'plant-editor',
+      //   element: <ArticleEditor />,
+      // },
     ],
   },
   {

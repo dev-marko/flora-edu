@@ -3,6 +3,8 @@ export interface AuthorDto {
   firstName: string;
   lastName: string;
   authorBiography: string;
-  createdAt: Date;
-  lastModified: Date;
+  createdAt: string; // ! Change this after testing
+  lastModified: string;
+  // createdAt: Date;
+  // lastModified: Date;
 }

@@ -4,7 +4,7 @@ import { PlantType } from '../interfaces/plant-type';
 export const PlantTypesSelect: Array<PlantType> = [
   {
     value: PlantTypeEnum.Unknown,
-    displayName: 'Сите',
+    displayName: '',
   },
   {
     value: PlantTypeEnum.Fruit,

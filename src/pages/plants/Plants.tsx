@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import Breadcrumbs from '@/components/shared/Breadcrumbs/Breadcrumbs';
-import { PlantTypesSelect } from '@/data/constants/plant-types';
+import { PlantTypesSelectFilter } from '@/data/constants/plant-types-select-filter';
 import { PlantTypeEnum } from '@/data/enums/plant-type-enum';
 import PlantsList from '@/components/PlantsList/PlantsList';
 
@@ -36,7 +36,7 @@ const Plants = () => {
           cursor={'pointer'}
           focusBorderColor={'primary.300'}
         >
-          {PlantTypesSelect.map((type) => {
+          {PlantTypesSelectFilter.map((type) => {
             return (
               <option key={type.value} value={type.value}>
                 {type.displayName}
