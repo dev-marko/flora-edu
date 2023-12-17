@@ -16,42 +16,46 @@ const populatePageNumbers = (totalItems: number, pageSize: number) => {
 };
 
 const Pagination = <T extends object>({
-  pagedListData: data,
+  pagedListData,
 }: PaginationProps<T>) => {
   const navigate = useNavigate();
   const pageNumbers: number[] = populatePageNumbers(
-    data.totalCount,
-    data.pageSize
+    pagedListData.totalCount,
+    pagedListData.pageSize
   );
 
   const goPreviousPage = () => {
-    const prevPageNum = --data.page;
+    const prevPageNum = --pagedListData.page;
     navigate({
       pathname: '.',
       search: createSearchParams({
         page: prevPageNum.toString(),
-        size: data.pageSize.toString(),
+        size: pagedListData.pageSize.toString(),
       }).toString(),
     });
   };
 
   const goNextPage = () => {
-    const nextPageNum = ++data.page;
+    const nextPageNum = ++pagedListData.page;
     navigate({
       pathname: '.',
       search: createSearchParams({
         page: nextPageNum.toString(),
-        size: data.pageSize.toString(),
+        size: pagedListData.pageSize.toString(),
       }).toString(),
     });
   };
 
   const onDedicatedPageClick = (pageNumber: number) => {
+    if (pageNumber == pagedListData.page) {
+      return;
+    }
+
     navigate({
       pathname: '.',
       search: createSearchParams({
         page: pageNumber.toString(),
-        size: data.pageSize.toString(),
+        size: pagedListData.pageSize.toString(),
       }).toString(),
     });
   };
@@ -59,7 +63,7 @@ const Pagination = <T extends object>({
   return (
     <HStack my={2}>
       <IconButton
-        isDisabled={!data.hasPreviousPage}
+        isDisabled={!pagedListData.hasPreviousPage}
         aria-label="Previous page"
         icon={<ArrowLeft />}
         colorScheme={'gray'}
@@ -70,14 +74,14 @@ const Pagination = <T extends object>({
           <Button
             key={index}
             onClick={() => onDedicatedPageClick(pageNum)}
-            colorScheme={pageNum === data.page ? 'primary' : 'gray'}
+            colorScheme={pageNum === pagedListData.page ? 'primary' : 'gray'}
           >
             {pageNum}
           </Button>
         );
       })}
       <IconButton
-        isDisabled={!data.hasNextPage}
+        isDisabled={!pagedListData.hasNextPage}
         aria-label="Next page"
         icon={<ArrowRight />}
         colorScheme={'gray'}
