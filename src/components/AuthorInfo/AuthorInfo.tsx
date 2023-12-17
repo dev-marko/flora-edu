@@ -8,7 +8,7 @@ type AuthorInfoProps = {
 const AuthorInfo = ({ author }: AuthorInfoProps) => {
   return (
     <HStack spacing={8}>
-      <Avatar />
+      <Avatar src={author?.avatarImageUrl} />
       <VStack align={'start'}>
         <Text fontWeight={'semibold'}>
           {author.firstName} {author.lastName}

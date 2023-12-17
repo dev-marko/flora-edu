@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -18,14 +18,25 @@ import BookmarkButton from '@components/shared/BookmarkButton';
 import thumbnail from '../../assets/placeholder.png';
 import HeartButton from '../shared/HeartButton';
 import { useNavigate } from 'react-router-dom';
+import PlantsApi from '@/apis/plants-api';
 
 type PlantCardProps = {
   id: string;
   name: string;
   description: string;
+  likeCount: number;
+  isLiked: boolean;
+  isBookmarked: boolean;
 };
 
-const PlantCard = ({ id, name, description }: PlantCardProps) => {
+const PlantCard = ({
+  id,
+  name,
+  description,
+  likeCount,
+  isLiked,
+  isBookmarked,
+}: PlantCardProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -33,15 +44,29 @@ const PlantCard = ({ id, name, description }: PlantCardProps) => {
     theme.colors.primary[500],
     theme.colors.primary[200]
   );
-  const [isHearted, setIsHearted] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  // const [bookmarked, setIsBookmarked] = useState(false);
 
-  const handleHeartClick = () => {
+  const [isHearted, setIsHearted] = useState(isLiked);
+  const [likeNum, setLikeNum] = useState(likeCount);
+
+  useEffect(() => {
+    setLikeNum(likeCount);
+  }, [likeCount]);
+
+  const handleHeartClick = async (id: string) => {
     setIsHearted(!isHearted);
+
+    if (!isHearted) {
+      setLikeNum(++likeCount);
+      await PlantsApi.likePlant(id);
+    } else {
+      setLikeNum(--likeCount);
+      await PlantsApi.unlikePlant(id);
+    }
   };
 
   const handleBookmarkClick = () => {
-    setIsBookmarked(!isBookmarked);
+    // setIsBookmarked(!isBookmarked);
   };
 
   const handleDetailsClick = () => {
@@ -72,8 +97,9 @@ const PlantCard = ({ id, name, description }: PlantCardProps) => {
         <ButtonGroup spacing={6}>
           <HeartButton
             tooltipLabel="Ми се допаѓа"
-            handleHeartClick={handleHeartClick}
+            handleHeartClick={() => handleHeartClick(id)}
             isActive={isHearted}
+            count={likeNum}
           ></HeartButton>
           <Button
             color={buttonColor}

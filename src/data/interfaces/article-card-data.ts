@@ -5,7 +5,7 @@ export interface ArticleCardData {
   title: string;
   shortDescription: string;
   headerImageUrl: string;
-  createdAt: string;
+  createdAt: Date;
   author: AuthorDto;
   isLiked: boolean;
   isBookmarked: boolean;

@@ -1,4 +1,5 @@
 import { AuthorDto } from './author-dto';
+import { PlantCommentDto } from './plant-comment-dto';
 
 export interface PlantDetails {
   id: string;
@@ -9,7 +10,10 @@ export interface PlantDetails {
   planting: string;
   maintenance: string;
   author: AuthorDto;
-  // TODO: comments array
+  likeCount: number;
+  isLiked: boolean;
+  isBookmarked: boolean;
+  comments: PlantCommentDto[];
   createdAt: Date;
   lastModified: Date;
 }
