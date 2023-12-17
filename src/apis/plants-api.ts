@@ -6,6 +6,7 @@ import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import { PlantCommentDto } from '@/data/interfaces/plant-comment-dto';
 import { PagedList } from '@/data/interfaces/paged-list';
 import { PlantCardData } from '@/data/interfaces/plant-card-data';
+import { UniqueVisitorDto } from '@/data/interfaces/unique-visitor-dto';
 
 const baseUrl = 'plants';
 
@@ -81,6 +82,10 @@ class PlantsApi {
   ): Promise<AxiosResponse> => {
     const res = await axios.post(`${baseUrl}/like-comment`, plantCommentId);
     return res;
+  };
+
+  static registerUniqueVisitor = async (uniqueVisitor: UniqueVisitorDto) => {
+    await axios.post(`${baseUrl}/register-unique-visitor`, uniqueVisitor);
   };
 }
 

@@ -17,7 +17,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Await, defer, useLoaderData, useRevalidator } from 'react-router-dom';
 import header from '../../assets/header.png';
@@ -27,6 +27,7 @@ import Comment from '@components/shared/Comment';
 import ArticleActionBar from './ArticleActionBar';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import ScrollToTop from '@/components/shared/ScrollToTop';
+import { useAnalytics } from 'use-analytics';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -43,6 +44,18 @@ const Article = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
   const toast = useToast();
+  const analytics = useAnalytics();
+
+  useEffect(() => {
+    async function fetchData() {
+      const axiosResponse = await dataPromise.payload;
+      analytics.page({
+        articleId: axiosResponse.data.id,
+        endpoint: FeatureEntities.Article,
+      });
+    }
+    fetchData();
+  }, []);
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 

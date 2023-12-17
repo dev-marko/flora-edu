@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { Await, defer, useLoaderData, useRevalidator } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import PlantDetailsHeader from './PlantDetailsHeader';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import ScrollToTop from '@/components/shared/ScrollToTop';
+import { useAnalytics } from 'use-analytics';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -50,6 +51,18 @@ const PlantDetails = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
   const toast = useToast();
+  const analytics = useAnalytics();
+
+  useEffect(() => {
+    async function fetchData() {
+      const axiosResponse = await dataPromise.payload;
+      analytics.page({
+        plantId: axiosResponse.data.id,
+        endpoint: FeatureEntities.Plant,
+      });
+    }
+    fetchData();
+  }, []);
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -154,6 +167,7 @@ const PlantDetails = () => {
           <HStack w={'full'} align={'start'} mb={5}>
             <Textarea
               placeholder="Остави коментар..."
+              value={commentContent}
               focusBorderColor={'primary.300'}
               onChange={(event) => handleCommentOnChange(event.target.value)}
             />
