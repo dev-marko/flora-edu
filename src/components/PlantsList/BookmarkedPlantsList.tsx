@@ -66,7 +66,7 @@ const renderPlantCards = (axiosResponse: AxiosResponse) => {
         likeCount={plant.likeCount}
         isLiked={plant.isLiked}
         isBookmarked={plant.isBookmarked}
-        withConfirmationDialog={false}
+        withConfirmationDialog={true}
       />
     );
   });
@@ -80,7 +80,7 @@ const renderPaginationArray = (axiosResponse: AxiosResponse) => {
   return <Pagination pagedListData={pagedList} />;
 };
 
-const PlantsList = () => {
+const BookmarkedPlantsList = () => {
   const dataPromise = useLoaderData() as DeferData;
 
   return (
@@ -104,4 +104,4 @@ const PlantsList = () => {
   );
 };
 
-export default PlantsList;
+export default BookmarkedPlantsList;
