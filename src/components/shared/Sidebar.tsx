@@ -63,7 +63,7 @@ const LinkItems: Array<LinkItemProps> = [
       {
         name: 'Нова',
         icon: PencilSquare,
-        path: 'editor',
+        path: 'articles/new',
       },
       // {
       //   name: 'Нацрти',

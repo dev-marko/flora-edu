@@ -58,7 +58,7 @@ const ArticleCard = ({
   const showDate = (): string => {
     const instance: Moment = moment(createdAt);
     instance.locale('mk');
-    return instance.format('MMMM d, YYYY');
+    return instance.format('MMMM DD, YYYY');
   };
 
   return (
@@ -71,8 +71,8 @@ const ArticleCard = ({
       my={'5'}
     >
       <Image
-        src={thumbnail}
-        alt="Temporary placeholder thumbnail"
+        src={headerImageUrl ?? thumbnail}
+        alt={`Насловна слика на статијата ${title}`}
         objectFit="cover"
         maxW={{ base: '100%', sm: '300px' }}
         borderTopLeftRadius={'md'}
