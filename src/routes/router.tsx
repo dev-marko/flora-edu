@@ -11,6 +11,8 @@ import { loader as articlesLoader } from '@components/ArticlesList/ArticlesList'
 import { loader as articleLoader } from '@pages/blog/Article';
 import { loader as dashboardPlantsLoader } from '@pages/dashboard/plants/PlantsTable';
 import { loader as homePageLoader } from '@pages/Home';
+import { loader as dashboardGeneralAnalyticsLoader } from '@pages/dashboard/DashboardHome';
+import { loader as dashboardArticlesLoader } from '@pages/dashboard/articles/ArticlesTable';
 import PlantEditor, {
   loader as plantLoader,
 } from '@pages/dashboard/plants/PlantEditor';
@@ -31,6 +33,8 @@ import ArticleEditor from '@/pages/dashboard/articles/ArticleEditor';
 import BookmarkedPlants from '@/pages/user-specific/BookmarkedPlants';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import BookmarkedArticles from '@/pages/user-specific/BookmarkedArticles';
+import CreateNewPlant from '@/pages/dashboard/plants/CreateNewPlant';
+import ArticlesTable from '@/pages/dashboard/articles/ArticlesTable';
 
 const router = createBrowserRouter([
   {
@@ -137,6 +141,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DashboardHome />,
+        loader: dashboardGeneralAnalyticsLoader,
       },
       {
         path: 'plants',
@@ -153,11 +158,29 @@ const router = createBrowserRouter([
               return plantLoader(params.plantId);
             },
           },
+          {
+            path: 'new',
+            element: <CreateNewPlant />,
+          },
         ],
       },
       {
-        path: 'plant-editor',
-        element: <ArticleEditor />,
+        path: 'articles',
+        children: [
+          {
+            index: true,
+            element: <ArticlesTable />,
+            loader: dashboardArticlesLoader,
+          },
+          {
+            path: ':articleId',
+            element: <ArticleEditor />,
+          },
+          {
+            path: 'new',
+            element: <ArticleEditor />,
+          },
+        ],
       },
     ],
   },

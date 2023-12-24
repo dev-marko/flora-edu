@@ -1,4 +1,5 @@
 import DashboardApi from '@/apis/dashboard-api';
+import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import { PlantTypesSelect } from '@/data/constants/plant-types-select';
 import { PlantTypeEnum } from '@/data/enums/plant-type-enum';
@@ -52,6 +53,8 @@ const PlantEditor = () => {
         id: plant.id,
         name: name === '' ? plant.name : name,
         description: description === '' ? plant.description : description,
+        thumbnailImageUrl: plant.thumbnailImageUrl,
+        headerImageUrl: plant.headerImageUrl,
         type:
           currType === PlantTypeEnum.Unknown
             ? plant.type.toString()
@@ -60,7 +63,7 @@ const PlantEditor = () => {
           predispositions === '' ? plant.predispositions : predispositions,
         planting: planting === '' ? plant.planting : planting,
         maintenance: maintenance === '' ? plant.maintenance : maintenance,
-        createdAt: plant.createdAt,
+        isNew: false,
       };
 
       DashboardApi.updatePlant(plantToEdit)
@@ -90,6 +93,8 @@ const PlantEditor = () => {
         <VStack align={'Start'}>
           <Text fontWeight={'bold'}>Име:</Text>
           <Input
+            bgColor={'white'}
+            boxShadow={'sm'}
             placeholder={plant.name}
             focusBorderColor={'primary.300'}
             onChange={(event) => setName(event.target.value)}
@@ -98,6 +103,8 @@ const PlantEditor = () => {
         <VStack align={'Start'} w={'16em'}>
           <Text fontWeight={'bold'}>Вид:</Text>
           <Select
+            bgColor={'white'}
+            boxShadow={'sm'}
             value={currType}
             onChange={(event) => handleSelectOnChange(event.target.value)}
             cursor={'pointer'}
@@ -115,6 +122,8 @@ const PlantEditor = () => {
         <VStack align={'Start'} w={'full'}>
           <Text fontWeight={'bold'}>Опис:</Text>
           <Textarea
+            bgColor={'white'}
+            boxShadow={'sm'}
             h={'20em'}
             resize={'none'}
             focusBorderColor="primary.300"
@@ -125,6 +134,8 @@ const PlantEditor = () => {
         <VStack align={'Start'} w={'full'}>
           <Text fontWeight={'bold'}>Предуслови:</Text>
           <Textarea
+            bgColor={'white'}
+            boxShadow={'sm'}
             h={'20em'}
             resize={'none'}
             focusBorderColor="primary.300"
@@ -135,6 +146,8 @@ const PlantEditor = () => {
         <VStack align={'Start'} w={'full'}>
           <Text fontWeight={'bold'}>Садење:</Text>
           <Textarea
+            bgColor={'white'}
+            boxShadow={'sm'}
             h={'20em'}
             resize={'none'}
             focusBorderColor="primary.300"
@@ -145,6 +158,8 @@ const PlantEditor = () => {
         <VStack align={'Start'} w={'full'}>
           <Text fontWeight={'bold'}>Одржување:</Text>
           <Textarea
+            bgColor={'white'}
+            boxShadow={'sm'}
             h={'20em'}
             resize={'none'}
             focusBorderColor="primary.300"
@@ -166,7 +181,7 @@ const PlantEditor = () => {
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await
             resolve={dataPromise.plant}
-            errorElement={<p>Error loading plant data!</p>}
+            errorElement={<BigGenericErrorMessage />}
           >
             {renderPlant}
           </Await>

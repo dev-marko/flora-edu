@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { Await, defer, useLoaderData, useRevalidator } from 'react-router-dom';
 
@@ -34,6 +34,8 @@ import { NewPlantComment } from '@/data/interfaces/new-plant-comment';
 import PlantDetailsHeader from './PlantDetailsHeader';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import ScrollToTop from '@/components/shared/ScrollToTop';
+import { useAnalytics } from 'use-analytics';
+import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -50,6 +52,18 @@ const PlantDetails = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
   const toast = useToast();
+  const analytics = useAnalytics();
+
+  useEffect(() => {
+    async function fetchData() {
+      const axiosResponse = await dataPromise.payload;
+      analytics.page({
+        plantId: axiosResponse.data.id,
+        endpoint: FeatureEntities.Plant,
+      });
+    }
+    fetchData();
+  }, []);
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -92,6 +106,7 @@ const PlantDetails = () => {
           });
         });
     };
+    console.log(plantDetails);
 
     return (
       <>
@@ -99,20 +114,25 @@ const PlantDetails = () => {
         <Breadcrumbs />
         <Heading>{plantDetails.name}</Heading>
         <CustomDivider dividerColor={dividerColor} />
-        <VStack align={'start'} spacing={4} w={'fill'}>
+        <VStack align={'start'} spacing={4} w={'full'}>
           <PlantDetailsHeader
             id={plantDetails.id}
-            headerImage={header}
+            headerImage={
+              plantDetails.headerImageUrls !== null
+                ? plantDetails.headerImageUrls[0]
+                : header
+            }
             isLiked={plantDetails.isLiked}
             likeCount={plantDetails.likeCount}
             isBookmarked={plantDetails.isBookmarked}
           />
-          <Stack direction={{ base: 'column', md: 'row' }}>
+          <Stack direction={{ base: 'column', md: 'row' }} w={'full'}>
             <Tabs
               isFitted
               variant="soft-rounded"
               orientation={tabsOrientation}
               flexDir={'column'}
+              w={'full'}
             >
               <TabList>
                 <Tab>Опис</Tab>
@@ -154,6 +174,7 @@ const PlantDetails = () => {
           <HStack w={'full'} align={'start'} mb={5}>
             <Textarea
               placeholder="Остави коментар..."
+              value={commentContent}
               focusBorderColor={'primary.300'}
               onChange={(event) => handleCommentOnChange(event.target.value)}
             />
@@ -189,7 +210,7 @@ const PlantDetails = () => {
   return (
     <React.Suspense fallback={<LoadingSpinner />}>
       <Await
-        errorElement={<h1>Error fetching plant details!</h1>}
+        errorElement={<BigGenericErrorMessage />}
         resolve={dataPromise.payload}
       >
         {renderPlantDetails}

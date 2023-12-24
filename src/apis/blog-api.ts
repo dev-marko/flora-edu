@@ -5,6 +5,7 @@ import { ArticlesRequest } from '@/data/request-interfaces/articles-request';
 import { Article } from '@/data/interfaces/article';
 import { NewArticleComment } from '@/data/interfaces/new-article-comment';
 import { ArticleCardData } from '@/data/interfaces/article-card-data';
+import { UniqueVisitorDto } from '@/data/interfaces/unique-visitor-dto';
 
 const baseUrl = 'articles';
 
@@ -35,10 +36,12 @@ class ArticlesApi {
     return res;
   };
 
-  static getMostPopularArticles = async (): Promise<AxiosResponse<ArticleCardData[]>> => {
+  static getMostPopularArticles = async (): Promise<
+    AxiosResponse<ArticleCardData[]>
+  > => {
     const res = axios.get(`${baseUrl}/most-popular`);
     return res;
-  }
+  };
 
   static getArticleById = async (
     authorId: string | undefined
@@ -73,6 +76,10 @@ class ArticlesApi {
   ): Promise<AxiosResponse> => {
     const res = await axios.post(`${baseUrl}/like-comment`, articleCommentId);
     return res;
+  };
+
+  static registerUniqueVisitor = async (uniqueVisitor: UniqueVisitorDto) => {
+    await axios.post(`${baseUrl}/register-unique-visitor`, uniqueVisitor);
   };
 }
 

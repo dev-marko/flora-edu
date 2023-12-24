@@ -1,24 +1,45 @@
 import { UserInfo } from '@/data/interfaces/auth/user-info';
 import useUserStore from '@/stores/useUserStore';
-import { Center, Text, VStack } from '@chakra-ui/react';
+import { Divider, Flex, Stack, Text, VStack } from '@chakra-ui/react';
+import PlantAnalytics from './analytics/PlantAnalytics';
+import { defer } from 'react-router-dom';
+import DashboardApi from '@/apis/dashboard-api';
+import ArticleAnalytics from './analytics/ArticleAnalytics';
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const loader = () => {
+  return defer({
+    plantAnalytics: DashboardApi.getPlantAnalytics(),
+    articleAnalytics: DashboardApi.getArticleAnalytics(),
+  });
+};
 
 const DashboardHome = () => {
   const user: UserInfo = useUserStore((state) => state.user);
+
   return (
-    <Center h={'90vh'}>
-      <VStack align={'center'} justify={'center'} spacing={0}>
-        <Text textAlign={'center'} fontSize={'xl'}>
+    <Flex flexDir={'column'}>
+      <VStack w={'full'} p={1}>
+        <Text fontSize={'md'}>
           Здраво{' '}
           <strong>
             {user.firstName} {user.lastName}
           </strong>
-          !
-        </Text>
-        <Text textAlign={'center'} fontSize={'xl'}>
-          Добредојдовте на вашиот контролен панел.
+          ! Добредојдовте на вашиот контролен панел. 📚✍
         </Text>
       </VStack>
-    </Center>
+      <Divider mb={5} />
+      <Stack
+        mt={2}
+        direction={['column', 'row']}
+        w={'full'}
+        justify={'start'}
+        spacing={12}
+      >
+        <PlantAnalytics />
+        <ArticleAnalytics />
+      </Stack>
+    </Flex>
   );
 };
 

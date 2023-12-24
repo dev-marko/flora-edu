@@ -22,33 +22,32 @@ import {
 } from 'react-router-dom';
 
 import DashboardApi from '@/apis/dashboard-api';
-import { PlantsRequest } from '@/data/request-interfaces/plants-request';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import React, { useState } from 'react';
 import moment from 'moment';
-import { PlantTableData } from '@/data/interfaces/plant-table-data';
-import plantTypeTranslatorEngToMkd from '@/utils/plant-type-translator-eng-to-mkd';
 import { Pencil, Trash } from 'react-bootstrap-icons';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import { ArticlesRequest } from '@/data/request-interfaces/articles-request';
+import { ArticleTableData } from '@/data/interfaces/article-table-data';
 import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 
 type DeferData = {
-  plants: Promise<AxiosResponse>;
+  articles: Promise<AxiosResponse>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function loader() {
-  const requestDto: PlantsRequest = {
+  const requestDto: ArticlesRequest = {
     page: 1,
     size: 100,
   };
 
   return defer({
-    plants: DashboardApi.getPlants(requestDto),
+    articles: DashboardApi.getArticles(requestDto),
   });
 }
 
-const PlantsTable = () => {
+const ArticlesTable = () => {
   const dataPromise = useLoaderData() as DeferData;
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,17 +56,17 @@ const PlantsTable = () => {
   const revalidator = useRevalidator();
   const [toDeleteId, setToDeleteId] = useState('');
 
-  const handleEditOnClick = (plantId: string) => {
-    navigate(`${plantId}`);
+  const handleEditOnClick = (articleId: string) => {
+    navigate(`${articleId}`);
   };
 
   const handleDelete = () => {
-    DashboardApi.deletePlantById(toDeleteId)
+    DashboardApi.deleteArticleById(toDeleteId)
       .then(() => {
         toast({
           colorScheme: 'primary',
           title: 'Успех',
-          description: 'Успешно избришано растение!',
+          description: 'Успешно избришана статија!',
           status: 'success',
           duration: 5000,
           isClosable: true,
@@ -77,7 +76,7 @@ const PlantsTable = () => {
       .catch(() => {
         toast({
           title: 'Неуспех',
-          description: 'Неуспешна операција за бришење на растение!',
+          description: 'Неуспешна операција за бришење на статија!',
           status: 'error',
           duration: 5000,
           isClosable: true,
@@ -86,41 +85,40 @@ const PlantsTable = () => {
       });
   };
 
-  function renderPlants(axiosResponse: AxiosResponse) {
-    const plants: PlantTableData[] = axiosResponse.data.items;
+  function renderArticles(axiosResponse: AxiosResponse) {
+    const articles: ArticleTableData[] = axiosResponse.data.items;
 
-    if (plants.length === 0) {
+    if (articles.length === 0) {
       return (
         <Tr>
           <Td align={'center'} textAlign={'center'} colSpan={5}>
-            Немате растенија 😟
+            Немате статии 😟
           </Td>
         </Tr>
       );
     }
 
-    const tableRows = plants.map((plant: PlantTableData) => {
+    const tableRows = articles.map((article: ArticleTableData) => {
       return (
         <Tr>
-          <Td>{plant.name}</Td>
-          <Td>{plantTypeTranslatorEngToMkd.get(plant.type.toString())}</Td>
-          <Td>{moment(plant.createdAt).format('YYYY-MM-DD')}</Td>
-          <Td>{moment(plant.lastModified).format('YYYY-MM-DD')}</Td>
+          <Td>{article.title}</Td>
+          <Td>{moment(article.createdAt).format('YYYY-MM-DD')}</Td>
+          <Td>{moment(article.lastModified).format('YYYY-MM-DD')}</Td>
           <Td>
             <IconButton
-              aria-label={'Промени растение'}
+              aria-label={'Промени статија'}
               icon={<Pencil />}
               colorScheme={'primary'}
-              onClick={() => handleEditOnClick(plant.id)}
+              onClick={() => handleEditOnClick(article.id)}
             />
           </Td>
           <Td>
             <IconButton
-              aria-label={'Избриши растение'}
+              aria-label={'Избриши статија'}
               icon={<Trash />}
               colorScheme={'red'}
               onClick={() => {
-                setToDeleteId(plant.id);
+                setToDeleteId(article.id);
                 onOpen();
               }}
             />
@@ -139,16 +137,13 @@ const PlantsTable = () => {
           <Thead bgColor={'gray.300'}>
             <Tr>
               <Th fontFamily={'Inter'} fontSize={'1rem'}>
-                Име
+                Наслов
               </Th>
               <Th fontFamily={'Inter'} fontSize={'1rem'}>
-                Вид
+                Креирана
               </Th>
               <Th fontFamily={'Inter'} fontSize={'1rem'}>
-                Креирано
-              </Th>
-              <Th fontFamily={'Inter'} fontSize={'1rem'}>
-                Модифицирано
+                Модифицирана
               </Th>
               <Th fontFamily={'Inter'} fontSize={'1rem'}>
                 Промени
@@ -161,16 +156,15 @@ const PlantsTable = () => {
           <Tbody>
             <React.Suspense fallback={<LoadingSpinner />}>
               <Await
-                resolve={dataPromise.plants}
+                resolve={dataPromise.articles}
                 errorElement={<BigGenericErrorMessage />}
               >
-                {renderPlants}
+                {renderArticles}
               </Await>
             </React.Suspense>
           </Tbody>
           <Tfoot bgColor={'gray.300'}>
             <Tr>
-              <Th></Th>
               <Th></Th>
               <Th></Th>
               <Th></Th>
@@ -184,7 +178,7 @@ const PlantsTable = () => {
         isOpen={isOpen}
         onClose={onClose}
         cancelRef={cancelRef}
-        headerText="Избриши растение"
+        headerText="Избриши статија"
         bodyText="Дали сте сигурни?"
         mainAction={handleDelete}
         mainActionButtonText="Избриши"
@@ -193,4 +187,4 @@ const PlantsTable = () => {
   );
 };
 
-export default PlantsTable;
+export default ArticlesTable;

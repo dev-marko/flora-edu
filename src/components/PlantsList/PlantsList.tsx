@@ -10,6 +10,7 @@ import LoadingSpinner from '../shared/LoadingSpinner';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import Pagination from '../shared/Pagination';
 import { PagedList } from '@/data/interfaces/paged-list';
+import BigGenericErrorMessage from '../shared/BigGenericErrorMessage';
 
 type DeferData = {
   plants: Promise<AxiosResponse>;
@@ -63,6 +64,7 @@ const renderPlantCards = (axiosResponse: AxiosResponse) => {
         id={plant.id}
         name={plant.name}
         description={plant.description}
+        thumbnailImageUrl={plant.thumbnailImageUrl}
         likeCount={plant.likeCount}
         isLiked={plant.isLiked}
         isBookmarked={plant.isBookmarked}
@@ -89,7 +91,7 @@ const PlantsList = () => {
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await
             resolve={dataPromise.plants}
-            errorElement={<p>Error loading plants data!</p>}
+            errorElement={<BigGenericErrorMessage />}
           >
             {renderPlantCards}
           </Await>
@@ -97,7 +99,9 @@ const PlantsList = () => {
       </Flex>
       <VStack w={'100%'}>
         <React.Suspense>
-          <Await resolve={dataPromise.plants}>{renderPaginationArray}</Await>
+          <Await resolve={dataPromise.plants} errorElement={<></>}>
+            {renderPaginationArray}
+          </Await>
         </React.Suspense>
       </VStack>
     </>

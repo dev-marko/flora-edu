@@ -13,6 +13,7 @@ import PlantCard from '../PlantCard/PlantCard';
 import { AxiosResponse } from 'axios';
 import React from 'react';
 import LoadingSpinner from '../shared/LoadingSpinner';
+import BigGenericErrorMessage from '../shared/BigGenericErrorMessage';
 
 type DeferData = {
   mostPopularPlants: Promise<AxiosResponse>;
@@ -32,6 +33,7 @@ const MostPopularPlants = () => {
           id={plant.id}
           name={plant.name}
           description={plant.description}
+          thumbnailImageUrl={plant.thumbnailImageUrl}
           likeCount={plant.likeCount}
           isLiked={plant.isLiked}
           isBookmarked={plant.isBookmarked}
@@ -67,7 +69,7 @@ const MostPopularPlants = () => {
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await
             resolve={dataPromise.mostPopularPlants}
-            errorElement={<p>Error loading plants data!</p>}
+            errorElement={<BigGenericErrorMessage />}
           >
             {renderMostPopularPlants}
           </Await>

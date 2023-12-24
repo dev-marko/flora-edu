@@ -10,6 +10,7 @@ import ArticleCard from '../ArticleCard/ArticleCard';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import { PagedList } from '@/data/interfaces/paged-list';
 import Pagination from '../shared/Pagination';
+import BigGenericErrorMessage from '../shared/BigGenericErrorMessage';
 
 type DeferData = {
   articles: Promise<AxiosResponse>;
@@ -87,7 +88,7 @@ const BookmarkedArticlesList = () => {
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await
             resolve={dataPromise.articles}
-            errorElement={<p>Error loading articles data!</p>}
+            errorElement={<BigGenericErrorMessage />}
           >
             {renderArticles}
           </Await>
@@ -95,7 +96,9 @@ const BookmarkedArticlesList = () => {
       </Flex>
       <VStack w={'100%'}>
         <React.Suspense>
-          <Await resolve={dataPromise.articles}>{renderPaginationArray}</Await>
+          <Await resolve={dataPromise.articles} errorElement={<></>}>
+            {renderPaginationArray}
+          </Await>
         </React.Suspense>
       </VStack>
     </>

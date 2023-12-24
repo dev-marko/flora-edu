@@ -15,9 +15,12 @@ import {
   Textarea,
   IconButton,
   useToast,
+  ListItem,
+  OrderedList,
+  UnorderedList,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Await, defer, useLoaderData, useRevalidator } from 'react-router-dom';
 import header from '../../assets/header.png';
@@ -27,6 +30,15 @@ import Comment from '@components/shared/Comment';
 import ArticleActionBar from './ArticleActionBar';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import ScrollToTop from '@/components/shared/ScrollToTop';
+import { useAnalytics } from 'use-analytics';
+import Markdown from 'react-markdown';
+import CustomH1 from '@/components/custom-markdown/CustomH1';
+import CustomH2 from '@/components/custom-markdown/CustomH2';
+import CustomH3 from '@/components/custom-markdown/CustomH3';
+import CustomH4 from '@/components/custom-markdown/CustomH4';
+import CustomH5 from '@/components/custom-markdown/CustomH5';
+import CustomH6 from '@/components/custom-markdown/CustomH6';
+import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -43,6 +55,18 @@ const Article = () => {
   const dataPromise = useLoaderData() as DeferData;
   const revalidator = useRevalidator();
   const toast = useToast();
+  const analytics = useAnalytics();
+
+  useEffect(() => {
+    async function fetchData() {
+      const axiosResponse = await dataPromise.payload;
+      analytics.page({
+        articleId: axiosResponse.data.id,
+        endpoint: FeatureEntities.Article,
+      });
+    }
+    fetchData();
+  }, []);
 
   const dividerColor = useColorModeValue('black', 'whiteAlpha.900');
 
@@ -53,7 +77,7 @@ const Article = () => {
   };
 
   const renderArticle = (axiosResponse: AxiosResponse<ArticleData>) => {
-    const article = axiosResponse.data;
+    const article: ArticleData = axiosResponse.data;
 
     const handleCommentSend = () => {
       const newArticleComment: NewArticleComment = {
@@ -82,15 +106,31 @@ const Article = () => {
       <>
         <ScrollToTop />
         <Breadcrumbs />
-        <VStack align={'start'} spacing={4} w={'fill'}>
+        <VStack align={'start'} spacing={4} w={'full'}>
           <HStack justify={'center'}>
-            <Image w={'full'} src={header} />
-            {/* <Box h={'300px'} w={'100vh'} bgColor={'gray.500'}></Box> */}
+            <Image w={'full'} src={article.headerImageUrl ?? header} />
           </HStack>
           <Heading>{article.title}</Heading>
           <Text fontSize={'lg'}>{article.subtitle}</Text>
           <CustomDivider dividerColor={dividerColor} />
-          <Text>{article.content}</Text>
+          {/* <Text>{article.content}</Text> */}
+          <VStack align={'start'} w={'full'}>
+            <Markdown
+              components={{
+                h1: CustomH1,
+                h2: CustomH2,
+                h3: CustomH3,
+                h4: CustomH4,
+                h5: CustomH5,
+                h6: CustomH6,
+                ol: OrderedList,
+                ul: UnorderedList,
+                li: ListItem,
+              }}
+            >
+              {article.content}
+            </Markdown>
+          </VStack>
           <CustomDivider dividerColor={dividerColor} />
           <ArticleActionBar
             id={article.id}
@@ -144,7 +184,7 @@ const Article = () => {
   return (
     <React.Suspense fallback={<LoadingSpinner />}>
       <Await
-        errorElement={<h1>Error fetching plant details!</h1>}
+        errorElement={<BigGenericErrorMessage />}
         resolve={dataPromise.payload}
       >
         {renderArticle}

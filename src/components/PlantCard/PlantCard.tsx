@@ -22,6 +22,7 @@ type PlantCardProps = {
   id: string;
   name: string;
   description: string;
+  thumbnailImageUrl: string | undefined;
   likeCount: number;
   isLiked: boolean;
   isBookmarked: boolean;
@@ -32,6 +33,7 @@ const PlantCard = ({
   id,
   name,
   description,
+  thumbnailImageUrl,
   likeCount,
   isLiked,
   isBookmarked,
@@ -52,7 +54,14 @@ const PlantCard = ({
   return (
     <Card key={id} maxW={'2xs'} maxH={'md'} shadow={'md'} mx={5} my={5}>
       <CardBody p={0}>
-        <Image src={thumbnail} alt="Bouquet of roses" borderTopRadius={'md'} />
+        <Image
+          width={'256px'}
+          height={'172px'}
+          objectFit={'contain'}
+          src={thumbnailImageUrl ?? thumbnail}
+          alt="Bouquet of roses"
+          borderTopRadius={'md'}
+        />
         <Stack p={5}>
           <Text fontSize={'lg'} fontWeight={500}>
             {name}
