@@ -1,9 +1,7 @@
-import PlantsApi from '@/apis/plants-api';
 import BookmarkButton from '@/components/shared/BookmarkButton';
 import HeartButton from '@/components/shared/HeartButton';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import { HStack, Image } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
 
 type PlantDetailsHeaderProps = {
   id: string;
@@ -39,6 +37,7 @@ const PlantDetailsHeader = ({
           entityBeingBookmarked={FeatureEntities.Plant}
           tooltipLabel="Зачувај растение"
           initBookmarkStatus={isBookmarked}
+          withConfirmDialog={false}
         ></BookmarkButton>
       </HStack>
     </>

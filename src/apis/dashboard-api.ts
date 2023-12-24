@@ -50,6 +50,24 @@ class DashboardApi {
     const res = axios.delete<string>(`${baseUrl}/plants`, { data: plantId });
     return res;
   };
+
+  static getPlantThumbnailImagesSasToken = async (
+    blobName: string
+  ): Promise<AxiosResponse> => {
+    const res = axios.get<string>(
+      `${baseUrl}/plant-thumbnail-sas-token?blobName=${blobName}`
+    );
+    return res;
+  };
+
+  static getPlantHeaderImagesSasToken = async (
+    blobName: string
+  ): Promise<AxiosResponse> => {
+    const res = axios.get<string>(
+      `${baseUrl}/plant-header-sas-token?blobName=${blobName}`
+    );
+    return res;
+  };
 }
 
 export default DashboardApi;

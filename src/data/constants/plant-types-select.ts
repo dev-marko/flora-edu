@@ -2,10 +2,10 @@ import { PlantTypeEnum } from '../enums/plant-type-enum';
 import { PlantType } from '../interfaces/plant-type';
 
 export const PlantTypesSelect: Array<PlantType> = [
-  {
-    value: PlantTypeEnum.Unknown,
-    displayName: '',
-  },
+  // {
+  //   value: PlantTypeEnum.Unknown,
+  //   displayName: '',
+  // },
   {
     value: PlantTypeEnum.Fruit,
     displayName: 'Овошје',

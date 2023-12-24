@@ -6,6 +6,7 @@ import { defer } from 'react-router-dom';
 import DashboardApi from '@/apis/dashboard-api';
 import ArticleAnalytics from './analytics/ArticleAnalytics';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const loader = () => {
   return defer({
     plantAnalytics: DashboardApi.getPlantAnalytics(),

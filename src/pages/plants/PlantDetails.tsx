@@ -105,6 +105,7 @@ const PlantDetails = () => {
           });
         });
     };
+    console.log(plantDetails);
 
     return (
       <>
@@ -112,20 +113,25 @@ const PlantDetails = () => {
         <Breadcrumbs />
         <Heading>{plantDetails.name}</Heading>
         <CustomDivider dividerColor={dividerColor} />
-        <VStack align={'start'} spacing={4} w={'fill'}>
+        <VStack align={'start'} spacing={4} w={'full'}>
           <PlantDetailsHeader
             id={plantDetails.id}
-            headerImage={header}
+            headerImage={
+              plantDetails.headerImageUrls !== null
+                ? plantDetails.headerImageUrls[0]
+                : header
+            }
             isLiked={plantDetails.isLiked}
             likeCount={plantDetails.likeCount}
             isBookmarked={plantDetails.isBookmarked}
           />
-          <Stack direction={{ base: 'column', md: 'row' }}>
+          <Stack direction={{ base: 'column', md: 'row' }} w={'full'}>
             <Tabs
               isFitted
               variant="soft-rounded"
               orientation={tabsOrientation}
               flexDir={'column'}
+              w={'full'}
             >
               <TabList>
                 <Tab>Опис</Tab>

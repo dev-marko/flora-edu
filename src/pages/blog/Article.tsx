@@ -95,7 +95,7 @@ const Article = () => {
       <>
         <ScrollToTop />
         <Breadcrumbs />
-        <VStack align={'start'} spacing={4} w={'fill'}>
+        <VStack align={'start'} spacing={4} w={'full'}>
           <HStack justify={'center'}>
             <Image w={'full'} src={header} />
             {/* <Box h={'300px'} w={'100vh'} bgColor={'gray.500'}></Box> */}

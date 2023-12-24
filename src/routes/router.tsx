@@ -32,6 +32,7 @@ import ArticleEditor from '@/pages/dashboard/articles/ArticleEditor';
 import BookmarkedPlants from '@/pages/user-specific/BookmarkedPlants';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import BookmarkedArticles from '@/pages/user-specific/BookmarkedArticles';
+import CreateNewPlant from '@/pages/dashboard/plants/CreateNewPlant';
 
 const router = createBrowserRouter([
   {
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
             loader: ({ params }) => {
               return plantLoader(params.plantId);
             },
+          },
+          {
+            path: 'new',
+            element: <CreateNewPlant />,
           },
         ],
       },

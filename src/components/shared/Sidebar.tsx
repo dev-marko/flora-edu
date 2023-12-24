@@ -65,17 +65,17 @@ const LinkItems: Array<LinkItemProps> = [
         icon: PencilSquare,
         path: 'editor',
       },
-      {
-        name: 'Нацрти',
-        icon: FileText,
-        path: 'drafts',
-      },
+      // {
+      //   name: 'Нацрти',
+      //   icon: FileText,
+      //   path: 'drafts',
+      // },
     ],
   },
   {
     name: 'Мои растенија',
     icon: ChevronDown,
-    path: 'plant-editor',
+    path: '',
     isMenu: true,
     menuContent: [
       {
@@ -86,13 +86,13 @@ const LinkItems: Array<LinkItemProps> = [
       {
         name: 'Ново',
         icon: PencilSquare,
-        path: 'editor',
+        path: 'plants/new',
       },
-      {
-        name: 'Нацрти',
-        icon: FileText,
-        path: 'drafts',
-      },
+      // {
+      //   name: 'Нацрти',
+      //   icon: FileText,
+      //   path: 'drafts',
+      // },
     ],
   },
   {

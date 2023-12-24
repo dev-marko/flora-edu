@@ -63,6 +63,7 @@ const renderPlantCards = (axiosResponse: AxiosResponse) => {
         id={plant.id}
         name={plant.name}
         description={plant.description}
+        thumbnailImageUrl={plant.thumbnailImageUrl}
         likeCount={plant.likeCount}
         isLiked={plant.isLiked}
         isBookmarked={plant.isBookmarked}

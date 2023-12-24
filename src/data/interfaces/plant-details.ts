@@ -5,6 +5,8 @@ export interface PlantDetails {
   id: string;
   name: string;
   type: string;
+  thumbnailImageUrl: string;
+  headerImageUrls: string[];
   description: string;
   predispositions: string;
   planting: string;
