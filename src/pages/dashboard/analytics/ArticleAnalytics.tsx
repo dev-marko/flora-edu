@@ -18,6 +18,8 @@ import {
   EyeFill,
   HeartFill,
 } from 'react-bootstrap-icons';
+import LikesBarChart from '@/components/analytics-charts/LikesBarChart';
+import BookmarksBarChart from '@/components/analytics-charts/BookmarksBarChart';
 
 type DeferData = {
   articleAnalytics: Promise<AxiosResponse>;
@@ -39,9 +41,9 @@ const ArticleAnalytics = () => {
     }
 
     return (
-      <>
-        <VStack align={'start'}>
-          <Text fontSize="lg" fontFamily={'Inter'}>
+      <VStack align={'start'} w={'full'} spacing={8}>
+        <VStack ps={[0, 5]} align={'start'}>
+          <Text fontSize="lg" fontFamily={'Inter'} fontWeight={'500'}>
             Најпопуларна статија, според:
           </Text>
           <List ps={4}>
@@ -75,8 +77,8 @@ const ArticleAnalytics = () => {
             </ListItem>
           </List>
         </VStack>
-        <VStack align={'start'}>
-          <Text fontSize="lg" fontFamily={'Inter'}>
+        <VStack ps={[0, 5]} align={'start'}>
+          <Text fontSize="lg" fontFamily={'Inter'} fontWeight={'500'}>
             Статија со најголема интеракција:
           </Text>
           <List ps={5}>
@@ -110,12 +112,20 @@ const ArticleAnalytics = () => {
             </ListItem>
           </List>
         </VStack>
-      </>
+        <LikesBarChart
+          headerText={'Вашите статии по број на лајкови:'}
+          data={articleAnalytics.likesChartData}
+        />
+        <BookmarksBarChart
+          headerText={'Вашите статии по број на зачуваности:'}
+          data={articleAnalytics.bookmarksChartData}
+        />
+      </VStack>
     );
   };
 
   return (
-    <VStack align={'start'} spacing={4} mx={2}>
+    <VStack align={'start'} spacing={4} minW={'36em'} ms={[0, '8em']}>
       <Heading as="h3" size="lg" fontFamily={'Inter'}>
         Статистика за вашите статии 📝:
       </Heading>

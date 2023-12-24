@@ -1,6 +1,6 @@
 import { UserInfo } from '@/data/interfaces/auth/user-info';
 import useUserStore from '@/stores/useUserStore';
-import { Divider, Flex, Text, VStack } from '@chakra-ui/react';
+import { Divider, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 import PlantAnalytics from './analytics/PlantAnalytics';
 import { defer } from 'react-router-dom';
 import DashboardApi from '@/apis/dashboard-api';
@@ -29,10 +29,16 @@ const DashboardHome = () => {
         </Text>
       </VStack>
       <Divider mb={5} />
-      <VStack align={'start'} spacing={12}>
+      <Stack
+        mt={2}
+        direction={['column', 'row']}
+        w={'full'}
+        justify={'start'}
+        spacing={12}
+      >
         <PlantAnalytics />
         <ArticleAnalytics />
-      </VStack>
+      </Stack>
     </Flex>
   );
 };

@@ -18,6 +18,8 @@ import {
   EyeFill,
   HeartFill,
 } from 'react-bootstrap-icons';
+import LikesBarChart from '@/components/analytics-charts/LikesBarChart';
+import BookmarksBarChart from '@/components/analytics-charts/BookmarksBarChart';
 
 type DeferData = {
   plantAnalytics: Promise<AxiosResponse>;
@@ -39,9 +41,9 @@ const PlantAnalytics = () => {
     }
 
     return (
-      <>
-        <VStack align={'start'}>
-          <Text fontSize="lg" fontFamily={'Inter'}>
+      <VStack align={'start'} w={'full'} spacing={8}>
+        <VStack ps={[0, 5]} align={'start'}>
+          <Text fontSize="lg" fontFamily={'Inter'} fontWeight={'500'}>
             Најпопуларно растение, според:
           </Text>
           <List ps={4}>
@@ -75,8 +77,8 @@ const PlantAnalytics = () => {
             </ListItem>
           </List>
         </VStack>
-        <VStack align={'start'}>
-          <Text fontSize="lg" fontFamily={'Inter'}>
+        <VStack ps={[0, 5]} align={'start'}>
+          <Text fontSize="lg" fontFamily={'Inter'} fontWeight={'500'}>
             Растенија со најголема интеракција:
           </Text>
           <List ps={5}>
@@ -110,12 +112,20 @@ const PlantAnalytics = () => {
             </ListItem>
           </List>
         </VStack>
-      </>
+        <LikesBarChart
+          headerText={'Вашите растенија по број на лајкови:'}
+          data={plantAnalytics.likesChartData}
+        />
+        <BookmarksBarChart
+          headerText={'Вашите растенија по број на зачуваности:'}
+          data={plantAnalytics.bookmarksChartData}
+        />
+      </VStack>
     );
   };
 
   return (
-    <VStack align={'start'} spacing={4} mx={2}>
+    <VStack align={'start'} spacing={4} mx={2} minW={'36em'}>
       <Heading as="h3" size="lg" fontFamily={'Inter'}>
         Статистика за вашите растенија 🌱:
       </Heading>
