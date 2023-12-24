@@ -1,4 +1,5 @@
 import DashboardApi from '@/apis/dashboard-api';
+import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import { PlantTypesSelect } from '@/data/constants/plant-types-select';
 import { PlantTypeEnum } from '@/data/enums/plant-type-enum';
@@ -180,7 +181,7 @@ const PlantEditor = () => {
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await
             resolve={dataPromise.plant}
-            errorElement={<p>Error loading plant data!</p>}
+            errorElement={<BigGenericErrorMessage />}
           >
             {renderPlant}
           </Await>

@@ -13,6 +13,7 @@ import React from 'react';
 import { ArticleCardData } from '@/data/interfaces/article-card-data';
 import { AxiosResponse } from 'axios';
 import LoadingSpinner from '../shared/LoadingSpinner';
+import BigGenericErrorMessage from '../shared/BigGenericErrorMessage';
 
 type DeferData = {
   mostPopularArticles: Promise<AxiosResponse>;
@@ -71,7 +72,7 @@ const MostPopularArticles = () => {
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await
             resolve={dataPromise.mostPopularArticles}
-            errorElement={<p>Error loading articles data!</p>}
+            errorElement={<BigGenericErrorMessage />}
           >
             {renderMostPopularArticles}
           </Await>

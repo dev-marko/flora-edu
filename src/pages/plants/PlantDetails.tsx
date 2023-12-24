@@ -35,6 +35,7 @@ import PlantDetailsHeader from './PlantDetailsHeader';
 import { FeatureEntities } from '@/data/enums/feature-entities';
 import ScrollToTop from '@/components/shared/ScrollToTop';
 import { useAnalytics } from 'use-analytics';
+import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 
 type DeferData = {
   payload: Promise<AxiosResponse>;
@@ -209,7 +210,7 @@ const PlantDetails = () => {
   return (
     <React.Suspense fallback={<LoadingSpinner />}>
       <Await
-        errorElement={<h1>Error fetching plant details!</h1>}
+        errorElement={<BigGenericErrorMessage />}
         resolve={dataPromise.payload}
       >
         {renderPlantDetails}

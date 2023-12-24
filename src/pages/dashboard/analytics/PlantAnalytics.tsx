@@ -20,6 +20,7 @@ import {
 } from 'react-bootstrap-icons';
 import LikesBarChart from '@/components/analytics-charts/LikesBarChart';
 import BookmarksBarChart from '@/components/analytics-charts/BookmarksBarChart';
+import SmallGenericErrorMessage from '@/components/shared/SmallGenericErrorMessage';
 
 type DeferData = {
   plantAnalytics: Promise<AxiosResponse>;
@@ -132,7 +133,7 @@ const PlantAnalytics = () => {
       <React.Suspense fallback={<LoadingSpinner />}>
         <Await
           resolve={dataPromise.plantAnalytics}
-          errorElement={<p>Error loading plant data!</p>}
+          errorElement={<SmallGenericErrorMessage />}
         >
           {renderPlantAnalytics}
         </Await>

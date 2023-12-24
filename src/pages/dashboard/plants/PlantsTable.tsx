@@ -30,6 +30,7 @@ import { PlantTableData } from '@/data/interfaces/plant-table-data';
 import plantTypeTranslatorEngToMkd from '@/utils/plant-type-translator-eng-to-mkd';
 import { Pencil, Trash } from 'react-bootstrap-icons';
 import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
+import BigGenericErrorMessage from '@/components/shared/BigGenericErrorMessage';
 
 type DeferData = {
   plants: Promise<AxiosResponse>;
@@ -39,7 +40,7 @@ type DeferData = {
 export function loader() {
   const requestDto: PlantsRequest = {
     page: 1,
-    size: 5,
+    size: 100,
   };
 
   return defer({
@@ -86,9 +87,19 @@ const PlantsTable = () => {
   };
 
   function renderPlants(axiosResponse: AxiosResponse) {
-    const plants = axiosResponse.data.items;
+    const plants: PlantTableData[] = axiosResponse.data.items;
 
-    const plantCards = plants.map((plant: PlantTableData) => {
+    if (plants.length === 0) {
+      return (
+        <Tr>
+          <Td align={'center'} textAlign={'center'} colSpan={5}>
+            Немате растенија 😟
+          </Td>
+        </Tr>
+      );
+    }
+
+    const tableRows = plants.map((plant: PlantTableData) => {
       return (
         <Tr>
           <Td>{plant.name}</Td>
@@ -118,7 +129,7 @@ const PlantsTable = () => {
       );
     });
 
-    return plantCards;
+    return tableRows;
   }
 
   return (
@@ -151,7 +162,7 @@ const PlantsTable = () => {
             <React.Suspense fallback={<LoadingSpinner />}>
               <Await
                 resolve={dataPromise.plants}
-                errorElement={<p>Error loading plants data!</p>}
+                errorElement={<BigGenericErrorMessage />}
               >
                 {renderPlants}
               </Await>

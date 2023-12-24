@@ -288,7 +288,7 @@ const CreateNewPlant = () => {
                     }
                   />
                 </VStack>
-                <VStack align={'Start'}>
+                <VStack align={'start'}>
                   <Field name="name">
                     {({ field, form }: any) => (
                       <FormControl
@@ -309,7 +309,7 @@ const CreateNewPlant = () => {
                     )}
                   </Field>
                 </VStack>
-                <VStack align={'Start'} w={'16em'}>
+                <VStack align={'start'} w={'16em'}>
                   <Text fontWeight={'bold'}>Вид:</Text>
                   <Select
                     bgColor={'white'}
@@ -331,7 +331,7 @@ const CreateNewPlant = () => {
                     })}
                   </Select>
                 </VStack>
-                <VStack align={'Start'} w={'full'}>
+                <VStack align={'start'} w={'full'}>
                   <Field name="description">
                     {({ field, form }: any) => (
                       <FormControl
@@ -356,7 +356,7 @@ const CreateNewPlant = () => {
                     )}
                   </Field>
                 </VStack>
-                <VStack align={'Start'} w={'full'}>
+                <VStack align={'start'} w={'full'}>
                   <Field name="predispositions">
                     {({ field, form }: any) => (
                       <FormControl
@@ -382,7 +382,7 @@ const CreateNewPlant = () => {
                     )}
                   </Field>
                 </VStack>
-                <VStack align={'Start'} w={'full'}>
+                <VStack align={'start'} w={'full'}>
                   <Field name="planting">
                     {({ field, form }: any) => (
                       <FormControl
@@ -407,7 +407,7 @@ const CreateNewPlant = () => {
                     )}
                   </Field>
                 </VStack>
-                <VStack align={'Start'} w={'full'}>
+                <VStack align={'start'} w={'full'}>
                   <Field name="maintenance">
                     {({ field, form }: any) => (
                       <FormControl
