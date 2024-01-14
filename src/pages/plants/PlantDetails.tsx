@@ -106,7 +106,6 @@ const PlantDetails = () => {
           });
         });
     };
-    console.log(plantDetails);
 
     return (
       <>

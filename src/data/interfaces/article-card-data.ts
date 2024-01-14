@@ -9,4 +9,5 @@ export interface ArticleCardData {
   author: AuthorDto;
   isLiked: boolean;
   isBookmarked: boolean;
+  likeCount: number;
 }

@@ -65,6 +65,8 @@ const renderArticles = (axiosResponse: AxiosResponse) => {
         author={article.author}
         createdAt={article.createdAt}
         isBookmarked={article.isBookmarked}
+        isLiked={article.isLiked}
+        likeCount={article.likeCount}
         withConfirmationDialog={true}
       />
     );

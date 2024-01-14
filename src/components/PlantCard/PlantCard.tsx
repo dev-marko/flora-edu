@@ -57,7 +57,7 @@ const PlantCard = ({
         <Image
           width={'256px'}
           height={'172px'}
-          objectFit={'contain'}
+          objectFit={'cover'}
           src={thumbnailImageUrl ?? thumbnail}
           alt="Bouquet of roses"
           borderTopRadius={'md'}
@@ -76,7 +76,7 @@ const PlantCard = ({
           <HeartButton
             entityId={id}
             entityBeingLiked={FeatureEntities.Plant}
-            tooltipLabel="Зачувај растение"
+            tooltipLabel="Лајк растение"
             initLikeStatus={isLiked}
             count={likeCount}
           ></HeartButton>

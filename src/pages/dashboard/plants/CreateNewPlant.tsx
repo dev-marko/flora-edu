@@ -127,7 +127,6 @@ const CreateNewPlant = () => {
         return;
       }
       const res = await blockBlobClient.uploadData(fileArrayBuffer);
-      console.log('thumbnail', res);
       const imageUrl = `https://${blobStorageBaseUrl}/${plantThumbnailsContainer}/${thumbnailImageFile?.name}`;
       return imageUrl;
     } catch (error) {
@@ -161,7 +160,6 @@ const CreateNewPlant = () => {
         return;
       }
       const res = await blockBlobClient.uploadData(fileArrayBuffer);
-      console.log('header', res);
       const imageUrl = `https://${blobStorageBaseUrl}/${plantHeaderImagesContainer}/${headerImageFile?.name}`;
       return imageUrl;
     } catch (error) {

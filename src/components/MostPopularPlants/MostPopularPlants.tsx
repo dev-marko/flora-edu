@@ -54,6 +54,7 @@ const MostPopularPlants = () => {
         py={5}
         justify={'space-between'}
         spacing={{ base: 5 }}
+        align={'center'}
       >
         <Heading textAlign={{ base: 'center' }}>Најпопуларни растенија</Heading>
         <Link to="plants">
@@ -65,6 +66,7 @@ const MostPopularPlants = () => {
         direction={['column', 'row']}
         flexWrap={{ base: 'wrap', sm: 'wrap', md: 'wrap', lg: 'nowrap' }}
         justify={'center'}
+        align={'center'}
       >
         <React.Suspense fallback={<LoadingSpinner />}>
           <Await

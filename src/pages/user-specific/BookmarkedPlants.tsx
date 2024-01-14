@@ -19,7 +19,10 @@ const BookmarkedPlants = () => {
           <SearchBar placeholderText="Пребарај зачувано растение..." />
         </Stack>
         <CustomDivider dividerColor={dividerColor} />
-        <BookmarkedPlantsList />
+
+        <VStack ps={[0, 8]}>
+          <BookmarkedPlantsList />
+        </VStack>
       </VStack>
     </>
   );

@@ -38,7 +38,10 @@ const MostPopularArticles = () => {
           author={article.author}
           createdAt={article.createdAt}
           isBookmarked={article.isBookmarked}
+          isLiked={article.isLiked}
+          likeCount={article.likeCount}
           withConfirmationDialog={false}
+          disableLikeButton={false}
         />
       );
     });
@@ -55,6 +58,7 @@ const MostPopularArticles = () => {
         py={5}
         justify={'space-between'}
         spacing={{ base: 5 }}
+        align={'center'}
       >
         <Heading textAlign={{ base: 'center' }}>
           Популарни статии од нашиот блог
