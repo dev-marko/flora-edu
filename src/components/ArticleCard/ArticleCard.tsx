@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/mk';
 import { FeatureEntities } from '@/data/enums/feature-entities';
+import HeartButton from '../shared/HeartButton';
 
 type ArticleCardProps = {
   id: string;
@@ -31,7 +32,10 @@ type ArticleCardProps = {
   createdAt: Date;
   author: AuthorDto;
   isBookmarked: boolean;
+  isLiked: boolean;
+  likeCount: number;
   withConfirmationDialog: boolean;
+  disableLikeButton?: boolean;
 };
 const ArticleCard = ({
   id,
@@ -41,7 +45,10 @@ const ArticleCard = ({
   createdAt,
   author,
   isBookmarked,
+  isLiked,
+  likeCount,
   withConfirmationDialog,
+  disableLikeButton,
 }: ArticleCardProps) => {
   const theme = useTheme();
   const buttonColor = useColorModeValue(
@@ -66,8 +73,7 @@ const ArticleCard = ({
       key={id}
       direction={{ base: 'column', sm: 'row' }}
       shadow={'md'}
-      maxH={{ base: 'lg', sm: 'md' }}
-      mx={'10'}
+      mx={['0', '10']}
       my={'5'}
     >
       <Image
@@ -98,6 +104,14 @@ const ArticleCard = ({
         </CardBody>
         <CardFooter justify={'end'}>
           <ButtonGroup spacing={6}>
+            <HeartButton
+              entityId={id}
+              entityBeingLiked={FeatureEntities.Article}
+              tooltipLabel="Зачувај растение"
+              initLikeStatus={isLiked}
+              count={likeCount}
+              disable={disableLikeButton}
+            ></HeartButton>
             <BookmarkButton
               entityId={id}
               entityBeingBookmarked={FeatureEntities.Article}

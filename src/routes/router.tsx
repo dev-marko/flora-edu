@@ -72,8 +72,13 @@ const router = createBrowserRouter([
           {
             path: 'my-bookmarked-plants',
             element: <BookmarkedPlants />,
-            loader: ({ request }) =>
-              plantsLoader({ request }, FeatureEntities.BookmarkedPlants),
+            loader: async ({ request }) => {
+              await requireAuth(request);
+              return plantsLoader(
+                { request },
+                FeatureEntities.BookmarkedPlants
+              );
+            },
             handle: {
               crumb: () => 'Зачувани растенија',
             },
@@ -104,8 +109,13 @@ const router = createBrowserRouter([
           {
             path: 'my-bookmarked-articles',
             element: <BookmarkedArticles />,
-            loader: ({ request }) =>
-              articlesLoader({ request }, FeatureEntities.BookmarkedArticles),
+            loader: async ({ request }) => {
+              await requireAuth(request);
+              return articlesLoader(
+                { request },
+                FeatureEntities.BookmarkedArticles
+              );
+            },
             handle: {
               crumb: () => 'Зачувани статии',
             },
@@ -141,7 +151,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DashboardHome />,
-        loader: dashboardGeneralAnalyticsLoader,
+        loader: async ({ request }) => {
+          await requireAuth(request);
+          return dashboardGeneralAnalyticsLoader();
+        },
       },
       {
         path: 'plants',

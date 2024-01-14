@@ -18,6 +18,7 @@ import {
   ListItem,
   OrderedList,
   UnorderedList,
+  Box,
 } from '@chakra-ui/react';
 import { AxiosResponse } from 'axios';
 import React, { useEffect } from 'react';
@@ -107,8 +108,16 @@ const Article = () => {
         <ScrollToTop />
         <Breadcrumbs />
         <VStack align={'start'} spacing={4} w={'full'}>
-          <HStack justify={'center'}>
-            <Image w={'full'} src={article.headerImageUrl ?? header} />
+          <HStack w={'full'} align={'center'} justify={'center'}>
+            <Box w={'full'}>
+              <Image
+                w={'full'}
+                maxH={'50vh'}
+                src={article.headerImageUrl ?? header}
+                objectFit={'cover'}
+                rounded={'lg'}
+              />
+            </Box>
           </HStack>
           <Heading>{article.title}</Heading>
           <Text fontSize={'lg'}>{article.subtitle}</Text>

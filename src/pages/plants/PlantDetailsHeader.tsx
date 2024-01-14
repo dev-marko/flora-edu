@@ -1,7 +1,8 @@
 import BookmarkButton from '@/components/shared/BookmarkButton';
 import HeartButton from '@/components/shared/HeartButton';
 import { FeatureEntities } from '@/data/enums/feature-entities';
-import { HStack, Image } from '@chakra-ui/react';
+import { Box, HStack, Image } from '@chakra-ui/react';
+import header from '../../assets/header.png';
 
 type PlantDetailsHeaderProps = {
   id: string;
@@ -20,9 +21,16 @@ const PlantDetailsHeader = ({
 }: PlantDetailsHeaderProps) => {
   return (
     <>
-      <HStack justify={'center'}>
-        <Image w={'full'} src={headerImage} />
-        {/* <Box h={'300px'} w={'100vh'} bgColor={'gray.500'}></Box> */}
+      <HStack w={'full'} align={'center'} justify={'center'}>
+        <Box w={'full'}>
+          <Image
+            w={'full'}
+            maxH={'50vh'}
+            src={headerImage ?? header}
+            objectFit={'cover'}
+            rounded={'lg'}
+          />
+        </Box>
       </HStack>
       <HStack spacing={4}>
         <HeartButton

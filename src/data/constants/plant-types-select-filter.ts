@@ -3,10 +3,6 @@ import { PlantType } from '../interfaces/plant-type';
 
 export const PlantTypesSelectFilter: Array<PlantType> = [
   {
-    value: PlantTypeEnum.Unknown,
-    displayName: 'Сите',
-  },
-  {
     value: PlantTypeEnum.Fruit,
     displayName: 'Овошје',
   },

@@ -18,7 +18,7 @@ import ScrollToTop from '@/components/shared/ScrollToTop';
 
 const AboutUs = () => (
   <Stack my={10} spacing={12}>
-    <ScrollToTop/>
+    <ScrollToTop />
     <Box>
       <Stack spacing={8}>
         <Box>
@@ -26,28 +26,23 @@ const AboutUs = () => (
         </Box>
         <Box>
           <Text textAlign={'justify'} textIndent={'3em'}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget
-            lorem dolor sed viverra ipsum nunc. Ultrices gravida dictum fusce ut
-            placerat orci. Sit amet mauris commodo quis imperdiet massa
-            tincidunt nunc. Dui faucibus in ornare quam viverra orci sagittis eu
-            volutpat. Sagittis eu volutpat odio facilisis mauris sit amet massa
-            vitae. Convallis tellus id interdum velit laoreet id donec ultrices.
-            In est ante in nibh mauris. Volutpat odio facilisis mauris sit amet
-            massa vitae. Cursus in hac habitasse platea dictumst quisque
-            sagittis. Sagittis nisl rhoncus mattis rhoncus. Consectetur
-            adipiscing elit duis tristique sollicitudin. Aliquam sem fringilla
-            ut morbi tincidunt augue interdum velit. Id donec ultrices tincidunt
-            arcu non. Malesuada fames ac turpis egestas integer eget aliquet
-            nibh. Amet massa vitae tortor condimentum lacinia. Interdum velit
-            euismod in pellentesque massa placerat duis ultricies lacus. Urna
-            nunc id cursus metus aliquam eleifend mi in nulla. Mi bibendum neque
-            egestas congue quisque. Nunc vel risus commodo viverra maecenas
-            accumsan. Ridiculus mus mauris vitae ultricies leo integer
-            malesuada. Quis viverra nibh cras pulvinar mattis nunc sed. Luctus
-            accumsan tortor posuere ac ut consequat. Quis viverra nibh cras
-            pulvinar. Tempus quam pellentesque nec nam aliquam sem et tortor.
-            Iaculis nunc sed augue lacus viverra. Ut porttitor leo a diam.
+            ФлораЕду претставува првата македонска веб-платформа посветена за
+            учење како да посадите и одржувате секакви видови растенија во
+            вашиот дом. Ова е место каде луѓе од сите возрасти, со или без
+            претходно искуство во градинарството, можат да учат и започнат своја
+            домашна градина. Страната е создадена од страна на Марко
+            Спасеновски, студент на Факултетот за компјутерски науки и
+            компјутерско инженерство во Скопје. Цел на оваа иницијатива е да се
+            подигне свеста и интересот кај луѓето за градинарството, креирајќи
+            ги нови генерации на љубители на природата и зелени простории.
+          </Text>
+          <br />
+          <Text textAlign={'justify'} textIndent={'3em'}>
+            ФлораЕду не само што ви нуди практични упатства за грижа за
+            растенијата, туку исто така ви обезбедува забавни и образовни
+            ресурси за да ја разградите таинственоста на билките. Секој чекор е
+            детално објаснет со лесни и разбирливи упатства, што овозможува и на
+            почетниците да се почувствуваат како искусни градинари.
           </Text>
         </Box>
         <Stack
@@ -88,16 +83,9 @@ const AboutUs = () => (
         </Stack>
         <Box>
           <Text textAlign={'justify'} textIndent={'3em'}>
-            Facilisis gravida neque convallis a cras. Euismod quis viverra nibh
-            cras pulvinar mattis nunc sed blandit. Proin nibh nisl condimentum
-            id venenatis a condimentum. Nulla facilisi morbi tempus iaculis urna
-            id volutpat. Ipsum faucibus vitae aliquet nec ullamcorper sit.
-            Porttitor leo a diam sollicitudin tempor. Bibendum at varius vel
-            pharetra vel turpis nunc eget lorem. Egestas fringilla phasellus
-            faucibus scelerisque eleifend donec pretium vulputate sapien.
-            Viverra suspendisse potenti nullam ac tortor vitae purus faucibus.
-            Ac feugiat sed lectus vestibulum mattis. Fermentum leo vel orci
-            porta non.
+            Сите се добредојдени на ФлораЕду - каде што секој член од нашата
+            заедница може да процвета и расте, буквално и метафорично, во
+            својата љубов кон растенијата и природата! 🌿🌷
           </Text>
         </Box>
       </Stack>
@@ -109,16 +97,11 @@ const AboutUs = () => (
         </Box>
         <Box>
           <Text textAlign={'justify'} textIndent={'3em'}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget
-            lorem dolor sed viverra ipsum nunc. Ultrices gravida dictum fusce ut
-            placerat orci. Sit amet mauris commodo quis imperdiet massa
-            tincidunt nunc. Dui faucibus in ornare quam viverra orci sagittis eu
-            volutpat. Sagittis eu volutpat odio facilisis mauris sit amet massa
-            vitae. Convallis tellus id interdum velit laoreet id donec ultrices.
-            In est ante in nibh mauris. Volutpat odio facilisis mauris sit amet
-            massa vitae. Cursus in hac habitasse platea dictumst quisque
-            sagittis. Sagittis nisl rhoncus mattis rhoncus.
+            Доколку имате некои забелешки, пофалби или жалби, слободно
+            искористете ја формата за контакт или јавете ни се на нашиот мобилен
+            телефон. Го цениме вашето мислење и секоја препорака ќе биде
+            разгледана. Заедно растеме! Доколку имате слободно време, повелете и
+            посетете не' во нашите канцеларии!
           </Text>
         </Box>
         <Flex
@@ -129,11 +112,11 @@ const AboutUs = () => (
             <Text fontSize={'xl'} fontWeight={600}>
               Адреса
             </Text>
-            <Text>Lorem ipsum</Text>
-            <Text>Dolor sit amet consectetur</Text>
-            <Text>Nunc tempor nisi scelarisque</Text>
+            <Text>бр. 296</Text>
+            <Text>бул. Борис Трајковски</Text>
+            <Text>1000 Скопје</Text>
             <AspectRatio w={'full'} ratio={16 / 9} mt={5}>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2964.803802744042!2d21.40761576544506!3d42.004486029212316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13541443605aa4ab%3A0x33d56647e5b87264!2sFaculty%20of%20Computer%20Science%20%26%20Engineering!5e0!3m2!1sen!2smk!4v1687904474522!5m2!1sen!2smk" />
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11870.185744814642!2d21.4952011!3d41.9455967!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13543debda5e5eb9%3A0x4a15ac6f947c262e!2zRmxvcmEgQ29tcGFueSAvINCk0LvQvtGA0LAg0JrQvtC80L_QsNC90Lg!5e0!3m2!1sen!2smk!4v1703976735977!5m2!1sen!2smk" />
             </AspectRatio>
           </Box>
           <Box flex={1}>

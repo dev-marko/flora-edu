@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { IconButton, Tooltip, Text, HStack } from '@chakra-ui/react';
 
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
+
 import { FeatureEntities } from '@/data/enums/feature-entities';
-import { useState } from 'react';
 import PlantsApi from '@/apis/plants-api';
 import ArticlesApi from '@/apis/blog-api';
 
@@ -13,6 +14,7 @@ type HeartButtonProps = {
   initLikeStatus: boolean;
   entityBeingLiked: FeatureEntities;
   count?: number;
+  disable?: boolean;
 };
 
 const HeartButton = ({
@@ -21,6 +23,7 @@ const HeartButton = ({
   initLikeStatus: initBookmarkStatus,
   entityBeingLiked,
   count = 0,
+  disable = false,
 }: HeartButtonProps) => {
   const [isLiked, setIsLiked] = useState(initBookmarkStatus);
   const [likeCount, setLikeCount] = useState(count);
@@ -69,6 +72,7 @@ const HeartButton = ({
             icon={isLiked ? <HeartIconSolid /> : <HeartIconOutline />}
             variant={'link'}
             color={'red.500'}
+            isDisabled={disable}
           />
         </Tooltip>
         {likeCount !== 0 ? (

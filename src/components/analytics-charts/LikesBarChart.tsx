@@ -24,8 +24,6 @@ const LikesBarChart = ({ headerText, data }: LikesBarChartProps) => {
     ],
   };
 
-  console.log(formattedData);
-
   return (
     <VStack ps={[0, 5]} align={'start'} w={'full'}>
       <Text fontSize="lg" fontFamily={'Inter'} fontWeight={'500'}>

@@ -142,7 +142,6 @@ const ArticleEditor = () => {
         return;
       }
       const res = await blockBlobClient.uploadData(fileArrayBuffer);
-      console.log('header', res);
       const imageUrl = `https://${blobStorageBaseUrl}/${articleHeaderImagesContainer}/${headerImageFile?.name}`;
       return imageUrl;
     } catch (error) {
@@ -359,6 +358,7 @@ const ArticleEditor = () => {
                       boxShadow={'sm'}
                       rounded={'lg'}
                       p={4}
+                      overflowY={'scroll'}
                     >
                       <Markdown
                         components={{
